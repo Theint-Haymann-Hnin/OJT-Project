@@ -1,0 +1,40 @@
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+   
+}
+.title {
+    text-align: center;
+    margin: 20px 0;
+    font-family: 'Viaoda Libre', cursive;
+    font-size: 40px;
+    text-shadow: 3px 3px rgb(220, 220, 220);
+}
+.ttl {
+    color: #000;
+}
+.ttl:hover {
+    color:rgb(60, 179, 113);
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal-content {
+    background-image: linear-gradient(to right, rgb(255, 240, 245) , rgb(245, 245, 245));
+}
+.modal-content h5 {
+    font-size: 17px;
+}
+nav {
+    font-weight: bold;
+}
+.nav-ttl{
+    font-size: 40px;
+    color:grey;
+}
+.user-profile-ttl {
+    font-size: 20px;
+}
+.profile-edit-btn {
+    float: right;
+} 
+
+
