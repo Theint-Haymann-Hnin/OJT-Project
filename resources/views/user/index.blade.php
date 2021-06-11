@@ -60,7 +60,15 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>user1</td>
+                        <td>
+                            <a
+                                class="ttl"
+                                data-toggle="modal"
+                                data-target="#exampleModalCenter"
+                            >
+                                User1
+                            </a>
+                        </td>
                         <td>user1@gmail.com</td>
                         <td>user1</td>
                         <td>09 38948988</td>
@@ -79,6 +87,89 @@
                     </tr>
                 </tbody>
             </table>
+            <!-- Modal -->
+            <div
+                class="modal fade"
+                id="exampleModalCenter"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">
+                                Post title
+                            </h5>
+                            <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                            >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="user-profile-ttl">
+                                        User Profile</span
+                                    >
+                                    <button
+                                        class="btn btn-dark profile-edit-btn"
+                                    >
+                                        <i class="fa fa-edit"></i> Edit
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <table
+                                        class="table table-bordered table-hover"
+                                    >
+                                        <tr>
+                                            <th>Name</th>
+                                            <td>
+                                                <span>Mg Mg</span>
+                                                <span>Mg Mg' img</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Email Address</th>
+                                            <td>mgmmg@gmail.com</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Type</th>
+                                            <td>User</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phone</th>
+                                            <td>09 938894t9854</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Date Of Birth</th>
+                                            <td>20001/12/12</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Address</th>
+                                            <td>Yangon</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                type="button"
+                                class="btn btn-info"
+                                data-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-       
+       return view('user.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('user.userprofile');
+        return view('user.edit');
     }
 
     /**
@@ -56,7 +56,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -80,5 +80,17 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function changePassword()
+    {
+        return view('user.change-password');
+    }
+    public function createUserConfirmation()
+    {
+        return view('user.create-user-confirm');
+    }
+    public function userProfile()
+    {
+        return view('user.userprofile');
     }
 }

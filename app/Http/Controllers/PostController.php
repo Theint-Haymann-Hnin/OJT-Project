@@ -45,9 +45,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-    //    return view('post.create-confirmation');
+    
     //    return view('post.update');
-    //    return view('post.update-confirmation');
+   
     }
 
     /**
@@ -83,6 +83,18 @@ class PostController extends Controller
     {
         //
     }
+    public function upload()
+    {
+        return view('post.upload-post');
+    }
+    public function createPostConfirmation()
+    {
+        return view('post.create-confirmation');
+    } 
+     public function updatePostConfirmation()
+     {
+        return view('post.update-confirmation');
+     }
     
 
 }

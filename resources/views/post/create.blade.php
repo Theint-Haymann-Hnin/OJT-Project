@@ -14,7 +14,7 @@
                         <div class="form-group">
                             <label for="title"><b>Title</b></label>
                             <input
-                                type="text"
+                                type="text" required
                                 class="
                                     form-control
                                     @error('title')
@@ -51,7 +51,7 @@
                             @enderror
                         </div>
                         <button class="btn btn-success mr-3">Confirm</button>
-                        <button class="btn btn-outline-success">Clear</button>
+                        <button type="reset" class="btn btn-outline-success">Clear</button>
                     </form>
                 </div>
               </div>

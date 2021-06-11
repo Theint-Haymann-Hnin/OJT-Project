@@ -13,27 +13,30 @@
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>Name</th>
-                            <td></td>
+                            <td>
+                                <span>Mg Mg</span>
+                                <img src="{{asset('img/post_backgroundjpg')}}" alt="profile_img">
+                            </td>
                         </tr>
                         <tr>
                             <th>Email Address</th>
-                            <td></td>
+                            <td>mgmmg@gmail.com</td>
                         </tr>
                         <tr>
                             <th>Type</th>
-                            <td></td>
+                            <td>User</td>
                         </tr>
                         <tr>
                             <th>Phone</th>
-                            <td></td>
+                            <td>09 938894t9854</td>
                         </tr>
                         <tr>
                             <th>Date Of Birth</th>
-                            <td></td>
+                            <td>20001/12/12</td>
                         </tr>
                         <tr>
                             <th>Address</th>
-                            <td></td>
+                            <td>Yangon</td>
                         </tr>
                     </table>
                 </div>

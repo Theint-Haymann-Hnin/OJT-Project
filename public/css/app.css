@@ -5,7 +5,7 @@ body {
 .title {
     text-align: center;
     margin: 20px 0;
-    font-family: 'Viaoda Libre', cursive;
+    /* font-family: 'Viaoda Libre', cursive; */
     font-size: 40px;
     text-shadow: 3px 3px rgb(220, 220, 220);
 }
@@ -17,9 +17,9 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
-.modal-content {
+/* .modal-content {
     background-image: linear-gradient(to right, rgb(255, 240, 245) , rgb(245, 245, 245));
-}
+} */
 .modal-content h5 {
     font-size: 17px;
 }
@@ -35,6 +35,19 @@ nav {
 }
 .profile-edit-btn {
     float: right;
+}
+.change-pwd-ttl {
+    font-size: 20px;
 } 
+.create-user-confirm {
+    margin: 20px 0;
+    font-size: 40px;
+    text-shadow: 3px 3px rgb(220, 220, 220);
+    float:left;
+}
+.changepwd {
+    display:block;
+    margin-bottom: 10px;
+}
 
 
