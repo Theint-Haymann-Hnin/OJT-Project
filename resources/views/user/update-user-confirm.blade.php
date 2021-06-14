@@ -4,15 +4,14 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="create-user-confirm">
-                        Create User Confirmation
-                    </h1>
+                    <h1 class="update-user-confirm">Update User Confirm Screen</h1>
+                    <div class="update-user-confirm-photo"> : Profile photo </div>
                 </div>
                 <div class="card-body">
                     <form>
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <label> Value</label>
+                            <label> : Value </label>
                             <input
                                 type="hidden"
                                 required
@@ -25,7 +24,7 @@
                                 placeholder="Enter your name"
                                 name="name"
                                 id="name"
-                                value="{{ old('name') }}" disabled
+                                value="{{ old('name') }}"
                             />
                             @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -35,7 +34,7 @@
                             <label for="exampleFormControlInput1"
                                 >Email address</label
                             >
-                            <label> Value</label>
+                            <label> : Value </label>
                             <input
                                 type="hidden"
                                 required
@@ -55,28 +54,17 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="pasword">Password</label>
-                            <label> Value</label>
-                            <input
-                                type="hidden"
-                                name="password"
-                                class="form-control"
-                                id="pasword"
-                                placeholder="Password"
-                            />
-                        </div>
-                        <div class="form-group">
                             <label for="type">Type</label>
-                            <label> Value</label>
+                            <label> : Value </label>
                             <select
                                 class="
                                     form-control
-                                    @error('type')
+                                    @error('actress')
                                     is-invalid
                                     @enderror
-                                "
+                                " style="display: none;"
                                 id="type"
-                                name="type" style="display:none;"
+                                name="type"
                                 required
                             >
                                 <option>Select Type</option>
@@ -90,7 +78,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <label> Value</label>
+                            <label> : Value </label>
                             <input
                                 type="hidden"
                                 required
@@ -111,7 +99,7 @@
                         </div>
                         <div class="form-group">
                             <label for="dob">Date Of Birth</label>
-                            <label> Value</label>
+                            <label> : Value </label>
                             <input
                                 type="hidden"
                                 required
@@ -132,7 +120,7 @@
                         </div>
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <label> Value</label>
+                            <label> : Value </label>
                             <input
                                 type="hidden"
                                 required
@@ -152,8 +140,6 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="profile">Profile</label>
-                            <label> Value</label>
                             <input
                                 type="hidden"
                                 required
@@ -173,7 +159,7 @@
                             @enderror
                         </div>
                         <button type="submit" class="btn btn-primary mr-3">
-                            Create
+                            Update
                         </button>
                         <button type="reset" class="btn btn-outline-success">
                             Cancel

@@ -139,6 +139,13 @@ return [
         ],
     ],
 
+    'custom' => [
+        'title' => [
+            'reeuired' => 'Please fill it',
+            'max' => 'Your title is too long!'
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes

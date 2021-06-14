@@ -8,8 +8,9 @@
                     <h1 class="title">Update Post</h1>
                 </div>
                 <div class="card-body">
-                    <form action="" method="POST">
-                        {{ csrf_field() }}
+                    <form action="{{url('posts/'.$post->id)}}" method="post">
+                         @csrf
+                        @method('put')
                         <div class="form-group">
                             <label for="title"><b>Title</b></label>
                             <input
@@ -23,7 +24,7 @@
                                 placeholder="Enter your title"
                                 name="title"
                                 id="title"
-                                value="{{ old('title') }}"
+                                value="{{ old('title') ??$post->title}}"
                             />
                             @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -43,9 +44,85 @@
                                     @enderror
                                 "
                                 placeholder="Enter Description"
-                                >{{ old("description") }}</textarea
+                                >{{ old("description")  ??$post->description }}</textarea
                             >
                             @error('description')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="status"><b>Status</b></label>
+                            <input
+                                type="text" required
+                                class="
+                                    form-control
+                                    @error('status')
+                                    is-invalid
+                                    @enderror
+                                "
+                                placeholder="Enter status"
+                                name="status"
+                                id="status"
+                                value="{{ old('status')  ??$post->status }}"
+                            />
+                            @error('status')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="created_user_id"><b>Created User Id</b></label>
+                            <input
+                                type="text" required
+                                class="
+                                    form-control
+                                    @error('created_user_id')
+                                    is-invalid
+                                    @enderror
+                                "
+                                placeholder="Enter created_user_id"
+                                name="created_user_id"
+                                id="created_user_id"
+                                value="{{ old('created_user_id') ?? $post->created_user_id}}"
+                            />
+                            @error('created_user_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="updated_user_id"><b>Updated User Id</b></label>
+                            <input
+                                type="text" required
+                                class="
+                                    form-control
+                                    @error('updated_user_id')
+                                    is-invalid
+                                    @enderror
+                                "
+                                placeholder="Enter updated_user_id"
+                                name="updated_user_id"
+                                id="updated_user_id"
+                                value="{{ old('updated_user_id')  ?? $post->updated_user_id }}"
+                            />
+                            @error('updated_user_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="deleted_user_id"><b>Deleted User Id</b></label>
+                            <input
+                                type="text" required
+                                class="
+                                    form-control
+                                    @error('deleted_user_id')
+                                    is-invalid
+                                    @enderror
+                                "
+                                placeholder="Enter deleted_user_id"
+                                name="deleted_user_id"
+                                id="deleted_user_id"
+                                value="{{ old('deleted_user_id')  ?? $post->deleted_user_id }}"
+                            />
+                            @error('deleted_user_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

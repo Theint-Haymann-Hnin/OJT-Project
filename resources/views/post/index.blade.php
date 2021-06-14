@@ -3,6 +3,12 @@
     <h1 class="title">Post List</h1>
     <div class="row">
         <div class="col-md-6">
+            @if (Session('successAlert'))
+                    <div class="alert alert-success alert-dismissible show fade">
+                        <strong>{{ Session('successAlert') }}</strong>
+                        <button class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                @endif
             <form class="form-inline my-2 my-lg-0">
                 <input
                     class="form-control mr-sm-2"
@@ -50,71 +56,36 @@
                 </thead>
                 <tbody>
                     <tr>
+                        @foreach($posts as  $post)
                         <td>
                             <a
                                 class="ttl"
                                 data-toggle="modal"
                                 data-target="#exampleModalCenter"
                             >
-                                Title1
+                                {{$post->title}}
                             </a>
                         </td>
-                        <td>Description1</td>
-                        <td>User1</td>
-                        <td>9/6/2021</td>
+                        <td>{{$post->description}}</td>
+                        <td>{{$post-> created_user_id}}</td>
+                        <td>{{$post-> created_at}}</td>
                         <td>
-                            <button type="submit" class="btn btn-success mr-1">
-                                <i class="fa fa-edit"></i> Edit
-                            </button>
-                            <button type="button" class="btn btn-danger">
-                                <i class="fa fa-trash"></i> Delete
-                            </button>
+                            <form action="{{url('posts/'.$post->id)}}" method="post">
+                                @csrf 
+                                @method('delete')
+                                <a href="{{url('posts/'.$post->id.'/edit')}}">
+                                    <button type="button" class="btn btn-success mr-1">
+                                        <i class="fa fa-edit"></i> Edit
+                                    </button>
+                                </a>
+                                <button type="submit" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?')">
+                                    <i class="fa fa-trash"></i> Delete
+                                </button>
+                            </form>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <a
-                                class="ttl"
-                                data-toggle="modal"
-                                data-target="#exampleModalCenter"
-                            >
-                                Title1
-                            </a>
-                        </td>
-                        <td>Description1</td>
-                        <td>User1</td>
-                        <td>9/6/2021</td>
-                        <td>
-                            <button type="submit" class="btn btn-success mr-1">
-                                <i class="fa fa-edit"></i> Edit
-                            </button>
-                            <button type="button" class="btn btn-danger">
-                                <i class="fa fa-trash"></i> Delete
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a
-                                class="ttl"
-                                data-toggle="modal"
-                                data-target="#exampleModalCenter"
-                            >
-                                Title1
-                            </a>
-                        </td>
-                        <td>Description1</td>
-                        <td>User1</td>
-                        <td>9/6/2021</td>
-                        <td>
-                            <button type="submit" class="btn btn-success mr-1">
-                                <i class="fa fa-edit"></i> Edit
-                            </button>
-                            <button type="button" class="btn btn-danger">
-                                <i class="fa fa-trash"></i> Delete
-                            </button>
-                        </td>
-                    </tr>
+                    @endforeach
+                   
                 </tbody>
             </table>
             <!-- Modal -->

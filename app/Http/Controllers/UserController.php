@@ -45,7 +45,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('user.edit');
+        return view('user.update');
     }
 
     /**
@@ -92,5 +92,9 @@ class UserController extends Controller
     public function userProfile()
     {
         return view('user.userprofile');
+    }
+    public function updateUserConfirmation()
+    {
+        return view('user.update-user-confirm');
     }
 }

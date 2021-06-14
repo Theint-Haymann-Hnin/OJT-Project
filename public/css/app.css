@@ -49,5 +49,13 @@ nav {
     display:block;
     margin-bottom: 10px;
 }
+.update-user-confirm {
+    float:left;
+}
+.update-user-confirm-photo {
+    float: right;
+}
+
+
 
 

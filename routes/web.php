@@ -25,11 +25,10 @@ Route::get('/createpostconfirm', [PostController::class, 'createPostConfirmation
 Route::get('/updatepostconfirm', [PostController::class, 'updatePostConfirmation']);
 
 
-
-
 Route::resource('/users','App\Http\Controllers\UserController');
 Route::get('/changepassword', [UserController::class, 'changePassword']);
 Route::get('/createuserconfirm', [UserController::class, 'createUserConfirmation']);
+Route::get('/updateuserconfirm', [UserController::class, 'updateUserConfirmation']);
 Route::get('/userprofile', [UserController::class, 'userProfile']);
 
 

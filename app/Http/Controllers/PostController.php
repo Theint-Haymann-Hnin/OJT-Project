@@ -3,85 +3,53 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Contract\Service\Post\PostServiceInterface;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public $postService;
+    public function __construct(PostServiceInterface $post_service_interface){
+        $this->postService = $post_service_interface;
+    }
     public function index()
-    {
-        return view('post.index');
+    {    
+        $posts = $this->postService ->index();
+        return view('post.index', compact('posts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('post.create');
     }
-    
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
-    {
-        //
+    {  
+        $data =$this->validatePost();
+        $this->postService->store($data);
+        return redirect('/posts')->with('successAlert','You have successfully created');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
     
     //    return view('post.update');
    
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
-    {
-        //
+    {   
+        $post =Post::find($id);
+        return view('post.update', compact('post'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-       
+        $post_update_data =$this->validatePost();
+        $this->postService->update($post_update_data , $id);
+        return redirect('/posts')->with('successAlert','You have successfully updated');;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $this->postService->delete($id);
+        return redirect('/posts')->with('successAlert','You have successfully deleted');
     }
     public function upload()
     {
@@ -94,6 +62,17 @@ class PostController extends Controller
      public function updatePostConfirmation()
      {
         return view('post.update-confirmation');
+     }
+     public function validatePost()
+     {
+         return request()-> validate([
+             'title' => 'required',
+             'description' => 'required',
+             'status' => 'required',
+             'created_user_id' => 'required',
+             'updated_user_id' => 'required',
+             'deleted_user_id' => 'required'
+         ]);
      }
     
 

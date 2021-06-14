@@ -11,9 +11,10 @@
                     <form action="" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="title"><b>Title</b></label>
+                            <label for="title">Title</label>
+                            <label>: Value</label>
                             <input
-                                type="text"
+                                type="hidden"
                                 class="
                                     form-control
                                     @error('title')
@@ -31,7 +32,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="description"><b>Description</b></label>
+                            <label for="description">Description</label>
+                            <label>: Value</label>
                             <textarea
                                 name="description"
                                 id="description"
@@ -41,7 +43,7 @@
                                     @error('description')
                                     is-invalid
                                     @enderror
-                                "
+                                " style="display: none;"
                                 placeholder="Enter Description"
                                 >{{ old("description") }}</textarea
                             >
