@@ -42,7 +42,8 @@
                                     @error('description')
                                     is-invalid
                                     @enderror
-                                " style="display: none;"
+                                "
+                                style="display: none"
                                 placeholder="Enter Description"
                                 >{{ old("description") }}</textarea
                             >

@@ -3,83 +3,59 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Contract\Service\User\UserServiceInterface;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public $userService;
+    public function __construct(UserServiceInterface $user_service_interface){
+        $this->userService = $user_service_interface;
+    }
+    
     public function index()
     {
-        return view ('user.index');
+        $users= $this->userService ->index();
+        return view('user.index', compact('users'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-       return view('user.create');
+        return view('user.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
-        //
+        $data = $this->validateUser();
+        $this->userService->store($data);
+        return redirect()->route('users.index')->with('success_msg', 'success process');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
+    
     public function show($id)
     {
-        return view('user.update');
+        // return view('user.update');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
+    
     public function edit($id)
     {
-        
+        $user =User::find($id);
+        return view('user.update', compact('user'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        
+        $user_update_data = $this->validateUser();
+        $this->userService->update($user_update_data, $id);
+        return redirect('/users')->with('successAlert','You have successfully updated');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
+    
     public function destroy($id)
     {
-        //
+        $this->userService->delete($id);
+        return redirect('/users')->with('successAlert','You have successfully deleted');
     }
     public function changePassword()
     {
@@ -97,4 +73,18 @@ class UserController extends Controller
     {
         return view('user.update-user-confirm');
     }
-}
+    private function validateUser()
+    {
+        return request()->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'type' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'dob' => 'required',
+            'profile' => 'required',
+            ]);
+        }
+    }
+    

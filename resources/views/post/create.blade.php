@@ -1,5 +1,4 @@
-@extends('layouts.app')
- @section('content')
+@extends('layouts.app') @section('content')
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-2"></div>
@@ -9,12 +8,13 @@
                     <h1 class="title">Post Create Form</h1>
                 </div>
                 <div class="card-body">
-                    <form action="{{url('/posts')}}" method="post">
+                    <form action="{{ route('posts.store') }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="title"><b>Title</b></label>
                             <input
-                                type="text" required
+                                type="text"
+                                required
                                 class="
                                     form-control
                                     @error('title')
@@ -24,13 +24,15 @@
                                 placeholder="Enter your title"
                                 name="title"
                                 id="title"
-                                value="{{ old('title') }}"
+                                value="{{ old('title') ?? 
+                               isset( request()->session()->get('post')['title']) ?  request()->session()->get('post')['title'] : ''
+                            }}"
                             />
                             @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-        
+
                         <div class="form-group">
                             <label for="description"><b>Description</b></label>
                             <textarea
@@ -44,13 +46,15 @@
                                     @enderror
                                 "
                                 placeholder="Enter Description"
-                                >{{ old("description") }}</textarea
+                                >{{ old('description') ?? 
+                                isset( request()->session()->get('post')['description']) ?  request()->session()->get('post')['description'] : ''
+                                }}</textarea
                             >
                             @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="status"><b>Status</b></label>
                             <input
                                 type="text" required
@@ -68,11 +72,14 @@
                             @error('status')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                        </div>
+                        </div> -->
                         <div class="form-group">
-                            <label for="created_user_id"><b>Created User Id</b></label>
+                            <label for="created_user_id"
+                                ><b>Created User Id</b></label
+                            >
                             <input
-                                type="text" required
+                                type="text"
+                                required
                                 class="
                                     form-control
                                     @error('created_user_id')
@@ -82,16 +89,21 @@
                                 placeholder="Enter created_user_id"
                                 name="created_user_id"
                                 id="created_user_id"
-                                value="{{ old('created_user_id') }}"
+                                value="{{ old('created_user_id') ?? 
+                                isset( request()->session()->get('post')['created_user_id']) ?  request()->session()->get('post')['created_user_id'] : ''
+                             }}"
                             />
                             @error('created_user_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="updated_user_id"><b>Updated User Id</b></label>
+                            <label for="updated_user_id"
+                                ><b>Updated User Id</b></label
+                            >
                             <input
-                                type="text" required
+                                type="text"
+                                required
                                 class="
                                     form-control
                                     @error('updated_user_id')
@@ -101,16 +113,21 @@
                                 placeholder="Enter updated_user_id"
                                 name="updated_user_id"
                                 id="updated_user_id"
-                                value="{{ old('updated_user_id') }}"
+                                value="{{ old('updated_user_id') ?? 
+                                isset( request()->session()->get('post')['updated_user_id']) ?  request()->session()->get('post')['updated_user_id'] : ''
+                             }}"
                             />
                             @error('updated_user_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="deleted_user_id"><b>Deleted User Id</b></label>
+                            <label for="deleted_user_id"
+                                ><b>Deleted User Id</b></label
+                            >
                             <input
-                                type="text" required
+                                type="text"
+                                required
                                 class="
                                     form-control
                                     @error('deleted_user_id')
@@ -120,18 +137,21 @@
                                 placeholder="Enter deleted_user_id"
                                 name="deleted_user_id"
                                 id="deleted_user_id"
-                                value="{{ old('deleted_user_id') }}"
+                                value="{{ old('deleted_user_id') ?? 
+                                isset( request()->session()->get('post')['deleted_user_id']) ?  request()->session()->get('post')['deleted_user_id'] : ''
+                             }}"
                             />
                             @error('deleted_user_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <button class="btn btn-success mr-3">Confirm</button>
-                        <!-- <button type="reset" class="btn btn-outline-success">Clear</button> -->
+                        <button type="reset" class="btn btn-outline-success">
+                            Clear
+                        </button>
                     </form>
                 </div>
-              </div>
-           
+            </div>
         </div>
         <div class="col-md-2"></div>
     </div>

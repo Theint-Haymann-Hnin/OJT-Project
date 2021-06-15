@@ -25,7 +25,8 @@
                                 placeholder="Enter your name"
                                 name="name"
                                 id="name"
-                                value="{{ old('name') }}" disabled
+                                value="{{ old('name') }}"
+                                disabled
                             />
                             @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -76,7 +77,8 @@
                                     @enderror
                                 "
                                 id="type"
-                                name="type" style="display:none;"
+                                name="type"
+                                style="display: none"
                                 required
                             >
                                 <option>Select Type</option>

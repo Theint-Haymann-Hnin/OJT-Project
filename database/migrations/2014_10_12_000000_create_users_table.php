@@ -19,13 +19,23 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('type')->default(1);;
+            $table->string('phone');
+            $table->string('address');
+            $table->date('dob');
+            $table->string('profile');
+            $table->integer('created_user_id')->nullable();
+            $table->integer('updated_user_id')->nullable();;
+            $table->integer('deleted_user_id')->nullable();;
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });
     }
+    
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations. 
      *
      * @return void
      */

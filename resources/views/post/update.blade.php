@@ -141,8 +141,9 @@
                                 >Status</label
                             >
                         </div>
+                        
 
-                        <button class="btn btn-success mr-3">Confirm</button>
+                        <a href="{{url('/updatepostconfirm')}}"><button class="btn btn-success mr-3">Confirm</button></a>
                         <button class="btn btn-outline-success">Clear</button>
                     </form>
                 </div>

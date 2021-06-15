@@ -37,9 +37,11 @@
             </form>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-info btn-lg btn-block">
-                <i class="fas fa-user-plus"></i> Add
-            </button>
+            <a href="{{ url('/users/create') }}"
+                ><button type="button" class="btn btn-info btn-lg btn-block">
+                    <i class="fas fa-user-plus"></i> Add
+                </button></a
+            >
         </div>
     </div>
     <div class="row mt-5">
@@ -55,10 +57,11 @@
                         <th>Address</th>
                         <th>Created at</th>
                         <th>Updated at</th>
-                        <th></th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($users as $user)
                     <tr>
                         <td>
                             <a
@@ -66,25 +69,41 @@
                                 data-toggle="modal"
                                 data-target="#exampleModalCenter"
                             >
-                                User1
+                                {{$user->name}}
                             </a>
                         </td>
-                        <td>user1@gmail.com</td>
-                        <td>user1</td>
-                        <td>09 38948988</td>
-                        <td>YYY/mm/dd</td>
-                        <td>Yangon</td>
-                        <td>YYY/mm/dd</td>
-                        <td>YYY/mm/dd</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->created_user_id}}</td>
+                        <td>{{$user->phone}}</td>
+                        <td>{{$user->dob}}</td>
+                        <td>{{$user->address}}</td>
+                        <td>{{$user->created_at}}</td>
+                        <td>{{$user->updated_at}}</td>
                         <td>
-                            <button type="submit" class="btn btn-success mr-1">
-                                <i class="fa fa-edit"></i> Edit
-                            </button>
-                            <button type="button" class="btn btn-danger">
-                                <i class="fa fa-trash"></i> Delete
-                            </button>
+                            <form
+                                action="{{url('users/'.$user->id)}}"
+                                method="post"
+                            >
+                                @csrf @method('delete')
+                                <a href="{{url('users/'.$user->id.'/edit')}}">
+                                    <button
+                                        type="button"
+                                        class="btn btn-success mr-1 mb-3"
+                                    >
+                                        <i class="fa fa-edit"></i> Edit
+                                    </button>
+                                </a>
+                                <button
+                                    type="submit"
+                                    class="btn btn-danger"
+                                    onclick="return confirm('Are you sure you want to delete?')"
+                                >
+                                    <i class="fa fa-trash"></i> Delete
+                                </button>
+                            </form>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
             <!-- Modal -->

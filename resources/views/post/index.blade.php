@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-md-6">
             @if (Session('successAlert'))
-                    <div class="alert alert-success alert-dismissible show fade">
-                        <strong>{{ Session('successAlert') }}</strong>
-                        <button class="close" data-dismiss="alert">&times;</button>
-                    </div>
-                @endif
+            <div class="alert alert-success alert-dismissible show fade">
+                <strong>{{ Session("successAlert") }}</strong>
+                <button class="close" data-dismiss="alert">&times;</button>
+            </div>
+            @endif
             <form class="form-inline my-2 my-lg-0">
                 <input
                     class="form-control mr-sm-2"
@@ -56,7 +56,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        @foreach($posts as  $post)
+                        @foreach($posts as $post)
                         <td>
                             <a
                                 class="ttl"
@@ -70,22 +70,30 @@
                         <td>{{$post-> created_user_id}}</td>
                         <td>{{$post-> created_at}}</td>
                         <td>
-                            <form action="{{url('posts/'.$post->id)}}" method="post">
-                                @csrf 
-                                @method('delete')
+                            <form
+                                action="{{url('posts/'.$post->id)}}"
+                                method="post"
+                            >
+                                @csrf @method('delete')
                                 <a href="{{url('posts/'.$post->id.'/edit')}}">
-                                    <button type="button" class="btn btn-success mr-1">
+                                    <button
+                                        type="button"
+                                        class="btn btn-success mr-1"
+                                    >
                                         <i class="fa fa-edit"></i> Edit
                                     </button>
                                 </a>
-                                <button type="submit" class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete?')">
+                                <button
+                                    type="submit"
+                                    class="btn btn-danger"
+                                    onclick="return confirm('Are you sure you want to delete?')"
+                                >
                                     <i class="fa fa-trash"></i> Delete
                                 </button>
                             </form>
                         </td>
                     </tr>
                     @endforeach
-                   
                 </tbody>
             </table>
             <!-- Modal -->

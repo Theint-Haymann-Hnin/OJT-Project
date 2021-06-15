@@ -10,7 +10,15 @@ class PostDao implements PostDaoInterface{
     }
     public function store($data)
     {
+        // Post::create($data);
+    }
+    // public function collectDataForm($data)
+    // {
+    //     Post::create($data);
+    // }
+    public function storeCollectData($data) {
         Post::create($data);
+        request()->session()->forget('post');
     }
     public function update($post_data_to_update, $id){
         Post::find($id)->update($post_data_to_update);

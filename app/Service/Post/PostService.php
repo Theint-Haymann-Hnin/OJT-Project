@@ -12,10 +12,16 @@ class postService implements PostServiceInterface {
     public function index(){
         return $this->postDao->index();
     } 
-    public function store($data)
+    // public function store($data)
+    // {
+    //     $this->postDao->store($data);
+    // }
+    
+    public function storeCollectData($data)
     {
-        $this->postDao->store($data);
+        $this->postDao-> storeCollectData($data);
     }
+
     public function update($post_data_to_update , $id){
         $this->postDao->update($post_data_to_update, $id);
     }

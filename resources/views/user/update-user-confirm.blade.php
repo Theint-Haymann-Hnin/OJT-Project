@@ -4,8 +4,10 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h1 class="update-user-confirm">Update User Confirm Screen</h1>
-                    <div class="update-user-confirm-photo"> : Profile photo </div>
+                    <h1 class="update-user-confirm">
+                        Update User Confirm Screen
+                    </h1>
+                    <div class="update-user-confirm-photo">: Profile photo</div>
                 </div>
                 <div class="card-body">
                     <form>
@@ -62,7 +64,8 @@
                                     @error('actress')
                                     is-invalid
                                     @enderror
-                                " style="display: none;"
+                                "
+                                style="display: none"
                                 id="type"
                                 name="type"
                                 required

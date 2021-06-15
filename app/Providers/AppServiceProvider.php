@@ -7,6 +7,8 @@ use Illuminate\Support\ServiceProvider;
 // use Log;
 use App\Contract\Service\Post\PostServiceInterface;
 use App\Service\Post\PostService;
+use App\Contract\Service\User\UserServiceInterface;
+use App\Service\User\UserService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -46,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
   {
     // Dao Registration
     $this->app->bind(PostServiceInterface::class, PostService::class);
+    $this->app->bind(UserServiceInterface::class, UserService::class);
 
     // Business logic registration
    

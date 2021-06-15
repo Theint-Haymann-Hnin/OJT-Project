@@ -17,22 +17,36 @@ class PostController extends Controller
         $posts = $this->postService ->index();
         return view('post.index', compact('posts'));
     }
-
+    
     public function create()
     {
         return view('post.create');
     }
     public function store(Request $request)
-    {  
+    {    
+        
+        // dd($value);
         $data =$this->validatePost();
-        $this->postService->store($data);
-        return redirect('/posts')->with('successAlert','You have successfully created');
+        $request->session()->put('post', $data);
+        return redirect('/posts/create/collectdataform');
+        
+    }
+    public function collectDataForm(Request $request)
+    {    
+        
+        return view('post.create-confirmation');
+    } 
+    public function storeCollectData(Request $request)
+    {
+        
+        $this->postService->storeCollectData( $request->all() );
+        return redirect('/posts')->with('successAlert','You have successfully created');;
     }
     public function show($id)
     {
-    
-    //    return view('post.update');
-   
+        
+        //    return view('post.update');
+        
     }
     public function edit($id)
     {   
@@ -43,37 +57,34 @@ class PostController extends Controller
     {
         $post_update_data =$this->validatePost();
         $this->postService->update($post_update_data , $id);
-        return redirect('/posts')->with('successAlert','You have successfully updated');;
+        return redirect('/posts')->with('successAlert','You have successfully updated');
     }
-
-    public function destroy($id)
-    {
-        $this->postService->delete($id);
-        return redirect('/posts')->with('successAlert','You have successfully deleted');
-    }
-    public function upload()
-    {
-        return view('post.upload-post');
-    }
-    public function createPostConfirmation()
-    {
-        return view('post.create-confirmation');
-    } 
-     public function updatePostConfirmation()
-     {
-        return view('post.update-confirmation');
-     }
-     public function validatePost()
-     {
-         return request()-> validate([
-             'title' => 'required',
-             'description' => 'required',
-             'status' => 'required',
-             'created_user_id' => 'required',
-             'updated_user_id' => 'required',
-             'deleted_user_id' => 'required'
-         ]);
-     }
-    
-
-}
+    // public function updateConfirmDataForm(Request $request, $id)
+    // {    
+        
+        //     return view('post.update-confirmation.blade');
+        // } 
+        
+        public function destroy($id)
+        {
+            $this->postService->delete($id);
+            return redirect('/posts')->with('successAlert','You have successfully deleted');
+        }
+        public function upload()
+        {
+            return view('post.upload-post');
+        }
+        
+        
+        public function validatePost()
+        {
+            return request()-> validate([
+                'title' => 'required|min:3|max:100',
+                'description' => 'required',
+                'created_user_id' => 'required',
+                'updated_user_id' => 'required',
+                'deleted_user_id' => 'required'
+                ]);
+            }
+        }
+        
