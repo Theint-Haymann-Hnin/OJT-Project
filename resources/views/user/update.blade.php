@@ -10,6 +10,7 @@
                     <form
                         action="{{ route('users.update', [$user->id]) }}"
                         method="post"
+                        enctype="multipart/form-data"
                     >
                         @csrf @method('put')
                         <div class="form-group">
@@ -63,13 +64,8 @@
                                 required
                             >
                                 <option>Select Type</option>
-                                <option value="{{$user->type}}">
-                                    {{$user->type}}
-                                </option>
-
-                                <!-- <option>Admin</option>
-                                <option>User</option>
-                                <option>Visitor</option> -->
+                                <option value="0">Admin</option>
+                                <option value="1">User</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -137,7 +133,6 @@
 
                             <input
                                 type="file"
-                                required
                                 class="
                                     form-control
                                     @error('profile')
@@ -152,73 +147,13 @@
                             @error('profile')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="created_user_id"
-                                ><b>Created User Id</b></label
-                            >
-                            <input
-                                type="text"
-                                required
-                                class="
-                                    form-control
-                                    @error('created_user_id')
-                                    is-invalid
-                                    @enderror
-                                "
-                                placeholder="Enter created_user_id"
-                                name="created_user_id"
-                                id="created_user_id"
-                                value="{{ old('created_user_id') }}"
+                            <img
+                                src="{{asset('storage/profile-images/'.$user->profile)}}"
+                                alt="profile-img"
+                                style="width: 100px"
                             />
-                            @error('created_user_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="updated_user_id"
-                                ><b>Updated User Id</b></label
-                            >
-                            <input
-                                type="text"
-                                required
-                                class="
-                                    form-control
-                                    @error('updated_user_id')
-                                    is-invalid
-                                    @enderror
-                                "
-                                placeholder="Enter updated_user_id"
-                                name="updated_user_id"
-                                id="updated_user_id"
-                                value="{{ old('updated_user_id') }}"
-                            />
-                            @error('updated_user_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="deleted_user_id"
-                                ><b>Deleted User Id</b></label
-                            >
-                            <input
-                                type="text"
-                                required
-                                class="
-                                    form-control
-                                    @error('deleted_user_id')
-                                    is-invalid
-                                    @enderror
-                                "
-                                placeholder="Enter deleted_user_id"
-                                name="deleted_user_id"
-                                id="deleted_user_id"
-                                value="{{ old('deleted_user_id') }}"
-                            />
-                            @error('deleted_user_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+
                         <a href="{{ url('/changepassword') }}" class="changepwd"
                             >Change Password</a
                         >

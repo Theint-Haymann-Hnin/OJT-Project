@@ -64,7 +64,6 @@ class PostController extends Controller
         
         //     return view('post.update-confirmation.blade');
         // } 
-        
         public function destroy($id)
         {
             $this->postService->delete($id);
@@ -80,10 +79,10 @@ class PostController extends Controller
         {
             return request()-> validate([
                 'title' => 'required|min:3|max:100',
-                'description' => 'required',
-                'created_user_id' => 'required',
-                'updated_user_id' => 'required',
-                'deleted_user_id' => 'required'
+                'description' => 'required'
+                // 'created_user_id' => 'required',
+                // 'updated_user_id' => 'required',
+                // 'deleted_user_id' => 'required'
                 ]);
             }
         }

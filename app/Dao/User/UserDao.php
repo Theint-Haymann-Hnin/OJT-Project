@@ -8,8 +8,13 @@ class UserDao implements UserDaoInterface{
     {
         return User::all();
     }
-    public function store($data){
-        User::create($data);
+    // public function store($data){
+    //     User::create($data);
+    // }
+    public function storeCollectData($data) {
+       
+       User::create($data);
+        request()->session()->forget('user');
     }
     public function delete($id){
         User::find($id)->delete();

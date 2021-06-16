@@ -19,7 +19,7 @@ class postService implements PostServiceInterface {
     
     public function storeCollectData($data)
     {
-        $this->postDao-> storeCollectData($data);
+        $this->postDao->storeCollectData($data);
     }
 
     public function update($post_data_to_update , $id){

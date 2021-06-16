@@ -17,6 +17,7 @@ class PostDao implements PostDaoInterface{
     //     Post::create($data);
     // }
     public function storeCollectData($data) {
+        $data['created_user_id'] = 1;
         Post::create($data);
         request()->session()->forget('post');
     }

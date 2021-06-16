@@ -12,10 +12,15 @@ class userService implements UserServiceInterface {
     public function index(){
         return $this->userDao->index();
     } 
-    public function store($data)
+    // public function store($data)
+    // {
+    //     $this->userDao->store($data);
+    // }
+    public function storeCollectData($data)
     {
-        $this->userDao->store($data);
+        $this->userDao->storeCollectData($data);
     }
+
     public function delete($id){
         $this->userDao->delete($id);
     }

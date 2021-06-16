@@ -63,7 +63,9 @@
                 <tbody>
                     @foreach($users as $user)
                     <tr>
-                        <td>
+                        <!-- <td><a href data-toggle="modal" data-target="#yourModal{{$user->id}}">{{$user->name}}</a>
+                        <td> -->
+                            <td>
                             <a
                                 class="ttl"
                                 data-toggle="modal"
@@ -88,7 +90,7 @@
                                 <a href="{{url('users/'.$user->id.'/edit')}}">
                                     <button
                                         type="button"
-                                        class="btn btn-success mr-1 mb-3"
+                                        class="btn btn-success mr-1 mb-2"
                                     >
                                         <i class="fa fa-edit"></i> Edit
                                     </button>
@@ -107,6 +109,7 @@
                 </tbody>
             </table>
             <!-- Modal -->
+           
             <div
                 class="modal fade"
                 id="exampleModalCenter"
@@ -118,9 +121,9 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">
-                                Post title
-                            </h5>
+                            <h4 class="modal-title" id="exampleModalLongTitle">
+                               User Detail
+                            </h4>
                             <button
                                 type="button"
                                 class="close"
@@ -136,12 +139,15 @@
                                     <span class="user-profile-ttl">
                                         User Profile</span
                                     >
-                                    <button
+                                    <a href=" {{ route('users.update', [$user->id]) }}">
+                                        <button
                                         class="btn btn-dark profile-edit-btn"
                                     >
                                         <i class="fa fa-edit"></i> Edit
                                     </button>
+                                    </a>
                                 </div>
+                                @foreach($users as $user)
                                 <div class="card-body">
                                     <table
                                         class="table table-bordered table-hover"
@@ -149,32 +155,33 @@
                                         <tr>
                                             <th>Name</th>
                                             <td>
-                                                <span>Mg Mg</span>
-                                                <span>Mg Mg' img</span>
+                                                <span>{{$user->name}}</span> <br>
+                                                <span><img src="{{asset('storage/profile-images/'.$user->profile)}}" alt="profile-img" style = "width: 300px; height: 200px;"></span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Email Address</th>
-                                            <td>mgmmg@gmail.com</td>
+                                            <td>{{$user-> email}}</td>
                                         </tr>
                                         <tr>
                                             <th>Type</th>
-                                            <td>User</td>
+                                            <td>{{$user-> type}}</td>
                                         </tr>
                                         <tr>
                                             <th>Phone</th>
-                                            <td>09 938894t9854</td>
+                                            <td>{{$user->phone}}</td>
                                         </tr>
                                         <tr>
                                             <th>Date Of Birth</th>
-                                            <td>20001/12/12</td>
+                                            <td>{{$user-> dob}}</td>
                                         </tr>
                                         <tr>
                                             <th>Address</th>
-                                            <td>Yangon</td>
+                                            <td>{{$user-> address}}</td>
                                         </tr>
                                     </table>
                                 </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="modal-footer">

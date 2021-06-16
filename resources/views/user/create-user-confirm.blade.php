@@ -9,10 +9,17 @@
                     </h1>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form
+                        action="{{ url('/users/store/collectdata') }}"
+                        method="post"
+                    >
+                        {{ csrf_field() }}
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <label> Value</label>
+                            <label>
+                                :
+                                {{ request()->session()->get('user')['name'] }}</label
+                            >
                             <input
                                 type="hidden"
                                 required
@@ -25,8 +32,7 @@
                                 placeholder="Enter your name"
                                 name="name"
                                 id="name"
-                                value="{{ old('name') }}"
-                                disabled
+                                value=" {{ request()->session()->get('user')['name'] }}"
                             />
                             @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -36,7 +42,10 @@
                             <label for="exampleFormControlInput1"
                                 >Email address</label
                             >
-                            <label> Value</label>
+                            <label>
+                                :
+                                {{ request()->session()->get('user')['email'] }}</label
+                            >
                             <input
                                 type="hidden"
                                 required
@@ -49,7 +58,7 @@
                                 "
                                 id="exampleFormControlInput1"
                                 placeholder="name@example.com"
-                                value="{{ old('email') }}"
+                                value="{{ request()->session()->get('user')['email'] }}"
                             />
                             @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -57,42 +66,26 @@
                         </div>
                         <div class="form-group">
                             <label for="pasword">Password</label>
-                            <label> Value</label>
+                            <label
+                                >:
+                                {{ request()->session()->get('user')['password'] }}</label
+                            >
                             <input
                                 type="hidden"
                                 name="password"
                                 class="form-control"
                                 id="pasword"
                                 placeholder="Password"
+                                value=" {{ request()->session()->get('user')['password'] }}"
                             />
                         </div>
-                        <div class="form-group">
-                            <label for="type">Type</label>
-                            <label> Value</label>
-                            <select
-                                class="
-                                    form-control
-                                    @error('type')
-                                    is-invalid
-                                    @enderror
-                                "
-                                id="type"
-                                name="type"
-                                style="display: none"
-                                required
-                            >
-                                <option>Select Type</option>
-                                <option>Admin</option>
-                                <option>User</option>
-                                <option>Visitor</option>
-                            </select>
-                            @error('type')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <label> Value</label>
+                            <label
+                                >:
+                                {{ request()->session()->get('user')['phone'] }}</label
+                            >
                             <input
                                 type="hidden"
                                 required
@@ -105,7 +98,7 @@
                                 placeholder="Enter your phone number"
                                 name="phone"
                                 id="phone"
-                                value="{{ old('phone') }}"
+                                value=" {{ request()->session()->get('user')['phone'] }}"
                             />
                             @error('phone')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -113,7 +106,10 @@
                         </div>
                         <div class="form-group">
                             <label for="dob">Date Of Birth</label>
-                            <label> Value</label>
+                            <label
+                                >:
+                                {{ request()->session()->get('user')['dob'] }}</label
+                            >
                             <input
                                 type="hidden"
                                 required
@@ -126,7 +122,7 @@
                                 placeholder="Enter date of birth"
                                 name="dob"
                                 id="dob"
-                                value="{{ old('dob') }}"
+                                value="{{ request()->session()->get('user')['dob'] }}"
                             />
                             @error('dob')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -134,7 +130,10 @@
                         </div>
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <label> Value</label>
+                            <label>
+                                :
+                                {{ request()->session()->get('user')['address'] }}</label
+                            >
                             <input
                                 type="hidden"
                                 required
@@ -147,15 +146,18 @@
                                 placeholder="Enter your address"
                                 name="address"
                                 id="address"
-                                value="{{ old('address') }}"
+                                value="{{ request()->session()->get('user')['address'] }}"
                             />
                             @error('address')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label for="profile">Profile</label>
-                            <label> Value</label>
+                            <label>
+                                :{{ request()->session()->get('user')['profile'] }}</label
+                            >
                             <input
                                 type="hidden"
                                 required
@@ -168,7 +170,7 @@
                                 placeholder="Choose your profile picture"
                                 name="profile"
                                 id="profile"
-                                value="{{ old('profile') }}"
+                                value="{{ request()->session()->get('user')['profile'] }}"
                             />
                             @error('profile')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -177,9 +179,14 @@
                         <button type="submit" class="btn btn-primary mr-3">
                             Create
                         </button>
-                        <button type="reset" class="btn btn-outline-success">
-                            Cancel
-                        </button>
+                        <a href="{{ url('users/create') }}">
+                            <button
+                                type="button"
+                                class="btn btn-outline-success"
+                            >
+                                Cancel
+                            </button></a
+                        >
                     </form>
                 </div>
             </div>

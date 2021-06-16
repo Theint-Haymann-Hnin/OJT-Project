@@ -22,15 +22,23 @@ Route::get('/', function () {
 Route::resource('/posts','App\Http\Controllers\PostController');
 Route::get('posts/create/collectdataform', [PostController::class, 'collectDataForm']);
 Route::post('posts/store/collectdata', [PostController::class, 'storeCollectData']);
-// Route::get('/updateConfirmDataForm', [PostController::class, 'updateConfirmDataForm']);
+
 Route::get('/upload', [PostController::class, 'upload']);
 
 
 Route::resource('/users','App\Http\Controllers\UserController');
-Route::post('/changepassword', [UserController::class, 'changePassword']);
-Route::post('/createuserconfirm', [UserController::class, 'createUserConfirmation']);
-Route::post('/updateuserconfirm', [UserController::class, 'updateUserConfirmation']);
-Route::post('/userprofile', [UserController::class, 'userProfile']);
+// create-confirm lote kyi yan
+Route::get('users/create/collectdataform', [UserController::class, 'collectDataForm']);
+Route::post('users/store/collectdata', [UserController::class, 'storeCollectData']);
+
+
+
+Route::get('/changepassword', [UserController::class, 'changePassword']);
+Route::get('/createuserconfirm', [UserController::class, 'createUserConfirmation']);
+Route::get('/updateuserconfirm', [UserController::class, 'updateUserConfirmation']);
+Route::get('/userprofile/{id}', [UserController::class, 'userProfile']);
+
+
 
 
 

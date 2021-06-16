@@ -67,8 +67,8 @@
                             </a>
                         </td>
                         <td>{{$post->description}}</td>
-                        <td>{{$post-> created_user_id}}</td>
-                        <td>{{$post-> created_at}}</td>
+                        <td>{{$post->created_user_id}}</td>
+                        <td>{{$post->created_at}}</td>
                         <td>
                             <form
                                 action="{{url('posts/'.$post->id)}}"

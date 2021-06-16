@@ -7,7 +7,11 @@
                     <h1 class="title">User Create Form</h1>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/users') }}" method="post">
+                    <form
+                        action="{{ route('users.store') }}"
+                        method="post"
+                        enctype="multipart/form-data"
+                    >
                         @csrf
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -23,7 +27,9 @@
                                 placeholder="Enter your name"
                                 name="name"
                                 id="name"
-                                value="{{ old('name') }}"
+                                value="{{ old('name') ?? 
+                                isset( request()->session()->get('user')['name']) ?  request()->session()->get('user')['name'] : ''
+                             }}"
                             />
                             @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -44,22 +50,27 @@
                                     @enderror
                                 "
                                 id="exampleFormControlInput1"
-                                placeholder="name@example.com"
-                                value="{{ old('email') }}"
+                                placeholder="Enter your email address"
+                                value="{{ old('email') ?? 
+                                isset( request()->session()->get('user')['email']) ?  request()->session()->get('user')['email'] : ''
+                             }}"
                             />
                             @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="pasword">Password</label>
+                            <label for="password">Password</label>
                             <input
                                 type="password"
                                 required
                                 name="password"
                                 class="form-control"
-                                id="pasword"
+                                id="password"
                                 placeholder="Password"
+                                value="{{ old('password') ?? 
+                                isset( request()->session()->get('user')['password']) ?  request()->session()->get('user')['password'] : ''
+                             }}"
                             />
                         </div>
                         <div class="form-group">
@@ -71,30 +82,12 @@
                                 class="form-control"
                                 id="pasword"
                                 placeholder="Password"
+                                value="{{ old('password') ?? 
+                                isset( request()->session()->get('user')['password']) ?  request()->session()->get('user')['password'] : ''
+                             }}"
                             />
                         </div>
-                        <div class="form-group">
-                            <label for="type">Type</label>
-                            <select
-                                class="
-                                    form-control
-                                    @error('actress')
-                                    is-invalid
-                                    @enderror
-                                "
-                                id="type"
-                                name="type"
-                                required
-                            >
-                                <option>Select Type</option>
-                                <option value="0">Admin</option>
-                                <option value="1">User</option>
-                                <!-- <option value="visitor">Visitor</option> -->
-                            </select>
-                            @error('type')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
+
                         <div class="form-group">
                             <label for="phone">Phone</label>
                             <input
@@ -109,7 +102,9 @@
                                 placeholder="Enter your phone number"
                                 name="phone"
                                 id="phone"
-                                value="{{ old('phone') }}"
+                                value="{{ old('phone') ?? 
+                                isset( request()->session()->get('user')['phone']) ?  request()->session()->get('user')['phone'] : ''
+                             }}"
                             />
                             @error('phone')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -117,8 +112,6 @@
                         </div>
                         <div class="form-group">
                             <label for="dob">Date Of Birth</label>
-                            <!-- <input type="date" id="date" name="date"
-                value="date" style="width:1000px;"> -->
                             <input
                                 type="date"
                                 required
@@ -131,7 +124,9 @@
                                 placeholder="Enter date of birth"
                                 name="dob"
                                 id="dob"
-                                value="{{ old('dob') }}"
+                                value="{{ old('dob') ?? 
+                                isset( request()->session()->get('user')['dob']) ?  request()->session()->get('user')['dob'] : ''
+                             }}"
                             />
                             @error('dob')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -151,7 +146,9 @@
                                 placeholder="Enter your address"
                                 name="address"
                                 id="address"
-                                value="{{ old('address') }}"
+                                value="{{ old('address') ?? 
+                                isset( request()->session()->get('user')['address']) ?  request()->session()->get('user')['address'] : ''
+                             }}"
                             />
                             @error('address')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -171,75 +168,11 @@
                                 placeholder="Choose your profile picture"
                                 name="profile"
                                 id="profile"
-                                value="{{ old('profile') }}"
+                                value="{{ old('profile') ?? 
+                                isset( request()->session()->get('user')['profile']) ?  request()->session()->get('user')['profile'] : ''
+                             }}"
                             />
                             @error('profile')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="created_user_id"
-                                ><b>Created User Id</b></label
-                            >
-                            <input
-                                type="text"
-                                required
-                                class="
-                                    form-control
-                                    @error('created_user_id')
-                                    is-invalid
-                                    @enderror
-                                "
-                                placeholder="Enter created_user_id"
-                                name="created_user_id"
-                                id="created_user_id"
-                                value="{{ old('created_user_id') }}"
-                            />
-                            @error('created_user_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="updated_user_id"
-                                ><b>Updated User Id</b></label
-                            >
-                            <input
-                                type="text"
-                                required
-                                class="
-                                    form-control
-                                    @error('updated_user_id')
-                                    is-invalid
-                                    @enderror
-                                "
-                                placeholder="Enter updated_user_id"
-                                name="updated_user_id"
-                                id="updated_user_id"
-                                value="{{ old('updated_user_id') }}"
-                            />
-                            @error('updated_user_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="deleted_user_id"
-                                ><b>Deleted User Id</b></label
-                            >
-                            <input
-                                type="text"
-                                required
-                                class="
-                                    form-control
-                                    @error('deleted_user_id')
-                                    is-invalid
-                                    @enderror
-                                "
-                                placeholder="Enter deleted_user_id"
-                                name="deleted_user_id"
-                                id="deleted_user_id"
-                                value="{{ old('deleted_user_id') }}"
-                            />
-                            @error('deleted_user_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

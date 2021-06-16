@@ -1,4 +1,4 @@
-@extends('layouts.app') @section('content')
+<!-- @extends('layouts.app') @section('content')
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-12">
@@ -8,14 +8,15 @@
                     <button class="btn btn-dark profile-edit-btn">
                         <i class="fa fa-edit"></i> Edit
                     </button>
+                    <img src="{{asset('storage/profile-images/'.$user->profile)}}" alt="profile-img" style = "width: 100px;">
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-hover">
                         <tr>
                             <th>Name</th>
                             <td>
-                                <span>Mg Mg</span>
-                                <img src="{{asset('img/post_backgroundjpg')}}" alt="profile_img">
+                                <span>{{$user->name}}</span>
+                              
                             </td>
                         </tr>
                         <tr>
@@ -44,4 +45,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection -->
