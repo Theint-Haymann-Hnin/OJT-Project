@@ -6,6 +6,11 @@
 
         <title>Laravel</title>
 
+
+     <form action="{{route('logout')}}" method="POST">
+         @csrf
+        <button class="btn btn-success">Logout</button>
+     </form>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
