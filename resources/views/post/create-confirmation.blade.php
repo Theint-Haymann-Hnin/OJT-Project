@@ -13,9 +13,9 @@
                         method="post"
                     >
                         {{ csrf_field() }}
-                        <div class="form-group">
-                            <label for="title"><b>Title</b></label>
-                            <label for="title"
+                        <div class="form-group input-group">
+                            <label for="title" class="col-sm-2"><b>Title</b></label>
+                            <label for="title" class="col-sm-8"
                                 >:
                                 {{ request()->session()->get('post')['title'] }}</label
                             >
@@ -38,10 +38,10 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
-                            <label for="description"><b>Description</b></label>
+                        <div class="form-group input-group">
+                            <label for="description" class="col-sm-2"><b>Description</b></label>
                             <label for="description"
-                                >:
+                               class="col-sm-8" >:
                                 {{ request()->session()->get('post')['description'] }}
                             </label>
                             <textarea

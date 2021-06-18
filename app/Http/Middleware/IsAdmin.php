@@ -14,6 +14,7 @@ class IsAdmin
         if(auth()->user()->type == 0){
             return $next($request);
         }
-        return redirect('/posts');
+        return redirect()->back();
     }
 }
+

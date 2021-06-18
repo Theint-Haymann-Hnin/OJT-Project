@@ -13,6 +13,12 @@
                         enctype="multipart/form-data"
                     >
                         @csrf @method('put')
+
+                        @if($user->profile)
+                                    <img src="{{asset('storage/profile-images/'.$user->profile)}}"  alt="" style="width: 100px; height:100px">
+                                    @else    
+                                    <img src="{{ asset('images/default.png') }}" alt="" style="width: 100px; height:100px">  
+                                @endif 
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input
@@ -129,29 +135,17 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="profile">Profile</label>
-
-                            <input
-                                type="file"
-                                class="
-                                    form-control
-                                    @error('profile')
-                                    is-invalid
-                                    @enderror
-                                "
-                                placeholder="Choose your profile picture"
-                                name="profile"
-                                id="profile"
-                                value="{{ old('profile') }}"
-                            />
+                            <label for="update_photo" class="btn btn-outline-dark update_photo">Profile</label>
+                            <input type="file" name="profile" id="update_photo" class="" accept="image/png, image/jpg, image/jpeg" onchange="displaySelectedPhoto('update_photo','image')" style="width:0; height:0; overflow:hidden">
+                                @if($user->profile)
+                                    <img src="{{asset('storage/profile-images/'.$user->profile)}}" id="image" alt="" class="imagePreview img-thumbnail" style="width: 100px; height:100px">
+                                    @else    
+                                    <img src="{{ asset('images/default.png') }}" alt="" id="image" class="imagePreview img-thumbnail" style="width: 100px; height:100px">  
+                                @endif
                             @error('profile')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                            <img
-                                src="{{asset('storage/profile-images/'.$user->profile)}}"
-                                alt="profile-img"
-                                style="width: 100px"
-                            />
+                            
                         </div>
 
                         <a href="{{ url('/changepassword') }}" class="changepwd"

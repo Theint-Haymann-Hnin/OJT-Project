@@ -1,8 +1,19 @@
 @extends('layouts.app') @section('content')
 <div class="container">
-    <h1 class="title">User List</h1>
-    <div class="row">
+    <div class="row mb-3">
         <div class="col-md-10">
+            <h2>User List</h2>
+        </div>
+        <div class="col-md-2">
+            <a href="{{ url('/users/create') }}" class="add-btn"
+                ><button type="button" class="btn btn-info btn-lg btn-block">
+                    <i class="fas fa-user-plus"></i> Add
+                </button></a
+            >
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-11">
             <form class="form-inline my-2 my-lg-0">
                 <input
                     class="form-control mr-sm-2"
@@ -36,13 +47,6 @@
                 </button>
             </form>
         </div>
-        <div class="col-md-2">
-            <a href="{{ url('/users/create') }}"
-                ><button type="button" class="btn btn-info btn-lg btn-block">
-                    <i class="fas fa-user-plus"></i> Add
-                </button></a
-            >
-        </div>
     </div>
     <div class="row mt-5">
         <div class="col-md-12">
@@ -65,7 +69,7 @@
                     <tr>
                         <!-- <td><a href data-toggle="modal" data-target="#yourModal{{$user->id}}">{{$user->name}}</a>
                         <td> -->
-                            <td>
+                        <td>
                             <a
                                 class="ttl"
                                 data-toggle="modal"
@@ -109,7 +113,7 @@
                 </tbody>
             </table>
             <!-- Modal -->
-           
+
             <div
                 class="modal fade"
                 id="exampleModalCenter"
@@ -122,7 +126,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title" id="exampleModalLongTitle">
-                               User Detail
+                                User Detail
                             </h4>
                             <button
                                 type="button"
@@ -139,12 +143,17 @@
                                     <span class="user-profile-ttl">
                                         User Profile</span
                                     >
-                                    <a href=" {{ route('users.update', [$user->id]) }}">
-                                        <button
-                                        class="btn btn-dark profile-edit-btn"
+                                    <a
+                                        href=" {{ route('users.update', [$user->id]) }}"
                                     >
-                                        <i class="fa fa-edit"></i> Edit
-                                    </button>
+                                        <button
+                                            class="
+                                                btn btn-dark
+                                                profile-edit-btn
+                                            "
+                                        >
+                                            <i class="fa fa-edit"></i> Edit
+                                        </button>
                                     </a>
                                 </div>
                                 @foreach($users as $user)
@@ -155,8 +164,17 @@
                                         <tr>
                                             <th>Name</th>
                                             <td>
-                                                <span>{{$user->name}}</span> <br>
-                                                <span><img src="{{asset('storage/profile-images/'.$user->profile)}}" alt="profile-img" style = "width: 300px; height: 200px;"></span>
+                                                <span>{{$user->name}}</span>
+                                                <br />
+                                                <span
+                                                    ><img
+                                                        src="{{asset('storage/profile-images/'.$user->profile)}}"
+                                                        alt="profile-img"
+                                                        style="
+                                                            width: 300px;
+                                                            height: 200px;
+                                                        "
+                                                /></span>
                                             </td>
                                         </tr>
                                         <tr>

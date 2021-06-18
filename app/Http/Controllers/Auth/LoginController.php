@@ -33,7 +33,7 @@ class LoginController extends Controller
             if (auth()->user()->type == 0) {
                 return redirect('/posts');
             }else{
-                return redirect()->route('/users');
+                return redirect('/users');
             }
         }else{
             return redirect()->route('login')

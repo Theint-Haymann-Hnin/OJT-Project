@@ -24,16 +24,21 @@ Route::resource('/posts','App\Http\Controllers\PostController');
 Route::get('posts/create/collectdataform', [PostController::class, 'collectDataForm']);
 Route::post('posts/store/collectdata', [PostController::class, 'storeCollectData']);
 
+
+// example
+Route::get('posts/update/updateconfirm', [PostController::class, 'updateConfirm']);
+// example
+
+
 Route::get('/upload', [PostController::class, 'upload']);
 
 
+
+
+
 Route::resource('/users','App\Http\Controllers\UserController');
-// create-confirm lote kyi yan
 Route::get('users/create/collectdataform', [UserController::class, 'collectDataForm']);
 Route::post('users/store/collectdata', [UserController::class, 'storeCollectData']);
-
-
-
 Route::get('/changepassword', [UserController::class, 'changePassword']);
 Route::get('/createuserconfirm', [UserController::class, 'createUserConfirmation']);
 Route::get('/updateuserconfirm', [UserController::class, 'updateUserConfirmation']);
@@ -47,7 +52,7 @@ Route::get('/userprofile/{id}', [UserController::class, 'userProfile']);
 
 
 Auth::routes();
-Route::get('/posts', [HomeController::class, 'index'])->name('posts')->middleware('isadmin');
+// Route::get('/posts', [PostController::class, 'index'])->name('posts')->middleware('isadmin');
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

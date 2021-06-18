@@ -1,13 +1,13 @@
-<!-- @extends('layouts.app') @section('content')
+@extends('layouts.app') @section('content')
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <span class="user-profile-ttl"> User Profile</span>
-                    <button class="btn btn-dark profile-edit-btn">
+                    <!-- <span class="user-profile-ttl"> User Profile</span> -->
+                    <a href="{{url('users/'.$user->id.'/edit')}}"><button class="btn btn-dark profile-edit-btn float-right mt-3">
                         <i class="fa fa-edit"></i> Edit
-                    </button>
+                    </button></a>
                     <img src="{{asset('storage/profile-images/'.$user->profile)}}" alt="profile-img" style = "width: 100px;">
                 </div>
                 <div class="card-body">
@@ -21,23 +21,23 @@
                         </tr>
                         <tr>
                             <th>Email Address</th>
-                            <td>mgmmg@gmail.com</td>
+                            <td>{{$user->email}}</td>
                         </tr>
                         <tr>
                             <th>Type</th>
-                            <td>User</td>
+                            <td>{{$user->type}}</td>
                         </tr>
                         <tr>
                             <th>Phone</th>
-                            <td>09 938894t9854</td>
+                            <td>{{$user->phone}}</td>
                         </tr>
                         <tr>
                             <th>Date Of Birth</th>
-                            <td>20001/12/12</td>
+                            <td>{{$user->dob}}</td>
                         </tr>
                         <tr>
                             <th>Address</th>
-                            <td>Yangon</td>
+                            <td>{{$user->address}}</td>
                         </tr>
                     </table>
                 </div>
@@ -45,4 +45,4 @@
         </div>
     </div>
 </div>
-@endsection -->
+@endsection

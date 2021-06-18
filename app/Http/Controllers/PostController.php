@@ -14,7 +14,8 @@ class PostController extends Controller
     }
     public function index()
     {    
-        $posts = $this->postService ->index();
+      
+        $posts = $this->postService->index();
         
         return view('post.index', compact('posts'));
     }
@@ -54,17 +55,22 @@ class PostController extends Controller
         $post =Post::find($id);
         return view('post.update', compact('post'));
     }
+    
     public function update(Request $request, $id)
     {
         $post_update_data =$this->validatePost();
-        $this->postService->update($post_update_data , $id);
-        return redirect('/posts')->with('successAlert','You have successfully updated');
+        $request->session()->put('post', $post_update_data);
+        return view('post.update-confirmation');
+      
     }
-    // public function updateConfirmDataForm(Request $request, $id)
-    // {    
+    public function  updateConfirm(Request $request, $id)
+    {   
+        $post_update_data =$this->validatePost();
+        $this->postService->updateConfirm($post_update_data , $id);
+        return redirect('/posts')->with('successAlert','You have successfully updated');
         
-        //     return view('post.update-confirmation.blade');
-        // } 
+    }
+    
         public function destroy($id)
         {
             $this->postService->delete($id);

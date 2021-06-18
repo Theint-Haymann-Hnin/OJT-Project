@@ -9,8 +9,9 @@
                 </div>
                 <div class="card-body">
                     <form action="{{url('posts/'.$post->id)}}" method="post">
-                         @csrf
-                        @method('put')
+                        @csrf
+                                              @method('put')
+                       
                         <div class="form-group">
                             <label for="title"><b>Title</b></label>
                             <input
@@ -87,7 +88,7 @@
                         
 
                         <a href="{{url('/updatepostconfirm')}}"><button class="btn btn-success mr-3">Confirm</button></a>
-                        <button class="btn btn-outline-success">Clear</button>
+                        <button type="reset" class="btn btn-outline-success">Clear</button>
                     </form>
                 </div>
             </div>

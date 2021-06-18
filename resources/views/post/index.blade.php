@@ -1,6 +1,6 @@
 @extends('layouts.app') @section('content')
 <div class="container">
-    <h1 class="title">Post List</h1>
+    <h2>Post List</h2>
     <div class="row">
         <div class="col-md-6">
             @if (Session('successAlert'))
@@ -55,8 +55,9 @@
                     <th></th>
                 </thead>
                 <tbody>
+                    @foreach($posts as $post)
                     <tr>
-                        @foreach($posts as $post)
+                       
                         <td>
                             <a
                                 class="ttl"
@@ -78,7 +79,7 @@
                                 <a href="{{url('posts/'.$post->id.'/edit')}}">
                                     <button
                                         type="button"
-                                        class="btn btn-success mr-1"
+                                        class="btn btn-success mb-2"
                                     >
                                         <i class="fa fa-edit"></i> Edit
                                     </button>
