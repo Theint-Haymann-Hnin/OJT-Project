@@ -8,9 +8,9 @@
                     <h1 class="title">Update Post Confirmation</h1>
                 </div>
                 <div class="card-body">
-                    {{--<form action="{{url('posts/'.$post->id)}}" method="post">
+                    <form action="{{url('posts/update/updateconfirm/'.request()->session()->get('post')['id'])}}" method="post">
                         @csrf
-                        @method('put')--}}
+                        @method('put')
                       
                         <div class="form-group input-group">
                             <label for="title" class="col-sm-2"><b>Title</b></label>

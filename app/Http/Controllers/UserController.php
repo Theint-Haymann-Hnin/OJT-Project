@@ -20,7 +20,8 @@ class UserController extends Controller
         return view('user.index', compact('users'));
     }
     public function create()
-    {
+    {   
+       
         return view('user.create');
     }
     

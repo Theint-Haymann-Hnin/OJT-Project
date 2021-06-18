@@ -59,10 +59,18 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post_update_data =$this->validatePost();
+        $post_update_data['id'] = $id;
         $request->session()->put('post', $post_update_data);
-        return view('post.update-confirmation');
+        return redirect('posts/update/updatecollectdataform');
       
     }
+    public function updateCollectDataForm( )
+    {
+        return view('post.update-confirmation');
+    }
+
+
+
     public function  updateConfirm(Request $request, $id)
     {   
         $post_update_data =$this->validatePost();

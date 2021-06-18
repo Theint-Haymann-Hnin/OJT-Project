@@ -145,9 +145,7 @@
                             @error('profile')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                            
                         </div>
-
                         <a href="{{ url('/changepassword') }}" class="changepwd"
                             >Change Password</a
                         >

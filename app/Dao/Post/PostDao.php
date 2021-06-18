@@ -24,9 +24,9 @@ class PostDao implements PostDaoInterface{
         Post::create($data);
         request()->session()->forget('post');
     }
-    // public function update($post_data_to_update, $id){
-    //     Post::find($id)->update($post_data_to_update);
-    // }
+    public function update($post_data_to_update, $id){
+        Post::find($id)->update($post_data_to_update);
+    }
    
     public function  updateConfirm($post_data_to_update, $id){
         Post::find($id)->update($post_data_to_update);

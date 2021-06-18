@@ -16,17 +16,27 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', [PostController::class, 'index']);
 
-Route::resource('/posts','App\Http\Controllers\PostController');
+// Route::resource('posts', 'App\Http\Controllers\PostController', [
+//     'except' => [
+//         'index'
+//     ]
+// ])
+// ->middleware(['isadmin']);
+
+Route::resource('/posts','App\Http\Controllers\PostController')->middleware('isadmin');
 Route::get('posts/create/collectdataform', [PostController::class, 'collectDataForm']);
 Route::post('posts/store/collectdata', [PostController::class, 'storeCollectData']);
 
 
 // example
-Route::get('posts/update/updateconfirm', [PostController::class, 'updateConfirm']);
+Route::get('posts/update/updatecollectdataform', [PostController::class, 'updateCollectDataForm']);
+Route::put('posts/update/updateconfirm/{id}', [PostController::class, 'updateConfirm']);
+
 // example
 
 
@@ -44,29 +54,8 @@ Route::get('/createuserconfirm', [UserController::class, 'createUserConfirmation
 Route::get('/updateuserconfirm', [UserController::class, 'updateUserConfirmation']);
 Route::get('/userprofile/{id}', [UserController::class, 'userProfile']);
 
-
-
-
-
-
-
-
 Auth::routes();
-// Route::get('/posts', [PostController::class, 'index'])->name('posts')->middleware('isadmin');
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
