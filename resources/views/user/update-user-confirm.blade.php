@@ -10,10 +10,12 @@
                     <div class="update-user-confirm-photo">: Profile photo</div>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form action="{{url('users/update/updateconfirm/'.request()->session()->get('user')['id'])}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('put')
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <label> : Value </label>
+                            <label> : {{ request()->session()->get('user')['name'] }}</label>
                             <input
                                 type="hidden"
                                 required

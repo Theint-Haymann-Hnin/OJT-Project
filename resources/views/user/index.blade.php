@@ -14,12 +14,13 @@
     </div>
     <div class="row">
         <div class="col-md-11">
-            <form class="form-inline my-2 my-lg-0">
+            <form action="{{url('/search_users')}}" class="form-inline my-2 my-lg-0" method="GET">
+                @csrf
                 <input
                     class="form-control mr-sm-2"
                     type="search"
                     placeholder="Name"
-                    aria-label="Search"
+                    aria-label="Search" name="search_data"
                 />
                 <input
                     class="form-control mr-sm-2"
@@ -112,6 +113,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $users->links() }}
             <!-- Modal -->
 
             <div

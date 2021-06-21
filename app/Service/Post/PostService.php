@@ -27,9 +27,12 @@ class postService implements PostServiceInterface {
     // }
    
     public function  updateConfirm($post_data_to_update , $id){
-        $this->postDao->update($post_data_to_update, $id);
+        $this->postDao->updateConfirm($post_data_to_update, $id);
     }
     public function delete($id){
         $this->postDao->delete($id);
     }
+    // public function search(Request $request){
+    //     $this->postDao->search();
+    // }
 } 

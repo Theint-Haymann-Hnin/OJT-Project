@@ -9,9 +9,10 @@
                 <button class="close" data-dismiss="alert">&times;</button>
             </div>
             @endif
-            <form class="form-inline my-2 my-lg-0">
+            <form action="{{url('/search_posts')}}" class="form-inline my-2 my-lg-0" method="GET">
+                @csrf
                 <input
-                    class="form-control mr-sm-2"
+                    class="form-control mr-sm-2" name="search_data"
                     type="search"
                     placeholder="Search"
                     aria-label="Search"
@@ -25,6 +26,7 @@
                 </button>
             </form>
         </div>
+        @if(Auth::check())
         <div class="col-md-2">
             <a href="{{ url('posts/create') }}"
                 ><button type="button" class="btn btn-info btn-lg btn-block">
@@ -33,10 +35,11 @@
             >
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-info btn-lg btn-block">
+           <a href="{{url('/upload')}}" type="button" class="btn btn-info btn-lg btn-block">
                 <i class="fas fa-upload"></i> Upload
-            </button>
+           </a>
         </div>
+        @endif
         <div class="col-md-2">
             <button type="button" class="btn btn-info btn-lg btn-block">
                 <i class="fas fa-download"></i> Download
@@ -52,7 +55,8 @@
                     <th>Post Description</th>
                     <th>Posted User</th>
                     <th>Posted Date</th>
-                    <th></th>
+                    <th>Status</th>
+                    @if(Auth::check()) <th></th> @endif
                 </thead>
                 <tbody>
                     @foreach($posts as $post)
@@ -68,8 +72,10 @@
                             </a>
                         </td>
                         <td>{{$post->description}}</td>
-                        <td>{{$post->created_user_id}}</td>
+                        <td>{{$post->user->name}}</td>
                         <td>{{$post->created_at}}</td>
+                        <td>{{$post->status}}</td>
+                        @if(Auth::check()) 
                         <td>
                             <form
                                 action="{{url('posts/'.$post->id)}}"
@@ -93,10 +99,17 @@
                                 </button>
                             </form>
                         </td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+            
+            <div class="pagination">
+           
+                {{ $posts->links() }}
+              
+            </div>
             <!-- Modal -->
             <div
                 class="modal fade"

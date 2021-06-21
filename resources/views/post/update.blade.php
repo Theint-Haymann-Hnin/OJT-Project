@@ -25,7 +25,7 @@
                                 placeholder="Enter your title"
                                 name="title"
                                 id="title"
-                                value="{{ old('title') ??$post->title}}"
+                                value="{{ old('title') ?? $post->title}}"
                             />
                             @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -51,34 +51,17 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="status"><b>Status</b></label>
-                            <input
-                                type="text" required
-                                class="
-                                    form-control
-                                    @error('status')
-                                    is-invalid
-                                    @enderror
-                                "
-                                placeholder="Enter status"
-                                name="status"
-                                id="status"
-                                value="{{ old('status')  ??$post->status }}"
-                            />
-                            @error('status')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                      
                         <!-- Default unchecked -->
 
                         <div class="custom-control custom-checkbox mt-3 mb-3">
                             <input
                                 type="checkbox"
                                 class="custom-control-input"
-                                id="defaultUnchecked"
-                            />
+                                id="defaultUnchecked" name="status" 
+                                @if($post->status )
+                                checked
+                                @endif
+                            >
                             <label
                                 class="custom-control-label"
                                 for="defaultUnchecked"

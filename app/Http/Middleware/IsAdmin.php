@@ -10,7 +10,7 @@ class IsAdmin
    
     public function handle(Request $request, Closure $next)
     {
-        if( auth()->check()== true && auth()->user()->type == 0){
+        if( auth()->check() == true){
             return $next($request);
           
         }

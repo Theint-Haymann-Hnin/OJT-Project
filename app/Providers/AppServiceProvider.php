@@ -9,6 +9,7 @@ use App\Contract\Service\Post\PostServiceInterface;
 use App\Service\Post\PostService;
 use App\Contract\Service\User\UserServiceInterface;
 use App\Service\User\UserService;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,7 +20,8 @@ class AppServiceProvider extends ServiceProvider
    */
   public function boot()
   {
-    
+    Paginator::useBootstrap();
+
     // DB::listen(
     //   function ($sql) {
     //     foreach ($sql->bindings as $i => $binding) {

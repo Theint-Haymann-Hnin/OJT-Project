@@ -6,8 +6,14 @@ use App\Contract\Dao\Post\PostDaoInterface;
 use Auth;
 class PostDao implements PostDaoInterface{
     public function index()
-    {
-        return Post::all();
+    {   
+
+      if(auth()->check()){
+        $posts = Post::where('created_user_id','=',Auth::user()->id)->paginate(5);
+        return $posts;
+      }
+      $posts = Post::where('status','=', 1)->paginate(5);
+       return $posts;
         // return Post::where('created_user_id', Auth::user()->id)->get();
         
     }
@@ -20,15 +26,20 @@ class PostDao implements PostDaoInterface{
     //     Post::create($data);
     // }
     public function storeCollectData($data) {
-        $data['created_user_id'] = 1;
+        $data['created_user_id'] = auth()->user()->id;
         Post::create($data);
         request()->session()->forget('post');
     }
-    public function update($post_data_to_update, $id){
-        Post::find($id)->update($post_data_to_update);
-    }
+    // public function update($post_data_to_update, $id){
+    //     Post::find($id)->update($post_data_to_update);
+    // }
    
     public function  updateConfirm($post_data_to_update, $id){
+       if(isset($post_data_to_update['status'])){
+        $post_data_to_update['status'] = 1;
+       }else{
+        $post_data_to_update['status'] = 0;
+       }
         Post::find($id)->update($post_data_to_update);
         request()->session()->forget('post');
     }
@@ -36,4 +47,13 @@ class PostDao implements PostDaoInterface{
     {
         Post::find($id)->delete();
     }
+    // public function search()
+    // {     
+
+    //     $searchData = request()->search_data;
+    //     $posts = Post::where('title','like',"%".$searchData."%")->orWhere('description','like',"%".$searchData."%")->
+    //     orWhereHas('user',function($user)use($searchData){
+    //     $user->where('name','like',"%".$searchData."%");
+    //     })->paginate(5);
+    // }
 }

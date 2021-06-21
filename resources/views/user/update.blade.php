@@ -7,12 +7,15 @@
                     <h1 class="title">Update User Screen</h1>
                 </div>
                 <div class="card-body">
-                    <form
+                   {{--  <form
                         action="{{ route('users.update', [$user->id]) }}"
                         method="post"
                         enctype="multipart/form-data"
                     >
-                        @csrf @method('put')
+                        @csrf @method('put') --}}
+                        <form action="{{url('users/'.$user->id)}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                                                  @method('put')
 
                         @if($user->profile)
                                     <img src="{{asset('storage/profile-images/'.$user->profile)}}"  alt="" style="width: 100px; height:100px">

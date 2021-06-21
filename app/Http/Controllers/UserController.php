@@ -24,17 +24,7 @@ class UserController extends Controller
        
         return view('user.create');
     }
-    
-    // public function store(Request $request)
-    // {
-    //     $data = $this->validateUser();
-    //     $image =$request->profile;
-    //     $imageName=uniqid().'_'.$image->getClientOriginalName();
-    //     $image->storeAs('public/profile-images',$imageName);
-    //     $data['profile'] = $imageName;
-    //     $this->userService->store($data);
-    //     return redirect()->route('users.index')->with('success_msg', 'success process');
-    // }
+
     public function store(Request $request)
     {
         $data = $this->validateUser();
@@ -68,28 +58,57 @@ class UserController extends Controller
         $user =User::find($id);
         return view('user.update', compact('user'));
     }
-    
     public function update(Request $request, $id)
-    {     
-        $user_update_data = $this->validateUpdateUser();
-
-         $user = User::find($id);
-         if($request->profile){
+    { 
+            $post_update_data = $this->validateUpdateUser();
+            $post_update_data['id'] = $id;
+            $request->session()->put('post', $post_update_data);
+            if($request->profile){
             $old_image = $user->profile;
-           File::delete('storage/profile-images/'.$old_image);
+            File::delete('storage/profile-images/'.$old_image);
             $image =$request->profile;
             $imageName=uniqid().'_'.$image->getClientOriginalName();
             $image->storeAs('public/profile-images',$imageName);
             $user_update_data['profile']= $imageName;
-        } else {
-            $user_update_data['profile']= $user->profile;
-        }
-         
-       
-        // dd( $user_update_data);
-        $this->userService->update($user_update_data, $id);
-        return redirect('/users')->with('successAlert','You have successfully updated');
+            } else {
+                    $user_update_data['profile']= $user->profile;
+                }
+                return redirect('users/update/updatecollectdataform');
     }
+        public function updateCollectDataForm( )
+        {
+            return view('user.update-user-confirm');
+        }
+    public function  updateConfirm(Request $request, $id)
+    {   
+        
+    }
+
+
+
+    // right update function
+
+
+    // public function update(Request $request, $id)
+    // {     
+    //     $user_update_data = $this->validateUpdateUser();
+
+    //      $user = User::find($id);
+    //      if($request->profile){
+    //         $old_image = $user->profile;
+    //        File::delete('storage/profile-images/'.$old_image);
+    //         $image =$request->profile;
+    //         $imageName=uniqid().'_'.$image->getClientOriginalName();
+    //         $image->storeAs('public/profile-images',$imageName);
+    //         $user_update_data['profile']= $imageName;
+    //     } else {
+    //         $user_update_data['profile']= $user->profile;
+    //     }
+    //     $this->userService->update($user_update_data, $id);
+    //     return redirect('/users')->with('successAlert','You have successfully updated');
+    // }
+
+       // right update function
     
     
     public function destroy($id)
@@ -114,6 +133,17 @@ class UserController extends Controller
     {
         return view('user.update-user-confirm');
     }
+
+    public function search(Request $request)
+    {   
+       
+        // $this->postService->search();
+        $searchData = request()->search_data;
+        $users = User::where('name','like',"%".$searchData."%")->orWhere('email','like',"%".$searchData."%")
+        ->paginate(5);
+        return view('user.index', compact('users'));
+    }
+    
     private function validateUser()
     {
         return request()->validate([

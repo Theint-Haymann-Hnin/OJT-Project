@@ -63,8 +63,11 @@
                                 <input
                                 type="checkbox"
                                 class="custom-control-input"
-                                id="defaultUnchecked col-sm-2"
-                            />
+                                id="defaultUnchecked col-sm-2" name="status"
+                                @if( isset(session()->get('post')['status']))
+                                    checked
+                                @endif
+                            >
                                 <label
                                 class="custom-control-label"
                                 for="defaultUnchecked"
