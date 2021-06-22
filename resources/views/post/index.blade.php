@@ -9,10 +9,15 @@
                 <button class="close" data-dismiss="alert">&times;</button>
             </div>
             @endif
-            <form action="{{url('/search_posts')}}" class="form-inline my-2 my-lg-0" method="GET">
+            <form
+                action="{{ url('/search_posts') }}"
+                class="form-inline my-2 my-lg-0"
+                method="GET"
+            >
                 @csrf
                 <input
-                    class="form-control mr-sm-2" name="search_data"
+                    class="form-control mr-sm-2"
+                    name="search_data"
                     type="search"
                     placeholder="Search"
                     aria-label="Search"
@@ -35,15 +40,21 @@
             >
         </div>
         <div class="col-md-2">
-           <a href="{{url('/upload')}}" type="button" class="btn btn-info btn-lg btn-block">
+            <a
+                href="{{ url('/upload') }}"
+                type="button"
+                class="btn btn-info btn-lg btn-block"
+            >
                 <i class="fas fa-upload"></i> Upload
-           </a>
+            </a>
         </div>
         @endif
         <div class="col-md-2">
-            <button type="button" class="btn btn-info btn-lg btn-block">
-                <i class="fas fa-download"></i> Download
-            </button>
+            <a href="{{ route('exportExcel', 'csv') }}">
+                <button type="button" class="btn btn-info btn-lg btn-block">
+                    <i class="fas fa-download"></i> Download
+                </button>
+            </a>
         </div>
     </div>
     <div class="row mt-5">
@@ -56,12 +67,13 @@
                     <th>Posted User</th>
                     <th>Posted Date</th>
                     <th>Status</th>
-                    @if(Auth::check()) <th></th> @endif
+                    @if(Auth::check())
+                    <th></th>
+                    @endif
                 </thead>
                 <tbody>
                     @foreach($posts as $post)
                     <tr>
-                       
                         <td>
                             <a
                                 class="ttl"
@@ -75,7 +87,7 @@
                         <td>{{$post->user->name}}</td>
                         <td>{{$post->created_at}}</td>
                         <td>{{$post->status}}</td>
-                        @if(Auth::check()) 
+                        @if(Auth::check())
                         <td>
                             <form
                                 action="{{url('posts/'.$post->id)}}"
@@ -104,11 +116,8 @@
                     @endforeach
                 </tbody>
             </table>
-            
             <div class="pagination">
-           
                 {{ $posts->links() }}
-              
             </div>
             <!-- Modal -->
             <div

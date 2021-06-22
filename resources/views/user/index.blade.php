@@ -14,13 +14,18 @@
     </div>
     <div class="row">
         <div class="col-md-11">
-            <form action="{{url('/search_users')}}" class="form-inline my-2 my-lg-0" method="GET">
+            <form
+                action="{{ url('/search_users') }}"
+                class="form-inline my-2 my-lg-0"
+                method="GET"
+            >
                 @csrf
                 <input
                     class="form-control mr-sm-2"
                     type="search"
                     placeholder="Name"
-                    aria-label="Search" name="search_data"
+                    aria-label="Search"
+                    name="search_data"
                 />
                 <input
                     class="form-control mr-sm-2"
@@ -68,8 +73,6 @@
                 <tbody>
                     @foreach($users as $user)
                     <tr>
-                        <!-- <td><a href data-toggle="modal" data-target="#yourModal{{$user->id}}">{{$user->name}}</a>
-                        <td> -->
                         <td>
                             <a
                                 class="ttl"
@@ -115,7 +118,6 @@
             </table>
             {{ $users->links() }}
             <!-- Modal -->
-
             <div
                 class="modal fade"
                 id="exampleModalCenter"

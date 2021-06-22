@@ -136,11 +136,40 @@ class PostController extends Controller
     * @return \Illuminate\Support\Collection
     */
     public function importExcel(Request $request) 
-    {
+    {   
+        $this->validate($request, [
+            'import_file'  => 'required|mimes:xls,xlsx'
+           ]);
         
         \Excel::import(new TransactionsImport,$request->file('import_file'));
 
         return view('post.upload-post');
+       
+      
+        //    $path = $request->import_file('import_file')->getRealPath();
+      
+        //    $data = Excel::load($path)->get();
+      
+        //    if($data->count() > 0)
+        //    {
+        //     foreach($data->toArray() as $key => $value)
+        //     {
+        //      foreach($value as $row)
+        //      {
+        //       $insert_data[] = array(
+        //        'title'  => $row['title'],
+        //        'description'   => $row['description'],
+        //        'created_user_id'   => $row['created_user_id'],
+        //       );
+        //      }
+        //     }
+      
+        //     if(!empty($insert_data))
+        //     {
+        //      DB::table('tbl_customer')->insert($insert_data);
+        //     }
+        //    }
+        //    return back()->with('success', 'Excel Data Imported successfully.');
     }
 }
         

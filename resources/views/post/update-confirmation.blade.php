@@ -8,14 +8,19 @@
                     <h1 class="title">Update Post Confirmation</h1>
                 </div>
                 <div class="card-body">
-                    <form action="{{url('posts/update/updateconfirm/'.request()->session()->get('post')['id'])}}" method="post">
-                        @csrf
-                        @method('put')
-                      
+                    <form
+                        action="{{url('posts/update/updateconfirm/'.request()->session()->get('post')['id'])}}"
+                        method="post"
+                    >
+                        @csrf @method('put')
                         <div class="form-group input-group">
-                            <label for="title" class="col-sm-2"><b>Title</b></label>
-                            <label class="col-sm-8"> : 
-                                {{ request()->session()->get('post')['title'] }}</label>
+                            <label for="title" class="col-sm-2"
+                                ><b>Title</b></label
+                            >
+                            <label class="col-sm-8">
+                                :
+                                {{ request()->session()->get('post')['title'] }}</label
+                            >
                             <input
                                 type="hidden"
                                 class="
@@ -28,16 +33,19 @@
                                 name="title"
                                 id="title"
                                 value="{{ request()->session()->get('post')['title'] }}"
-                                />
-                            
+                            />
                             @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group input-group">
-                            <label for="description" class="col-sm-2"><b>Description</b></label>
-                            <label class="col-sm-8">:
-                                {{ request()->session()->get('post')['description'] }}</label>
+                            <label for="description" class="col-sm-2"
+                                ><b>Description</b></label
+                            >
+                            <label class="col-sm-8"
+                                >:
+                                {{ request()->session()->get('post')['description'] }}</label
+                            >
                             <textarea
                                 name="description"
                                 id="description"
@@ -56,19 +64,16 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
-                        <!-- Default unchecked -->
-
                         <div class="custom-control custom-checkbox mt-3 mb-3">
-                                <input
+                            <input
                                 type="checkbox"
                                 class="custom-control-input"
-                                id="defaultUnchecked col-sm-2" name="status"
-                                @if( isset(session()->get('post')['status']))
-                                    checked
-                                @endif
-                            >
-                                <label
+                                id="defaultUnchecked col-sm-2"
+                                name="status"
+                                @if(
+                                isset(session()-
+                            />get('post')['status'])) checked @endif >
+                            <label
                                 class="custom-control-label"
                                 for="defaultUnchecked"
                                 >Status</label

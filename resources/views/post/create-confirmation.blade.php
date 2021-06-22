@@ -14,7 +14,9 @@
                     >
                         {{ csrf_field() }}
                         <div class="form-group input-group">
-                            <label for="title" class="col-sm-2"><b>Title</b></label>
+                            <label for="title" class="col-sm-2"
+                                ><b>Title</b></label
+                            >
                             <label for="title" class="col-sm-8"
                                 >:
                                 {{ request()->session()->get('post')['title'] }}</label
@@ -37,11 +39,12 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="form-group input-group">
-                            <label for="description" class="col-sm-2"><b>Description</b></label>
-                            <label for="description"
-                               class="col-sm-8" >:
+                            <label for="description" class="col-sm-2"
+                                ><b>Description</b></label
+                            >
+                            <label for="description" class="col-sm-8"
+                                >:
                                 {{ request()->session()->get('post')['description'] }}
                             </label>
                             <textarea
@@ -57,13 +60,12 @@
                                 style="display: none"
                                 placeholder="Enter Description"
                             >
- {{ request()->session()->get('post')['description'] }}</textarea
+                             {{ request()->session()->get('post')['description'] }}</textarea
                             >
                             @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                      
                         <button class="btn btn-success mr-3">Create</button>
                         <a href="{{ url('posts/create') }}">
                             <button
@@ -80,5 +82,4 @@
         <div class="col-md-2"></div>
     </div>
 </div>
-
 @endsection

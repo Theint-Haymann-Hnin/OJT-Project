@@ -87,7 +87,6 @@
                              }}"
                             />
                         </div>
-
                         <div class="form-group">
                             <label for="phone">Phone</label>
                             <input
@@ -155,37 +154,32 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="update_photo" class="btn btn-outline-dark update_photo">Profile</label>
-                            <input type="file" name="profile" id="update_photo" class="" accept="image/png, image/jpg, image/jpeg" onchange="displaySelectedPhoto('update_photo','image')" style="width:0; height:0; overflow:hidden">
-                                   
-                                    <img src="{{ asset('images/default.png') }}" alt="" id="image" class="imagePreview img-thumbnail" style="width: 100px; height:100px"> 
-                            @error('profile')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            
-                        </div>
-                        <!-- <div class="form-group">
-                            <label for="profile">Profile</label>
+                            <label
+                                for="update_photo"
+                                class="btn btn-outline-dark update_photo"
+                                >Profile</label
+                            >
                             <input
                                 type="file"
-                                required
-                                class="
-                                    form-control
-                                    @error('profile')
-                                    is-invalid
-                                    @enderror
-                                "
-                                placeholder="Choose your profile picture"
                                 name="profile"
-                                id="profile"
-                                value="{{ old('profile') ?? 
-                                isset( request()->session()->get('user')['profile']) ?  request()->session()->get('user')['profile'] : ''
-                             }}"
+                                id="update_photo"
+                                class=""
+                                accept="image/png, image/jpg, image/jpeg"
+                                onchange="displaySelectedPhoto('update_photo','image')"
+                                style="width: 0; height: 0; overflow: hidden"
+                            />
+
+                            <img
+                                src="{{ asset('images/default.png') }}"
+                                alt=""
+                                id="image"
+                                class="imagePreview img-thumbnail"
+                                style="width: 100px; height: 100px"
                             />
                             @error('profile')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-                        </div> -->
+                        </div>
                         <button type="submit" class="btn btn-primary mr-3">
                             Confirm
                         </button>

@@ -32,7 +32,6 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="form-group">
                             <label for="description"><b>Description</b></label>
                             <textarea
@@ -54,8 +53,6 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
-                            
                         <button class="btn btn-success mr-3">Confirm</button>
                         <button type="reset" class="btn btn-outline-success">
                             Clear
@@ -67,5 +64,4 @@
         <div class="col-md-2"></div>
     </div>
 </div>
-
 @endsection

@@ -16,7 +16,7 @@
                         {{ csrf_field() }}
                         <div class="form-group input-group">
                             <label for="name" class="col-sm-2">Name</label>
-                            <label  class="col-sm-8">
+                            <label class="col-sm-8">
                                 :
                                 {{ request()->session()->get('user')['name'] }}</label
                             >
@@ -39,10 +39,12 @@
                             @enderror
                         </div>
                         <div class="form-group input-group">
-                            <label for="exampleFormControlInput1"
-                              class="col-sm-2"  >Email address</label
+                            <label
+                                for="exampleFormControlInput1"
+                                class="col-sm-2"
+                                >Email address</label
                             >
-                            <label class="col-sm-2" >
+                            <label class="col-sm-2">
                                 :
                                 {{ request()->session()->get('user')['email'] }}</label
                             >
@@ -65,9 +67,11 @@
                             @enderror
                         </div>
                         <div class="form-group input-group">
-                            <label for="pasword" class="col-sm-2">Password</label>
-                            <label
-                            class="col-sm-8" >:
+                            <label for="pasword" class="col-sm-2"
+                                >Password</label
+                            >
+                            <label class="col-sm-8"
+                                >:
                                 {{ request()->session()->get('user')['password'] }}</label
                             >
                             <input
@@ -82,8 +86,8 @@
 
                         <div class="form-group input-group">
                             <label for="phone" class="col-sm-2">Phone</label>
-                            <label
-                            class="col-sm-8" >:
+                            <label class="col-sm-8"
+                                >:
                                 {{ request()->session()->get('user')['phone'] }}</label
                             >
                             <input
@@ -105,9 +109,11 @@
                             @enderror
                         </div>
                         <div class="form-group input-group">
-                            <label for="dob" class="col-sm-2">Date Of Birth</label>
-                            <label
-                            class="col-sm-8" >:
+                            <label for="dob" class="col-sm-2"
+                                >Date Of Birth</label
+                            >
+                            <label class="col-sm-8"
+                                >:
                                 {{ request()->session()->get('user')['dob'] }}</label
                             >
                             <input
@@ -129,7 +135,9 @@
                             @enderror
                         </div>
                         <div class="form-group input-group">
-                            <label for="address" class="col-sm-2">Address</label>
+                            <label for="address" class="col-sm-2"
+                                >Address</label
+                            >
                             <label class="col-sm-8">
                                 :
                                 {{ request()->session()->get('user')['address'] }}</label
@@ -152,41 +160,18 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                       <div class="form-group">
-                            <label for="update_photo" class="btn btn-outline-dark update_photo">Profile</label>
-                            <input type="file" name="profile" id="update_photo" class="" accept="image/png, image/jpg, image/jpeg" onchange="displaySelectedPhoto('update_photo','image')" style="width:0; height:0; overflow:hidden">
-                                    <img src="{{ request()->session()->get('user')['profile'] }}" alt="" id="image" class="imagePreview img-thumbnail" style="width: 100px; height:100px"> 
-                                    {{ request()->session()->get('user')['profile'] }}
+                        <div class="form-group">
+                            <label for="update_photo">Profile</label>
+                            <img
+                                src="{{asset('storage/profile-images/'.request()->session()->get('user')['profile'])}}"
+                                alt="profile-img"
+                                style="width: 100px; height: 100px"
+                            />
+                            {{ request()->session()->get('user')['profile'] }}
                             @error('profile')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                      
-                         
-
-                       <!-- <div class="form-group input-group">
-                            <label for="profile" class="col-sm-2">Profile</label>
-                            <label class="col-sm-8">
-                                :{{ request()->session()->get('user')['profile'] }}</label
-                            >
-                            <input
-                                type="hidden"
-                                required
-                                class="
-                                    form-control
-                                    @error('profile')
-                                    is-invalid
-                                    @enderror
-                                "
-                                placeholder="Choose your profile picture"
-                                name="profile"
-                                id="profile"
-                                value="{{ request()->session()->get('user')['profile'] }}"
-                            />
-                            @error('profile')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>  -->
                         <button type="submit" class="btn btn-primary mr-3">
                             Create
                         </button>

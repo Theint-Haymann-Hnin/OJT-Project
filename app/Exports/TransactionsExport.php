@@ -2,10 +2,11 @@
 
 namespace App\Exports;
 
-use App\Post;
+use App\Models\Post;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class TransactionsExport implements FromCollection
+class TransactionsExport implements FromCollection ,WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -17,8 +18,10 @@ class TransactionsExport implements FromCollection
     public function headings(): array
     {
         return [
+            'id',
             'Title',
             'Description',
+            'Created User',
         ];
     }
 
@@ -27,6 +30,7 @@ class TransactionsExport implements FromCollection
         return [
             $post->title,
             $post->description,
+            $post->user->name ,
         ];
     }
 }

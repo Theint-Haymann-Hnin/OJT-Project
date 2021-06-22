@@ -3,6 +3,7 @@
 namespace App\Imports;
 use App\Models\Post;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class TransactionsImport implements ToModel
 {
@@ -16,6 +17,8 @@ class TransactionsImport implements ToModel
         return new Post([
             'title'     => $row[0],
             'description'    => $row[1],
+            'created_user_id'  =>$row[2],
+           
         ]);
     }
 }

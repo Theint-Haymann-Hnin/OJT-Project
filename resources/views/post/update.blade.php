@@ -9,9 +9,8 @@
                 </div>
                 <div class="card-body">
                     <form action="{{url('posts/'.$post->id)}}" method="post">
-                        @csrf
-                                              @method('put')
-                       
+                        @csrf @method('put')
+
                         <div class="form-group">
                             <label for="title"><b>Title</b></label>
                             <input
@@ -31,7 +30,6 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
                         <div class="form-group">
                             <label for="description"><b>Description</b></label>
                             <textarea
@@ -51,27 +49,28 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <!-- Default unchecked -->
-
                         <div class="custom-control custom-checkbox mt-3 mb-3">
                             <input
                                 type="checkbox"
                                 class="custom-control-input"
-                                id="defaultUnchecked" name="status" 
-                                @if($post->status )
-                                checked
-                                @endif
-                            >
+                                id="defaultUnchecked"
+                                name="status"
+                                @if($post-
+                            />status ) checked @endif >
                             <label
                                 class="custom-control-label"
                                 for="defaultUnchecked"
                                 >Status</label
                             >
                         </div>
-                        
-
-                        <a href="{{url('/updatepostconfirm')}}"><button class="btn btn-success mr-3">Confirm</button></a>
-                        <button type="reset" class="btn btn-outline-success">Clear</button>
+                        <a href="{{ url('/updatepostconfirm') }}"
+                            ><button class="btn btn-success mr-3">
+                                Confirm
+                            </button></a
+                        >
+                        <button type="reset" class="btn btn-outline-success">
+                            Clear
+                        </button>
                     </form>
                 </div>
             </div>
@@ -79,5 +78,4 @@
         <div class="col-md-2"></div>
     </div>
 </div>
-
 @endsection
