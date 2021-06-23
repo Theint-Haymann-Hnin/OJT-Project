@@ -2,13 +2,17 @@
 <div class="container">
     <h2>Post List</h2>
     <div class="row">
+      <div class="col-md-6">
+        @if (Session('successAlert'))
+        <div class="alert alert-success alert-dismissible show fade">
+            <strong>{{ Session("successAlert") }}</strong>
+            <button class="close" data-dismiss="alert">&times;</button>
+        </div>
+        @endif
+      </div>
+    </div>
+    <div class="row">
         <div class="col-md-6">
-            @if (Session('successAlert'))
-            <div class="alert alert-success alert-dismissible show fade">
-                <strong>{{ Session("successAlert") }}</strong>
-                <button class="close" data-dismiss="alert">&times;</button>
-            </div>
-            @endif
             <form
                 action="{{ url('/search_posts') }}"
                 class="form-inline my-2 my-lg-0"
@@ -66,7 +70,8 @@
                     <th>Post Description</th>
                     <th>Posted User</th>
                     <th>Posted Date</th>
-                    <th>Status</th>
+                   {{--
+                    <th>Status</th> --}}
                     @if(Auth::check())
                     <th></th>
                     @endif
@@ -86,7 +91,8 @@
                         <td>{{$post->description}}</td>
                         <td>{{$post->user->name}}</td>
                         <td>{{$post->created_at}}</td>
-                        <td>{{$post->status}}</td>
+                       {{--
+                        <td>{{$post->status}}</td> --}}
                         @if(Auth::check())
                         <td>
                             <form

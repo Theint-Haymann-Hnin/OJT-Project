@@ -14,6 +14,12 @@
                         method="post"
                     >
                         {{ csrf_field() }}
+                        <img
+                        src="{{asset('storage/profile-images/'.request()->session()->get('user')['profile'])}}"
+                        alt="profile-img"
+                        style="width: 100px; height: 100px;"
+                    />
+                       
                         <div class="form-group input-group">
                             <label for="name" class="col-sm-2">Name</label>
                             <label class="col-sm-8">
@@ -160,13 +166,9 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="display:none;">
                             <label for="update_photo">Profile</label>
-                            <img
-                                src="{{asset('storage/profile-images/'.request()->session()->get('user')['profile'])}}"
-                                alt="profile-img"
-                                style="width: 100px; height: 100px"
-                            />
+                           
                             {{ request()->session()->get('user')['profile'] }}
                             @error('profile')
                             <div class="invalid-feedback">{{ $message }}</div>

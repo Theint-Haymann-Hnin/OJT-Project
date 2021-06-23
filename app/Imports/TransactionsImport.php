@@ -5,7 +5,7 @@ use App\Models\Post;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class TransactionsImport implements ToModel
+class TransactionsImport implements ToModel ,WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,10 +15,9 @@ class TransactionsImport implements ToModel
     public function model(array $row)
     {
         return new Post([
-            'title'     => $row[0],
-            'description'    => $row[1],
-            'created_user_id'  =>$row[2],
-           
+            'title'     => $row['title'],
+            'description'    => $row['description'],
+            'created_user_id'  =>$row['created_user_id'],
         ]);
     }
 }

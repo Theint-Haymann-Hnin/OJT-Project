@@ -132,19 +132,26 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
+    
 
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
     ],
-
     'custom' => [
         'title' => [
-            'reeuired' => 'Please fill it',
-            'max' => 'Your title is too long!'
+            'required' => 'Title is required',
+            'max' => 'The title cannot be longer than 255 words',
+            'unique' => 'Posts already exists'
+        ],
+        'description' => [
+            'required' => 'Description is required',
+            'min' => 'Your description is too short!'
+         
         ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -156,7 +163,7 @@ return [
     | of "email". This simply helps us make our message more expressive.
     |
     */
+    'attributes' => ['title','description'],
 
-    'attributes' => [],
 
 ];

@@ -8,13 +8,16 @@ class PostDao implements PostDaoInterface{
     public function index()
     {   
 
-      if(auth()->check()){
-        $posts = Post::where('created_user_id','=',Auth::user()->id)->paginate(5);
-        return $posts;
+      if(auth()->check() && auth()->user()->type == 0 ){
+         $posts = Post::paginate(5);
+      } elseif(auth()->check() && auth()->user()->type == 1 ) {
+        $posts = Post::where('created_user_id', auth()->user()->id)->paginate(5);
+      } else {
+        $posts = Post::where('status','=', 1)->paginate(5);
       }
-      $posts = Post::where('status','=', 1)->paginate(5);
-       return $posts;
-        // return Post::where('created_user_id', Auth::user()->id)->get();
+      return $posts;
+      
+      
         
     }
     public function store($data)

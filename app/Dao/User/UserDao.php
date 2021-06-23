@@ -13,7 +13,8 @@ class UserDao implements UserDaoInterface{
     //     User::create($data);
     // }
     public function storeCollectData($data) {
-       
+
+     $data['created_user_id'] = auth()->user()->id;
        User::create($data);
         request()->session()->forget('user');
     }

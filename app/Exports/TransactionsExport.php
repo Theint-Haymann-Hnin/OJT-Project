@@ -5,8 +5,10 @@ namespace App\Exports;
 use App\Models\Post;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class TransactionsExport implements FromCollection ,WithHeadings
+class TransactionsExport implements FromCollection,ShouldAutoSize , WithHeadings, WithMapping
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -18,7 +20,6 @@ class TransactionsExport implements FromCollection ,WithHeadings
     public function headings(): array
     {
         return [
-            'id',
             'Title',
             'Description',
             'Created User',

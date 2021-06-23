@@ -44,7 +44,7 @@ class PostController extends Controller
     {
         
         $this->postService->storeCollectData( $request->all() );
-        return redirect('/posts')->with('successAlert','You have successfully created');;
+        return redirect('/posts')->with('successAlert','You have successfully created');
     }
     public function show($id)
     {
@@ -106,70 +106,33 @@ class PostController extends Controller
     public function validatePost()
     {
         return request()-> validate([
-            'title' => 'required|min:3|max:100',
-            'description' => 'required',
+            'title' => 'required|min:3|max:255|unique:posts,title, $this->post->id',
+            'description' => 'required| min:5',
             'status' => 'nullable'
-            // 'created_user_id' => 'required',
-            // 'updated_user_id' => 'required',
-            // 'deleted_user_id' => 'required'
+            
             ]);
     }
 
-    /**
-    * @return \Illuminate\Support\Collection
-    */
     public function exportExcel($type) 
     {
         return \Excel::download(new TransactionsExport, 'posts.'.$type);
     }
 
-    /**
-    * @return \Illuminate\Support\Collection
-    */
     public function importExportView()
     {
        return view('post.upload-post');
     }
    
     
-    /**
-    * @return \Illuminate\Support\Collection
-    */
     public function importExcel(Request $request) 
     {   
-        $this->validate($request, [
-            'import_file'  => 'required|mimes:xls,xlsx'
-           ]);
+        // $this->validate($request, [
+        //     'import_file'  => 'required|mimes:xls,xlsx'
+        //    ]);
         
         \Excel::import(new TransactionsImport,$request->file('import_file'));
 
-        return view('post.upload-post');
-       
-      
-        //    $path = $request->import_file('import_file')->getRealPath();
-      
-        //    $data = Excel::load($path)->get();
-      
-        //    if($data->count() > 0)
-        //    {
-        //     foreach($data->toArray() as $key => $value)
-        //     {
-        //      foreach($value as $row)
-        //      {
-        //       $insert_data[] = array(
-        //        'title'  => $row['title'],
-        //        'description'   => $row['description'],
-        //        'created_user_id'   => $row['created_user_id'],
-        //       );
-        //      }
-        //     }
-      
-        //     if(!empty($insert_data))
-        //     {
-        //      DB::table('tbl_customer')->insert($insert_data);
-        //     }
-        //    }
-        //    return back()->with('success', 'Excel Data Imported successfully.');
+        return redirect('/posts')->with('successAlert','File uploaded  successfully ');;
     }
 }
         

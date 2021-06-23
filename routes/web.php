@@ -5,6 +5,7 @@ use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ChangePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,6 @@ Route::get('/upload', [PostController::class, 'upload']);
 Route::resource('/users','App\Http\Controllers\UserController');
 Route::get('users/create/collectdataform', [UserController::class, 'collectDataForm']);
 Route::post('users/store/collectdata', [UserController::class, 'storeCollectData']);
-Route::get('/changepassword', [UserController::class, 'changePassword']);
 Route::get('/createuserconfirm', [UserController::class, 'createUserConfirmation']);
 Route::get('/updateuserconfirm', [UserController::class, 'updateUserConfirmation']);
 Route::get('/userprofile/{id}', [UserController::class, 'userProfile']);
@@ -58,6 +58,12 @@ Route::put('users/update/updateconfirm/{id}', [UserController::class, 'updateCon
 Route::get('/search_users', [UserController::class, 'search']);
 
 Auth::routes();
+
+// Change Password
+Route::get('/change-password', [ChangePasswordController::class, 'index']);
+Route::post('/change-password', [ChangePasswordController::class,'store'])->name('change.password');
+// Change Password
+
 
 
 

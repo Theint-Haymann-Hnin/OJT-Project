@@ -1,19 +1,22 @@
 @extends('layouts.app') @section('content')
 <div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            @if (Session('successAlert'))
+            <div class="alert alert-success alert-dismissible show fade">
+                <strong>{{ Session("successAlert") }}</strong>
+                <button class="close" data-dismiss="alert">&times;</button>
+            </div>
+            @endif
+        </div>
+    </div>
     <div class="row mb-3">
         <div class="col-md-10">
             <h2>User List</h2>
         </div>
-        <div class="col-md-2">
-            <a href="{{ url('/users/create') }}" class="add-btn"
-                ><button type="button" class="btn btn-info btn-lg btn-block">
-                    <i class="fas fa-user-plus"></i> Add
-                </button></a
-            >
-        </div>
     </div>
     <div class="row">
-        <div class="col-md-11">
+        <div class="col-md-10">
             <form
                 action="{{ url('/search_users') }}"
                 class="form-inline my-2 my-lg-0"
@@ -21,26 +24,26 @@
             >
                 @csrf
                 <input
-                    class="form-control mr-sm-2"
+                    class="form-control mr-sm-1"
                     type="search"
                     placeholder="Name"
                     aria-label="Search"
                     name="search_data"
                 />
                 <input
-                    class="form-control mr-sm-2"
+                    class="form-control mr-sm-1"
                     type="search"
                     placeholder="Email"
                     aria-label="Search"
                 />
                 <input
-                    class="form-control mr-sm-2"
+                    class="form-control mr-sm-1"
                     type="search"
                     placeholder="Created From"
                     aria-label="Search"
                 />
                 <input
-                    class="form-control mr-sm-2"
+                    class="form-control mr-sm-1"
                     type="search"
                     placeholder="Created to"
                     aria-label="Search"
@@ -52,6 +55,13 @@
                     <i class="fas fa-search mr-2"></i>Search
                 </button>
             </form>
+        </div>
+        <div class="col-md-2">
+            <a href="{{ url('/users/create') }}"
+                ><button type="button" class="btn btn-info btn-lg btn-block">
+                    <i class="fas fa-user-plus"></i> Add
+                </button></a
+            >
         </div>
     </div>
     <div class="row mt-5">
@@ -183,11 +193,11 @@
                                         </tr>
                                         <tr>
                                             <th>Email Address</th>
-                                            <td>{{$user-> email}}</td>
+                                            <td>{{$user->email}}</td>
                                         </tr>
                                         <tr>
                                             <th>Type</th>
-                                            <td>{{$user-> type}}</td>
+                                            <td>{{$user->type}}</td>
                                         </tr>
                                         <tr>
                                             <th>Phone</th>
@@ -195,11 +205,11 @@
                                         </tr>
                                         <tr>
                                             <th>Date Of Birth</th>
-                                            <td>{{$user-> dob}}</td>
+                                            <td>{{$user->dob}}</td>
                                         </tr>
                                         <tr>
                                             <th>Address</th>
-                                            <td>{{$user-> address}}</td>
+                                            <td>{{$user->address}}</td>
                                         </tr>
                                     </table>
                                 </div>

@@ -15,7 +15,7 @@
                         {{ csrf_field() }}
                         <div class="form-group input-group">
                             <label for="title" class="col-sm-2"
-                                ><b>Title</b></label
+                                >Title</label
                             >
                             <label for="title" class="col-sm-8"
                                 >:
@@ -41,7 +41,7 @@
                         </div>
                         <div class="form-group input-group">
                             <label for="description" class="col-sm-2"
-                                ><b>Description</b></label
+                                >Description</label
                             >
                             <label for="description" class="col-sm-8"
                                 >:

@@ -116,10 +116,7 @@ class UserController extends Controller
         $this->userService->delete($id);
         return redirect('/users')->with('successAlert','You have successfully deleted');
     }
-    public function changePassword()
-    {
-        return view('user.change-password');
-    }
+    
     public function createUserConfirmation()
     {
         return view('user.create-user-confirm');
@@ -141,6 +138,10 @@ class UserController extends Controller
         $searchData = request()->search_data;
         $users = User::where('name','like',"%".$searchData."%")->orWhere('email','like',"%".$searchData."%")
         ->paginate(5);
+
+        $from = date('created_at');
+        $to = date('created_at');
+        $users =User::whereBetween('created_at', [$from, $to])->get();
         return view('user.index', compact('users'));
     }
     
@@ -167,5 +168,9 @@ class UserController extends Controller
                 'profile' => 'nullable',
                 ]);
             }
+
+
+
+           
     }
     

@@ -12,7 +12,7 @@
                         @csrf @method('put')
 
                         <div class="form-group">
-                            <label for="title"><b>Title</b></label>
+                            <label for="title">Title</label>
                             <input
                                 type="text"
                                 class="
@@ -31,7 +31,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="description"><b>Description</b></label>
+                            <label for="description">Description</label>
                             <textarea
                                 name="description"
                                 id="description"
@@ -55,8 +55,7 @@
                                 class="custom-control-input"
                                 id="defaultUnchecked"
                                 name="status"
-                                @if($post-
-                            />status ) checked @endif >
+                                @if($post->status ) checked @endif >
                             <label
                                 class="custom-control-label"
                                 for="defaultUnchecked"

@@ -11,10 +11,9 @@
                     <form action="{{ route('posts.store') }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="title"><b>Title</b></label>
+                            <label for="title">Title</label>
                             <input
-                                type="text"
-                                required
+                                type="text" 
                                 class="
                                     form-control
                                     @error('title')
@@ -23,9 +22,7 @@
                                 "
                                 placeholder="Enter your title"
                                 name="title"
-                                id="title"
-                                value="{{ old('title') ?? 
-                               isset( request()->session()->get('post')['title']) ?  request()->session()->get('post')['title'] : ''
+                                id="title" value="{{isset( request()->session()->get('post')['title']) ?  request()->session()->get('post')['title'] : ''
                             }}"
                             />
                             @error('title')
@@ -33,7 +30,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="description"><b>Description</b></label>
+                            <label for="description">Description</label>
                             <textarea
                                 name="description"
                                 id="description"
@@ -45,8 +42,8 @@
                                     @enderror
                                 "
                                 placeholder="Enter Description"
-                                >{{ old('description') ?? 
-                                isset( request()->session()->get('post')['description']) ?  request()->session()->get('post')['description'] : ''
+                                >
+                                {{isset( request()->session()->get('post')['description']) ?  request()->session()->get('post')['description'] : ''
                                 }}</textarea
                             >
                             @error('description')
