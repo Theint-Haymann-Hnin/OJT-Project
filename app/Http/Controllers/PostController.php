@@ -16,24 +16,18 @@ class PostController extends Controller
     }
     public function index()
     {    
-      
-        $posts = $this->postService->index();
-        
+      $posts = $this->postService->index();
         return view('post.index', compact('posts'));
     }
-
     public function create()
     {
         return view('post.create');
     }
     public function store(Request $request)
-    {    
-        
-        // dd($value);
-        $data =$this->validatePost();
+    {  
+        $data =$this->validatePost(null);
         $request->session()->put('post', $data);
         return redirect('/posts/create/collectdataform');
-        
     }
     public function collectDataForm(Request $request)
     {    
@@ -48,37 +42,30 @@ class PostController extends Controller
     }
     public function show($id)
     {
-        
-        //    return view('post.update');
-        
+
     }
     public function edit($id)
-    {   
-        $post = Post::find($id);  
+    {      
+        $post= $this->postService->edit($id);
         return view('post.update', compact('post'));
     }
-    
     public function update(Request $request, $id)
     {   
-        $post_update_data = $this->validatePost();
+        $post_update_data = $this->validatePost($id);
         $post_update_data['id'] = $id;
         $request->session()->put('post', $post_update_data);
         return redirect('posts/update/updatecollectdataform');
-      
     }
-
     public function updateCollectDataForm( )
     {
         return view('post.update-confirmation');
     }
-
     public function  updateConfirm(Request $request, $id)
     {   
-        $post_update_data = $this->validatePost();
+        $post_update_data = $this->validatePost($id);
         $this->postService->updateConfirm($post_update_data , $id);
         return redirect('/posts')->with('successAlert','You have successfully updated');
     }
-
     public function destroy($id)
     {
         $this->postService->delete($id);
@@ -87,52 +74,39 @@ class PostController extends Controller
     public function upload()
     {
         return view('post.upload-post');
-    }
-       
-        
+    }  
     public function search(Request $request)
     {   
-        
-        // $this->postService->search();
-        $searchData = request()->search_data;
-        $posts = Post::where('title','like',"%".$searchData."%")->orWhere('description','like',"%".$searchData."%")->
-        orWhereHas('user',function($user)use($searchData){
-            $user->where('name','like',"%".$searchData."%");
-        })->paginate(5);
+       $searchData = $request->search_data;
+       $posts = $this->postService->search($searchData);
         return view('post.index', compact('posts'));
     }
-    
-    
-    public function validatePost()
+    public function validatePost($id)
     {
         return request()-> validate([
-            'title' => 'required|min:3|max:255|unique:posts,title, $this->post->id',
-            'description' => 'required| min:5',
-            'status' => 'nullable'
-            
+        'title' => "required|min:3|max:255|unique:posts,title, $id",
+        'description' => 'required| min:5',
+        'status' => 'nullable'
             ]);
     }
-
     public function exportExcel($type) 
     {
         return \Excel::download(new TransactionsExport, 'posts.'.$type);
     }
-
     public function importExportView()
     {
        return view('post.upload-post');
     }
-   
     
+
     public function importExcel(Request $request) 
-    {   
-        // $this->validate($request, [
-        //     'import_file'  => 'required|mimes:xls,xlsx'
-        //    ]);
-        
+    {    
+        $this->validate($request, [
+            'import_file'  => 'required|max:2000|mimes:csv,txt'
+           ]);
         \Excel::import(new TransactionsImport,$request->file('import_file'));
 
-        return redirect('/posts')->with('successAlert','File uploaded  successfully ');;
+        return redirect('/posts')->with('successAlert','File uploaded  successfully ');
     }
 }
         

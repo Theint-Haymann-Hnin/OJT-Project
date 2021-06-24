@@ -14,9 +14,7 @@
                     >
                         @csrf @method('put')
                         <div class="form-group input-group">
-                            <label for="title" class="col-sm-2"
-                                >Title</label
-                            >
+                            <label for="title" class="col-sm-2">Title</label>
                             <label class="col-sm-8">
                                 :
                                 {{ request()->session()->get('post')['title'] }}</label
@@ -71,8 +69,7 @@
                                 id="defaultUnchecked col-sm-2"
                                 name="status"
                                 @if(
-                                isset(session()-
-                            />get('post')['status'])) checked @endif >
+                                isset(session()->get('post')['status'])) checked @endif >
                             <label
                                 class="custom-control-label"
                                 for="defaultUnchecked"

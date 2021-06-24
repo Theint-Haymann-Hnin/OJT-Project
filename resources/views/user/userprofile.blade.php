@@ -4,7 +4,6 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <!-- <span class="user-profile-ttl"> User Profile</span> -->
                     <a href="{{url('users/'.$user->id.'/edit')}}"><button class="btn btn-dark profile-edit-btn float-right mt-3">
                         <i class="fa fa-edit"></i> Edit
                     </button></a>
@@ -16,7 +15,6 @@
                             <th>Name</th>
                             <td>
                                 <span>{{$user->name}}</span>
-                              
                             </td>
                         </tr>
                         <tr>
@@ -38,6 +36,10 @@
                         <tr>
                             <th>Address</th>
                             <td>{{$user->address}}</td>
+                        </tr>
+                        <tr>
+                            <th>Profile</th>
+                            <td>{{$user->profile}}</td>
                         </tr>
                     </table>
                 </div>

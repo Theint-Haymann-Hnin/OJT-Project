@@ -10,7 +10,6 @@
                 <div class="card-body">
                     <form action="{{url('posts/'.$post->id)}}" method="post">
                         @csrf @method('put')
-
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input

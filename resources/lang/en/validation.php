@@ -139,6 +139,8 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
+
+
     'custom' => [
         'title' => [
             'required' => 'Title is required',
@@ -148,10 +150,16 @@ return [
         'description' => [
             'required' => 'Description is required',
             'min' => 'Your description is too short!'
-         
         ],
     ],
 
+
+    'custom' => [
+        'import_file' => [
+            'max' => 'File size is maximum 20 MB',
+            'mimes' => 'Uploaded file  must be CVS type'
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -163,7 +171,7 @@ return [
     | of "email". This simply helps us make our message more expressive.
     |
     */
-    'attributes' => ['title','description'],
+    'attributes' => ['title','description','import_file'],
 
 
 ];

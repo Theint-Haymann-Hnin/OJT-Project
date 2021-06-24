@@ -34,19 +34,19 @@
                     class="form-control mr-sm-1"
                     type="search"
                     placeholder="Email"
-                    aria-label="Search"
+                    aria-label="Search" name="search_data"
                 />
                 <input
                     class="form-control mr-sm-1"
                     type="search"
                     placeholder="Created From"
-                    aria-label="Search"
+                    aria-label="Search" name="created_from"
                 />
                 <input
                     class="form-control mr-sm-1"
                     type="search"
                     placeholder="Created to"
-                    aria-label="Search"
+                    aria-label="Search" name="created_to"
                 />
                 <button
                     class="btn btn-outline-success my-2 my-sm-0"
@@ -84,10 +84,12 @@
                     @foreach($users as $user)
                     <tr>
                         <td>
+                            
                             <a
                                 class="ttl"
                                 data-toggle="modal"
                                 data-target="#exampleModalCenter"
+                                onclick="userDetail({{$user->id}})"
                             >
                                 {{$user->name}}
                             </a>
@@ -232,3 +234,24 @@
     </div>
 </div>
 @endsection
+@section('javascript')
+    <script>
+       function userDetail(id){
+           var user_id = id;
+           $.ajax({
+               type: "GET",
+               url: "/userdetail/"+user_id, 
+                contentType: "application/json",
+                dataType: "json",
+               success: function(result){
+                var temp = JSON.parse(result);
+                console.log("SUCCESS : ", temp);  
+            },
+            error: function(response) {
+            console.log(response);
+            }
+        });
+        }
+    </script>
+@endsection
+

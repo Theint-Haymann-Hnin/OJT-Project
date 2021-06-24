@@ -8,6 +8,11 @@
                         Update User Confirm Screen
                     </h1>
                     <div class="update-user-confirm-photo">: Profile photo</div>
+                    <img
+                    src="{{asset('storage/profile-images/'.request()->session()->get('user')['profile'])}}"
+                    alt="profile-img"
+                    style="width: 100px; height: 100px;"
+                />
                 </div>
                 <div class="card-body">
                     <form action="{{url('users/update/updateconfirm/'.request()->session()->get('user')['id'])}}" method="post" enctype="multipart/form-data">
@@ -15,7 +20,7 @@
                         @method('put')
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <label> : {{ request()->session()->get('user')['name'] }}</label>
+                            <label for="name"> : {{ request()->session()->get('user')['name'] }}</label>
                             <input
                                 type="hidden"
                                 required
@@ -28,7 +33,7 @@
                                 placeholder="Enter your name"
                                 name="name"
                                 id="name"
-                                value="{{ old('name') }}"
+                                value="{{ request()->session()->get('user')['name'] }}"
                             />
                             @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -38,7 +43,7 @@
                             <label for="exampleFormControlInput1"
                                 >Email address</label
                             >
-                            <label> : Value </label>
+                            <label> : {{ request()->session()->get('user')['email'] }} </label>
                             <input
                                 type="hidden"
                                 required
@@ -51,7 +56,7 @@
                                 "
                                 id="exampleFormControlInput1"
                                 placeholder="name@example.com"
-                                value="{{ old('email') }}"
+                                value="{{ request()->session()->get('user')['email'] }}"
                             />
                             @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -83,7 +88,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <label> : Value </label>
+                            <label> : {{ request()->session()->get('user')['phone'] }} </label>
                             <input
                                 type="hidden"
                                 required
@@ -96,7 +101,7 @@
                                 placeholder="Enter your phone number"
                                 name="phone"
                                 id="phone"
-                                value="{{ old('phone') }}"
+                                value="{{ request()->session()->get('user')['phone'] }}"
                             />
                             @error('phone')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -104,7 +109,7 @@
                         </div>
                         <div class="form-group">
                             <label for="dob">Date Of Birth</label>
-                            <label> : Value </label>
+                            <label> : {{ request()->session()->get('user')['dob'] }} </label>
                             <input
                                 type="hidden"
                                 required
@@ -117,7 +122,7 @@
                                 placeholder="Enter date of birth"
                                 name="dob"
                                 id="dob"
-                                value="{{ old('dob') }}"
+                                value="{{ request()->session()->get('user')['dob'] }}"
                             />
                             @error('dob')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -125,7 +130,7 @@
                         </div>
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <label> : Value </label>
+                            <label> : {{ request()->session()->get('user')['address'] }} </label>
                             <input
                                 type="hidden"
                                 required
@@ -138,7 +143,7 @@
                                 placeholder="Enter your address"
                                 name="address"
                                 id="address"
-                                value="{{ old('address') }}"
+                                value="{{ request()->session()->get('user')['address'] }}"
                             />
                             @error('address')
                             <div class="invalid-feedback">{{ $message }}</div>
@@ -157,7 +162,7 @@
                                 placeholder="Choose your profile picture"
                                 name="profile"
                                 id="profile"
-                                value="{{ old('profile') }}"
+                                value="{{ request()->session()->get('user')['profile'] }}"
                             />
                             @error('profile')
                             <div class="invalid-feedback">{{ $message }}</div>

@@ -17,7 +17,6 @@
                             <label for="name">Name</label>
                             <input
                                 type="text"
-                                required
                                 class="
                                     form-control
                                     @error('name')

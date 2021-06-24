@@ -7,18 +7,16 @@
                     <h1 class="title">Update User Screen</h1>
                 </div>
                 <div class="card-body">
-                   {{--  <form
+                 <form
                         action="{{ route('users.update', [$user->id]) }}"
                         method="post"
                         enctype="multipart/form-data"
                     >
-                        @csrf @method('put') --}}
-                        <form action="{{url('users/'.$user->id)}}" method="post" enctype="multipart/form-data">
-                            @csrf
-                                                  @method('put')
-
+                        @csrf @method('put') 
+                        {{$user->profile}}
+                      
                         @if($user->profile)
-                                    <img src="{{asset('storage/profile-images/'.$user->profile)}}"  alt="" style="width: 100px; height:100px">
+                                    <img src="{{asset('storage/profile-images/'.$user->profile)}}"  alt="{{$user->profile}}" style="width: 100px; height:100px">
                                     @else    
                                     <img src="{{ asset('images/default.png') }}" alt="" style="width: 100px; height:100px">  
                                 @endif 
@@ -141,7 +139,7 @@
                             <label for="update_photo" class="btn btn-outline-dark update_photo">Profile</label>
                             <input type="file" name="profile" id="update_photo" class="" accept="image/png, image/jpg, image/jpeg" onchange="displaySelectedPhoto('update_photo','image')" style="width:0; height:0; overflow:hidden">
                                 @if($user->profile)
-                                    <img src="{{asset('storage/profile-images/'.$user->profile)}}" id="image" alt="" class="imagePreview img-thumbnail" style="width: 100px; height:100px">
+                                    <img src="{{asset('storage/profile-images/'.$user->profile)}}" id="image" alt="{{$user->profile}}" class="imagePreview img-thumbnail" style="width: 100px; height:100px">
                                     @else    
                                     <img src="{{ asset('images/default.png') }}" alt="" id="image" class="imagePreview img-thumbnail" style="width: 100px; height:100px">  
                                 @endif
@@ -163,3 +161,5 @@
     </div>
 </div>
 @endsection
+
+

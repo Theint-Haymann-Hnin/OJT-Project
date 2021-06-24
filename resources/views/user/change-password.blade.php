@@ -7,8 +7,7 @@
    
                 <div class="card-body">
                     <form method="POST" action="{{ route('change.password') }}">
-                        @csrf 
-   
+                        @csrf
                          @foreach ($errors->all() as $error)
                             <p class="text-danger">{{ $error }}</p>
                          @endforeach 
@@ -33,7 +32,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">New Confirm Password</label>
     
                             <div class="col-md-6">
-                                <input id="new_confirm_password" type="password" class="form-control" name="new_confirm_password" autocomplete="current-password">
+                                <input id="new_confirm_password" type="password" class="form-control" name="new_confirm_password" autocomplete="current-password" >
                             </div>
                         </div>
    

@@ -114,11 +114,16 @@
                                 >
                                     {{ Auth::user()->name }}
                                 </a>
-
                                 <div
                                     class="dropdown-menu dropdown-menu-right"
                                     aria-labelledby="navbarDropdown"
                                 >
+                                    <a
+                                    class="dropdown-item"
+                                    href="{{url('/change-password')}}"
+                                    >
+                                    {{ __("Change password") }}
+                                    </a>
                                     <a
                                         class="dropdown-item"
                                         href="{{ route('logout') }}"
@@ -127,7 +132,6 @@
                                     >
                                         {{ __("Logout") }}
                                     </a>
-
                                     <form
                                         id="logout-form"
                                         action="{{ route('logout') }}"
@@ -183,5 +187,6 @@
                 }
             }
         </script>
+        @yield('javascript')
     </body>
 </html>

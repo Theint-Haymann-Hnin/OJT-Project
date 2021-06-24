@@ -13,7 +13,7 @@
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input
-                                type="text" 
+                                type="text"
                                 class="
                                     form-control
                                     @error('title')
@@ -22,7 +22,8 @@
                                 "
                                 placeholder="Enter your title"
                                 name="title"
-                                id="title" value="{{isset( request()->session()->get('post')['title']) ?  request()->session()->get('post')['title'] : ''
+                                id="title"
+                                value="{{isset( request()->session()->get('post')['title']) ?  request()->session()->get('post')['title'] : ''
                             }}"
                             />
                             @error('title')
@@ -42,8 +43,7 @@
                                     @enderror
                                 "
                                 placeholder="Enter Description"
-                                >
-                                {{isset( request()->session()->get('post')['description']) ?  request()->session()->get('post')['description'] : ''
+                                >{{isset( request()->session()->get('post')['description']) ?  request()->session()->get('post')['description'] : ''
                                 }}</textarea
                             >
                             @error('description')

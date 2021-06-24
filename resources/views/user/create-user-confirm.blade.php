@@ -13,13 +13,12 @@
                         action="{{ url('/users/store/collectdata') }}"
                         method="post"
                     >
-                        {{ csrf_field() }}
+                        @csrf
                         <img
-                        src="{{asset('storage/profile-images/'.request()->session()->get('user')['profile'])}}"
-                        alt="profile-img"
-                        style="width: 100px; height: 100px;"
-                    />
-                       
+                            src="{{asset('storage/profile-images/'.request()->session()->get('user')['profile'])}}"
+                            alt="profile-img"
+                            style="width: 100px; height: 100px"
+                        />
                         <div class="form-group input-group">
                             <label for="name" class="col-sm-2">Name</label>
                             <label class="col-sm-8">
@@ -89,7 +88,6 @@
                                 value=" {{ request()->session()->get('user')['password'] }}"
                             />
                         </div>
-
                         <div class="form-group input-group">
                             <label for="phone" class="col-sm-2">Phone</label>
                             <label class="col-sm-8"
@@ -166,10 +164,14 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="form-group" style="display:none;">
+                        <div class="form-group" style="display: none">
                             <label for="update_photo">Profile</label>
-                           
-                            {{ request()->session()->get('user')['profile'] }}
+                            <input
+                                type="text"
+                                class="form-control"
+                                value=" {{ request()->session()->get('user')['profile'] }}"
+                                name="profile"
+                            />
                             @error('profile')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

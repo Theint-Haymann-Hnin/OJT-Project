@@ -2,14 +2,14 @@
 <div class="container">
     <h2>Post List</h2>
     <div class="row">
-      <div class="col-md-6">
-        @if (Session('successAlert'))
-        <div class="alert alert-success alert-dismissible show fade">
-            <strong>{{ Session("successAlert") }}</strong>
-            <button class="close" data-dismiss="alert">&times;</button>
+        <div class="col-md-6">
+            @if (Session('successAlert'))
+            <div class="alert alert-success alert-dismissible show fade">
+                <strong>{{ Session("successAlert") }}</strong>
+                <button class="close" data-dismiss="alert">&times;</button>
+            </div>
+            @endif
         </div>
-        @endif
-      </div>
     </div>
     <div class="row">
         <div class="col-md-6">
@@ -70,9 +70,9 @@
                     <th>Post Description</th>
                     <th>Posted User</th>
                     <th>Posted Date</th>
-                   {{--
-                    <th>Status</th> --}}
-                    @if(Auth::check())
+                    {{--
+                    <th>Status</th>
+                    --}} @if(Auth::check())
                     <th></th>
                     @endif
                 </thead>
@@ -91,9 +91,9 @@
                         <td>{{$post->description}}</td>
                         <td>{{$post->user->name}}</td>
                         <td>{{$post->created_at}}</td>
-                       {{--
-                        <td>{{$post->status}}</td> --}}
-                        @if(Auth::check())
+                        {{--
+                        <td>{{$post->status}}</td>
+                        --}} @if(Auth::check())
                         <td>
                             <form
                                 action="{{url('posts/'.$post->id)}}"

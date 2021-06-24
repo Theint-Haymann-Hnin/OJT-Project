@@ -12,11 +12,8 @@ class IsAdmin
     {
         if( auth()->check() == true){
             return $next($request);
-          
         }
         return redirect('/');
-        
-        // return redirect()->back();
     }
 }
 

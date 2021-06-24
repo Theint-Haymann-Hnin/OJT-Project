@@ -6,12 +6,12 @@ use App\Contract\Dao\User\UserDaoInterface;
 class UserDao implements UserDaoInterface{
     public function index()
     {   
-        return User::paginate(5);
-        return User::all();
+        return User::orderBy('id','desc')->paginate(10);
     }
-    // public function store($data){
-    //     User::create($data);
-    // }
+    public function edit($id)
+    {      
+         return $user =User::find($id);
+    }
     public function storeCollectData($data) {
 
      $data['created_user_id'] = auth()->user()->id;
@@ -21,7 +21,7 @@ class UserDao implements UserDaoInterface{
     public function delete($id){
         User::find($id)->delete();
     }
-    // public function update($user_data_to_update, $id){
-    //     User::find($id)->update($user_data_to_update);
-    // }
+    public function updateConfirm($user_data_to_update, $id){
+        User::find($id)->update($user_data_to_update);
+    }
 }
