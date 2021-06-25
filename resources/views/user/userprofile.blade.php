@@ -23,7 +23,11 @@
                         </tr>
                         <tr>
                             <th>Type</th>
-                            <td>{{$user->type}}</td>
+                            <td>@if($user->type == 0)         
+                                Admin        
+                           @else
+                                User    
+                           @endif</td>
                         </tr>
                         <tr>
                             <th>Phone</th>
@@ -37,10 +41,7 @@
                             <th>Address</th>
                             <td>{{$user->address}}</td>
                         </tr>
-                        <tr>
-                            <th>Profile</th>
-                            <td>{{$user->profile}}</td>
-                        </tr>
+                      
                     </table>
                 </div>
             </div>

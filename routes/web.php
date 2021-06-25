@@ -44,7 +44,6 @@ Route::post('users/store/collectdata', [UserController::class, 'storeCollectData
 Route::get('/createuserconfirm', [UserController::class, 'createUserConfirmation']);
 Route::get('/updateuserconfirm', [UserController::class, 'updateUserConfirmation']);
 Route::get('/userprofile/{id}', [UserController::class, 'userProfile']);
-Route::get('/userdetail/{id}', [UserController::class, 'userDetail']);
 Route::get('users/update/updatecollectdataform', [UserController::class, 'updateCollectDataForm']);
 Route::put('users/update/updateconfirm/{id}', [UserController::class, 'updateConfirm']);
 Route::get('/search_users', [UserController::class, 'search']);

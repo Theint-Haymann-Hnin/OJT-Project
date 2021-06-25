@@ -100,9 +100,7 @@ class UserController extends Controller
     public function userDetail($id)
     {
         $user = User::findorFail($id);
-
-        $users = User::paginate(5);
-        return view('user.index', compact('user', 'users'));
+        return view('user.index', compact('user'));
     }
     public function updateUserConfirmation()
     {
@@ -111,7 +109,7 @@ class UserController extends Controller
 
     public function search(Request $request)
     {
-
+      
         // $this->postService->search();
         $searchData = request()->search_data;
         $users = User::where('name', 'like', "%" . $searchData . "%")->orWhere('email', 'like', "%" . $searchData . "%")

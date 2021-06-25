@@ -95,7 +95,12 @@
                             </a>
                         </td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->created_user_id}}</td>
+                        <td>@if($user->type == 0)         
+                            Admin        
+                       @else
+                            User    
+                       @endif</td>
+                      {{--   <td>{{$user->created_user_id}}</td> --}}
                         <td>{{$user->phone}}</td>
                         <td>{{$user->dob}}</td>
                         <td>{{$user->address}}</td>
@@ -156,9 +161,6 @@
                         <div class="modal-body">
                             <div class="card">
                                 <div class="card-header">
-                                    <span class="user-profile-ttl">
-                                        User Profile</span
-                                    >
                                     <a
                                         href=" {{ route('users.update', [$user->id]) }}"
                                     >
@@ -172,50 +174,14 @@
                                         </button>
                                     </a>
                                 </div>
-                                @foreach($users as $user)
                                 <div class="card-body">
                                     <table
                                         class="table table-bordered table-hover"
                                     >
-                                        <tr>
-                                            <th>Name</th>
-                                            <td>
-                                                <span>{{$user->name}}</span>
-                                                <br />
-                                                <span
-                                                    ><img
-                                                        src="{{asset('storage/profile-images/'.$user->profile)}}"
-                                                        alt="profile-img"
-                                                        style="
-                                                            width: 300px;
-                                                            height: 200px;
-                                                        "
-                                                /></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Email Address</th>
-                                            <td>{{$user->email}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Type</th>
-                                            <td>{{$user->type}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Phone</th>
-                                            <td>{{$user->phone}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Date Of Birth</th>
-                                            <td>{{$user->dob}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Address</th>
-                                            <td>{{$user->address}}</td>
-                                        </tr>
+                                    <tbody id="displayArea">
+                                        </tbody>
                                     </table>
                                 </div>
-                                @endforeach
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -238,20 +204,23 @@
     <script>
        function userDetail(id){
            var user_id = id;
-           $.ajax({
-               type: "GET",
-               url: "/userdetail/"+user_id, 
-                contentType: "application/json",
-                dataType: "json",
-               success: function(result){
-                var temp = JSON.parse(result);
-                console.log("SUCCESS : ", temp);  
-            },
-            error: function(response) {
-            console.log(response);
-            }
+       
+        $.get("api/user/"+user_id, function( response ) {
+            var user_name = response.name;
+            var user_email = response.email;
+            var user_type = response.type;
+            var user_phone = response.phone;
+            var user_dob = response.dob;
+            var user_address = response.address;
+            console.log(response.profile);
+           
+            $('#displayArea').append("<tr><th>Name</th><td>" + user_name + "</td></tr><tr><th>Email</th><td>"+user_email+"</td></tr>");
         });
+       
         }
     </script>
 @endsection
+
+
+
 
