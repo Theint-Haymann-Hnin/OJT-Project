@@ -10,7 +10,7 @@ use App\Imports\TransactionsImport;
 
 class PostController extends Controller
 {
-    public $postService;
+    private $postService;
     public function __construct(PostServiceInterface $post_service_interface){
         $this->postService = $post_service_interface;
     }
@@ -40,13 +40,10 @@ class PostController extends Controller
         $this->postService->storeCollectData( $request->all() );
         return redirect('/posts')->with('successAlert','You have successfully created');
     }
-    public function show($id)
-    {
-
-    }
+    
     public function edit($id)
     {      
-        $post= $this->postService->edit($id);
+        $post= $this->postService->findPostById($id);
         return view('post.update', compact('post'));
     }
     public function update(Request $request, $id)
@@ -60,10 +57,10 @@ class PostController extends Controller
     {
         return view('post.update-confirmation');
     }
-    public function  updateConfirm(Request $request, $id)
+    public function  updatePost(Request $request, $id)
     {   
         $post_update_data = $this->validatePost($id);
-        $this->postService->updateConfirm($post_update_data , $id);
+        $this->postService->updatePost($post_update_data , $id);
         return redirect('/posts')->with('successAlert','You have successfully updated');
     }
     public function destroy($id)

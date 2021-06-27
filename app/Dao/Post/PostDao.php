@@ -5,9 +5,14 @@ use App\Models\Post;
 use App\Contract\Dao\Post\PostDaoInterface;
 use Auth;
 class PostDao implements PostDaoInterface{
+
+    /**
+     * get Post LIst
+     * @return PostList
+     */
     public function index()
     { 
-        if(auth()->check() && auth()->user()->type == 0 ){
+      if(auth()->check() && auth()->user()->type == 0 ){
          $posts = Post::orderBy('id','desc')->paginate(5);
       } elseif(auth()->check() && auth()->user()->type == 1 ) {
         $posts = Post::where('created_user_id', auth()->user()->id)->paginate(5);
@@ -16,21 +21,32 @@ class PostDao implements PostDaoInterface{
       }
       return $posts;
     }
-    public function store($data)
-    {
-       
-    }
+
+    /**
+     * store collect data
+     * @param $data
+     */
     public function storeCollectData($data)
     {
         $data['created_user_id'] = auth()->user()->id;
         Post::create($data);
         request()->session()->forget('post');
     }
-    public function edit($id)
+
+    /**
+     * Find Post By Id
+     * @param $id
+     * @return Post $post
+     */
+    // change function name 
+    public function findPostById($id)
     {      
          return $post = Post::find($id);
     }
-    public function  updateConfirm($post_data_to_update, $id)
+
+
+   
+    public function updatePost($post_data_to_update, $id)
     {
        if(isset($post_data_to_update['status'])){
         $post_data_to_update['status'] = 1;
@@ -42,6 +58,7 @@ class PostDao implements PostDaoInterface{
     }
     public function delete($id)
     {
+        //make sure softdelete
         Post::find($id)->delete();
     }
     public function search($searchData )

@@ -6,11 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Contract\Service\User\UserServiceInterface;
 use File;
-use Carbon\Carbon;
 
 class UserController extends Controller
-{
-    public $userService;
+    {
+    private $userService;
     public function __construct(UserServiceInterface $user_service_interface)
     {
         $this->userService = $user_service_interface;
@@ -45,13 +44,9 @@ class UserController extends Controller
         return redirect('/users')->with('successAlert', 'You have successfully created');
     }
 
-    public function show($id)
-    {
-        //
-    }
     public function edit($id)
     {
-        $user = $this->userService->edit($id);
+        $user = $this->userService->findUserById($id);
         return view('user.update', compact('user'));
     }
     public function update(Request $request, $id)
@@ -76,10 +71,10 @@ class UserController extends Controller
     {
         return view('user.update-user-confirm');
     }
-    public function  updateConfirm(Request $request, $id)
+    public function  updateUser(Request $request, $id)
     {
 
-        $this->userService->updateConfirm($request->all(), $id);
+        $this->userService->updateUser($request->all(), $id);
         return redirect('/users')->with('successAlert', 'You have successfully updated');
     }
     public function destroy($id)
@@ -108,13 +103,10 @@ class UserController extends Controller
     }
 
     public function search(Request $request)
-    {
-      
-        // $this->postService->search();
-        $searchData = request()->search_data;
-        $users = User::where('name', 'like', "%" . $searchData . "%")->orWhere('email', 'like', "%" . $searchData . "%")
-            ->paginate(5);
-        return view('user.index', compact('users'));
+    {  
+        $users = $this->userService->search($request->name, $request->email,$request->start_date , $request->end_date);
+        
+        return view('user.index',compact('users'));
     }
     private function validateUser()
     {

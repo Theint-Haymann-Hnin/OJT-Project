@@ -67,19 +67,13 @@
                             @enderror
                         </div>
                         <button class="btn btn-success mr-3">Create</button>
-                        <a href="{{ url('posts/create') }}">
-                            <button
-                                type="button"
-                                class="btn btn-outline-success"
-                            >
-                                Cancel
-                            </button></a
-                        >
+                        <a href="{{ url('posts/create') }}" class="btn btn-outline-success">
+                            Cancel
+                        </a>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
     </div>
 </div>
 @endsection

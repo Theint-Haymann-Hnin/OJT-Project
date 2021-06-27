@@ -84,6 +84,7 @@
                                 class="ttl"
                                 data-toggle="modal"
                                 data-target="#exampleModalCenter"
+                                onclick="postDetail({{$post->id}})"
                             >
                                 {{$post->title}}
                             </a>
@@ -91,9 +92,8 @@
                         <td>{{$post->description}}</td>
                         <td>{{$post->user->name}}</td>
                         <td>{{$post->created_at}}</td>
-                        {{--
-                        <td>{{$post->status}}</td>
-                        --}} @if(Auth::check())
+                        
+                         @if(Auth::check())
                         <td>
                             <form
                                 action="{{url('posts/'.$post->id)}}"
@@ -125,65 +125,83 @@
             <div class="pagination">
                 {{ $posts->links() }}
             </div>
-            <!-- Modal -->
-            <div
-                class="modal fade"
-                id="exampleModalCenter"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="exampleModalCenterTitle"
-                aria-hidden="true"
-            >
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">
-                                Post title
-                            </h5>
-                            <button
-                                type="button"
-                                class="close"
-                                data-dismiss="modal"
-                                aria-label="Close"
-                            >
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <h5>Description</h5>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Repellat laudantium,
-                                voluptatum fugiat voluptates deserunt iusto
-                                distinctio ad quidem quo ullam, maxime placeat
-                                alias? Tenetur necessitatibus aliquid harum
-                                excepturi pariatur voluptate.
-                            </p>
-                            <h5>Status</h5>
-                            <p>publish</p>
-                            <h5>Created at</h5>
-                            <p>YYY/MM/DD</p>
-                            <h5>Created user</h5>
-                            <p>John</p>
-                            <h5>Last Updated at</h5>
-                            <p>YYY/MM/DD</p>
-                            <h5>Updated user</h5>
-                            <p>John</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button
-                                type="button"
-                                class="btn btn-info"
-                                data-dismiss="modal"
-                            >
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           <!-- Modal -->
+           <div
+           class="modal fade"
+           id="exampleModalCenter"
+           tabindex="-1"
+           role="dialog"
+           aria-labelledby="exampleModalCenterTitle"
+           aria-hidden="true"
+       >
+           <div class="modal-dialog modal-dialog-centered" role="document">
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <h4 class="modal-title" id="exampleModalLongTitle">
+                           Post Detail
+                       </h4>
+                       <button
+                           type="button"
+                           class="close"
+                           data-dismiss="modal"
+                           aria-label="Close"
+                       >
+                           <span aria-hidden="true">&times;</span>
+                       </button>
+                   </div>
+                   <div class="modal-body">
+                       <div class="card">
+                           <div class="card-header">
+                           </div>
+                           <div class="card-body">
+                               <table
+                                   class="table table-bordered table-hover"
+                               >
+                               <tbody id="displayArea">
+                                   </tbody>
+                               </table>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="modal-footer">
+                       <button
+                           type="button"
+                           class="btn btn-info"
+                           data-dismiss="modal"
+                       >
+                           Close
+                       </button>
+                   </div>
+               </div>
+           </div>
+       </div>
         </div>
         <div class="col-md-1"></div>
     </div>
 </div>
 @endsection
+@section('javascript')
+    <script>
+       
+       function postDetail(id){
+           var post_id = id;
+       
+        $.get("api/post/"+post_id, function( response ) {
+            var post_title = response.title;
+            var post_description = response.description;
+            var post_status = response.status;
+            var post_created_at = response.created_at;
+            var post_created_user_id = response.created_user_id;
+            var post_updated_at = response.updated_at;
+            var post_updated_user_id = response.updated_user_id;
+           
+            $('#displayArea').append("<tr><th>Title</th><td>" + post_title + "</td></tr><tr><th>Description</th><td>"+post_description+"</td></tr><tr><th>Status</th><td>"+post_status+"</td></tr><tr><th>Created at</th><td>"+post_created_at+"</td></tr><tr><th>Created User</th><td>"+ post_created_user_id+"</td></tr><tr><th>Updated at</th><td>"+post_updated_at+"</td></tr><tr><th>Updated User</th><td>"+post_updated_user_id+"</td></tr>");
+        });
+        }
+
+        $('#exampleModalCenter').on('hidden.bs.modal', function () {
+            window.location.reload(true)
+        })
+    </script>
+@endsection
+

@@ -28,25 +28,25 @@
                     type="search"
                     placeholder="Name"
                     aria-label="Search"
-                    name="search_data"
+                    name="name"
                 />
                 <input
                     class="form-control mr-sm-1"
                     type="search"
                     placeholder="Email"
-                    aria-label="Search" name="search_data"
+                    aria-label="Search" name="email"
                 />
                 <input
                     class="form-control mr-sm-1"
-                    type="search"
+                    type="date"
                     placeholder="Created From"
-                    aria-label="Search" name="created_from"
+                    aria-label="Search" name="start_date"
                 />
                 <input
                     class="form-control mr-sm-1"
-                    type="search"
+                    type="date"
                     placeholder="Created to"
-                    aria-label="Search" name="created_to"
+                    aria-label="Search" name="end_date"
                 />
                 <button
                     class="btn btn-outline-success my-2 my-sm-0"
@@ -100,7 +100,6 @@
                        @else
                             User    
                        @endif</td>
-                      {{--   <td>{{$user->created_user_id}}</td> --}}
                         <td>{{$user->phone}}</td>
                         <td>{{$user->dob}}</td>
                         <td>{{$user->address}}</td>
@@ -134,7 +133,6 @@
                 </tbody>
             </table>
             {{ $users->links() }}
-            <!-- Modal -->
             <div
                 class="modal fade"
                 id="exampleModalCenter"
@@ -161,12 +159,12 @@
                         <div class="modal-body">
                             <div class="card">
                                 <div class="card-header">
+                                    <img src="" alt="" class="user_profile">
                                     <a
-                                        href=" {{ route('users.update', [$user->id]) }}"
+                                        href="{{url('users/'.$user->id.'/edit')}}"
                                     >
                                         <button
-                                            class="
-                                                btn btn-dark
+                                            class="edit-btn btn btn-dark
                                                 profile-edit-btn
                                             "
                                         >
@@ -202,6 +200,7 @@
 @endsection
 @section('javascript')
     <script>
+       
        function userDetail(id){
            var user_id = id;
        
@@ -212,12 +211,25 @@
             var user_phone = response.phone;
             var user_dob = response.dob;
             var user_address = response.address;
+            var user_profile = response.profile;
             console.log(response.profile);
+            if(user_type == 0){
+                var type = 'Admin';
+            }else{
+                var type='User';
+            }
            
-            $('#displayArea').append("<tr><th>Name</th><td>" + user_name + "</td></tr><tr><th>Email</th><td>"+user_email+"</td></tr>");
+            $('#displayArea').append("<tr><th>Name</th><td>" + user_name + "</td></tr><tr><th>Email</th><td>"+user_email+"</td></tr><tr><th>Type</th><td>"+type+"</td></tr><tr><th>Phone</th><td>"+user_phone+"</td></tr>"+"</td></tr><tr><th>Date of Birth</th><td>"+user_dob+"</td></tr><tr><th>Address</th><td>"+user_address+"</td></tr>");
+            var source = "{!! asset('storage/profile-images/" +user_profile+ " ') !!}";
+
+            $('.user_profile').attr('src', source); 
         });
-       
+
         }
+
+        $('#exampleModalCenter').on('hidden.bs.modal', function () {
+            window.location.reload(true)
+        })
     </script>
 @endsection
 
