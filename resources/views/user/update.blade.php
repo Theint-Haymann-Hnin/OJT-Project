@@ -147,9 +147,9 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <a href="{{ url('/changepassword') }}" class="changepwd"
-                            >Change Password</a
-                        >
+                       <div class="mt-2 mb-2"><a href="{{url('/change-password')}}" class="changepwd"
+                        >Change Password</a
+                    ></div>
                         <button class="btn btn-primary mr-3">Confirm</button>
                         <button type="reset" class="btn btn-outline-success">
                             Clear

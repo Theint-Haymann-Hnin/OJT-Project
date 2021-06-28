@@ -64,11 +64,11 @@
                         </div>
                         <div class="form-group">
                             <label for="type">Type</label>
-                            <label> : Value </label>
+                            <label> :  </label>
                             <select
                                 class="
                                     form-control
-                                    @error('actress')
+                                    @error('type')
                                     is-invalid
                                     @enderror
                                 "
@@ -78,9 +78,8 @@
                                 required
                             >
                                 <option>Select Type</option>
-                                <option>Admin</option>
-                                <option>User</option>
-                                <option>Visitor</option>
+                                <option value="0">Admin</option>
+                                <option value="1">User</option>
                             </select>
                             @error('type')
                             <div class="invalid-feedback">{{ $message }}</div>

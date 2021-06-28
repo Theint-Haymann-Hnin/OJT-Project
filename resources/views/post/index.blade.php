@@ -37,10 +37,8 @@
         </div>
         @if(Auth::check())
         <div class="col-md-2">
-            <a href="{{ url('posts/create') }}"
-                ><button type="button" class="btn btn-info btn-lg btn-block">
-                    <i class="fas fa-plus"></i> Add
-                </button></a
+            <a href="{{ url('posts/create') }}"  class="btn btn-info btn-lg btn-block"
+                > <i class="fas fa-plus"></i> Add</a
             >
         </div>
         <div class="col-md-2">
@@ -54,10 +52,8 @@
         </div>
         @endif
         <div class="col-md-2">
-            <a href="{{ route('exportExcel', 'csv') }}">
-                <button type="button" class="btn btn-info btn-lg btn-block">
-                    <i class="fas fa-download"></i> Download
-                </button>
+            <a href="{{ route('exportExcel', 'csv') }}" class="btn btn-info btn-lg btn-block">
+                <i class="fas fa-download"></i> Download
             </a>
         </div>
     </div>
@@ -70,9 +66,7 @@
                     <th>Post Description</th>
                     <th>Posted User</th>
                     <th>Posted Date</th>
-                    {{--
-                    <th>Status</th>
-                    --}} @if(Auth::check())
+                     @if(Auth::check())
                     <th></th>
                     @endif
                 </thead>
@@ -91,7 +85,7 @@
                         </td>
                         <td>{{$post->description}}</td>
                         <td>{{$post->user->name}}</td>
-                        <td>{{$post->created_at}}</td>
+                        <td>{{date('d-m-Y', strtotime($post->created_at))}}</td>
                         
                          @if(Auth::check())
                         <td>
@@ -100,11 +94,8 @@
                                 method="post"
                             >
                                 @csrf @method('delete')
-                                <a href="{{url('posts/'.$post->id.'/edit')}}">
-                                    <button
-                                        type="button"
-                                        class="btn btn-success mb-2"
-                                    >
+                                <a href="{{url('posts/'.$post->id.'/edit')}}" class="btn btn-success">
+                                   
                                         <i class="fa fa-edit"></i> Edit
                                     </button>
                                 </a>

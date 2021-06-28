@@ -8,21 +8,42 @@ use App\Contract\Service\User\UserServiceInterface;
 use File;
 
 class UserController extends Controller
-    {
+{
+    /** $userService*/
     private $userService;
+    /**
+     * construct
+     * @param UserServiceInterface $user_service_interface
+     */
     public function __construct(UserServiceInterface $user_service_interface)
     {
         $this->userService = $user_service_interface;
     }
+    /**
+     * Display user list
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $users = $this->userService->index();
         return view('user.index', compact('users'));
     }
+    /**
+     * Show the user create form
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         return view('user.create');
     }
+    /**
+     * Show the user create confirm form
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $data = $this->validateUser();
@@ -33,22 +54,47 @@ class UserController extends Controller
         $request->session()->put('user', $data);
         return redirect('/users/create/collectdataform');
     }
+    /**
+     * Show the user create confirm form
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function collectDataForm(Request $request)
     {
 
         return view('user.create-user-confirm');
     }
+    /**
+     * Store a newly created user in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function storeCollectData(Request $request)
     {
         $this->userService->storeCollectData($request->all());
         return redirect('/users')->with('successAlert', 'You have successfully created');
     }
+    /**
+     * Show the form for editing the user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
 
     public function edit($id)
     {
         $user = $this->userService->findUserById($id);
         return view('user.update', compact('user'));
     }
+    /**
+     * Show the user update  form
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
         $user = User::find($id);
@@ -67,56 +113,73 @@ class UserController extends Controller
         $request->session()->put('user', $user_update_data);
         return redirect('users/update/updatecollectdataform');
     }
+    /**
+     * Show the user update confirm form
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function updateCollectDataForm()
     {
         return view('user.update-user-confirm');
     }
+    /**
+     * Update the user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function  updateUser(Request $request, $id)
     {
 
         $this->userService->updateUser($request->all(), $id);
         return redirect('/users')->with('successAlert', 'You have successfully updated');
     }
+    /**
+     * Remove the specified post from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
         $this->userService->delete($id);
         return redirect('/users')->with('successAlert', 'You have successfully deleted');
     }
-
-    public function createUserConfirmation()
-    {
-        return view('user.create-user-confirm');
-    }
+    /**
+     * show user detail 
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function userProfile($id)
     {
         $user = User::find($id);
         return view('user.userprofile', compact('user'));
     }
-    public function userDetail($id)
-    {
-        $user = User::findorFail($id);
-        return view('user.index', compact('user'));
-    }
-    public function updateUserConfirmation()
-    {
-        return view('user.update-user-confirm');
-    }
+    /**
+     * searching user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return $posts
+     */
 
     public function search(Request $request)
-    {  
-        $users = $this->userService->search($request->name, $request->email,$request->start_date , $request->end_date);
-        
-        return view('user.index',compact('users'));
+    {
+        $users = $this->userService->search($request->name, $request->email, $request->start_date, $request->end_date);
+
+        return view('user.index', compact('users'));
     }
     private function validateUser()
     {
         return request()->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|unique:users|email',
             'password' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-            'dob' => 'required',
+            'type'=>'required',
+            'phone' => 'nullable',
+            'address' => 'nullable',
+            'dob' => 'nullable',
             'profile' => 'required',
         ]);
     }

@@ -7,7 +7,7 @@
                     <a href="{{url('users/'.$user->id.'/edit')}}"><button class="btn btn-dark profile-edit-btn float-right mt-3">
                         <i class="fa fa-edit"></i> Edit
                     </button></a>
-                    <img src="{{asset('storage/profile-images/'.$user->profile)}}" alt="profile-img" style = "width: 100px;">
+                    <img src="{{asset('storage/profile-images/'.$user->profile)}}" alt="profile-img" style = "width: 100px; height:100px;">
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-hover">

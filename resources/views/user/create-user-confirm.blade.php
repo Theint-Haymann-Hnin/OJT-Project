@@ -49,8 +49,7 @@
                                 class="col-sm-2"
                                 >Email address</label
                             >
-                            <label class="col-sm-2">
-                                :
+                            <label class="col-sm-2">:
                                 {{ request()->session()->get('user')['email'] }}</label
                             >
                             <input
@@ -72,7 +71,7 @@
                             @enderror
                         </div>
                         <div class="form-group input-group">
-                            <label for="pasword" class="col-sm-2"
+                            <label for="password" class="col-sm-2"
                                 >Password</label
                             >
                             <label class="col-sm-8"
@@ -88,12 +87,33 @@
                                 value=" {{ request()->session()->get('user')['password'] }}"
                             />
                         </div>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <label for="type">:</label>
+                            <select
+                                class="
+                                    form-control
+                                    @error('actress')
+                                    is-invalid
+                                    @enderror
+                                "
+                                id="type"
+                                name="type" style="display:none;"  
+                            >
+                                <option>Select Type</option>
+                                <option value="{{ request()->session()->get('user')['type'] }}">Admin</option>
+                                <option value="{{ request()->session()->get('user')['type'] }}">User</option>
+                            </select>
+                            @error('type')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        
                         <div class="form-group input-group">
                             <label for="phone" class="col-sm-2">Phone</label>
                             <label class="col-sm-8"
                                 >:
-                                {{ request()->session()->get('user')['phone'] }}</label
-                            >
+                                {{ request()->session()->get('user')['phone'] }}</label>
                             <input
                                 type="hidden"
                                 required

@@ -26,7 +26,7 @@
                                 placeholder="Enter your name"
                                 name="name"
                                 id="name"
-                                value="{{ old('name') ?? 
+                                value="{{  
                                 isset( request()->session()->get('user')['name']) ?  request()->session()->get('user')['name'] : ''
                              }}"
                             />
@@ -36,8 +36,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput1"
-                                >Email address</label
-                            >
+                                >Email address</label>
                             <input
                                 type="email"
                                 required
@@ -50,7 +49,7 @@
                                 "
                                 id="exampleFormControlInput1"
                                 placeholder="Enter your email address"
-                                value="{{ old('email') ?? 
+                                value="{{
                                 isset( request()->session()->get('user')['email']) ?  request()->session()->get('user')['email'] : ''
                              }}"
                             />
@@ -67,46 +66,62 @@
                                 class="form-control"
                                 id="password"
                                 placeholder="Password"
-                                value="{{ old('password') ?? 
-                                isset( request()->session()->get('user')['password']) ?  request()->session()->get('user')['password'] : ''
+                                value="{{
+                                isset( request()->session()->get('user')['password']) ? request()->session()->get('user')['password'] : ''
                              }}"
                             />
                         </div>
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                         <div class="form-group">
                             <label for="pasword">Confirm Password</label>
                             <input
                                 type="password"
                                 required
-                                name="password"
+                                name="password_confirmation"
                                 class="form-control"
                                 id="pasword"
                                 placeholder="Password"
-                                value="{{ old('password') ?? 
-                                isset( request()->session()->get('user')['password']) ?  request()->session()->get('user')['password'] : ''
+                                value="{{
+                                isset( request()->session()->get('user')['password_confirmation']) ?  request()->session()->get('user')['password_confirmation'] : ''
                              }}"
                             />
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <select
+                                class="
+                                    form-control
+                                    @error('actress')
+                                    is-invalid
+                                    @enderror
+                                "
+                                id="type"
+                                name="type"
+                                value="{{
+                                    isset( request()->session()->get('user')['type']) ?  request()->session()->get('user')['type'] : '0'
+                                 }}"
+                            >
+                                <option value="0">Admin</option>
+                                <option value="1">User</option>
+                            </select>
+                            @error('type')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>
                             <input
                                 type="text"
-                                required
-                                class="
-                                    form-control
-                                    @error('phone')
-                                    is-invalid
-                                    @enderror
-                                "
+                                class="form-control"
                                 placeholder="Enter your phone number"
                                 name="phone"
                                 id="phone"
-                                value="{{ old('phone') ?? 
+                                value="{{
                                 isset( request()->session()->get('user')['phone']) ?  request()->session()->get('user')['phone'] : ''
                              }}"
                             />
-                            @error('phone')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="dob">Date Of Birth</label>
@@ -122,7 +137,7 @@
                                 placeholder="Enter date of birth"
                                 name="dob"
                                 id="dob"
-                                value="{{ old('dob') ?? 
+                                value="{{
                                 isset( request()->session()->get('user')['dob']) ?  request()->session()->get('user')['dob'] : ''
                              }}"
                             />
@@ -134,17 +149,15 @@
                             <label for="address">Address</label>
                             <input
                                 type="text"
-                                required
                                 class="
                                     form-control
                                     @error('address')
                                     is-invalid
-                                    @enderror
-                                "
+                                    @enderror"
                                 placeholder="Enter your address"
                                 name="address"
                                 id="address"
-                                value="{{ old('address') ?? 
+                                value="{{
                                 isset( request()->session()->get('user')['address']) ?  request()->session()->get('user')['address'] : ''
                              }}"
                             />
@@ -162,12 +175,10 @@
                                 type="file"
                                 name="profile"
                                 id="update_photo"
-                                class=""
                                 accept="image/png, image/jpg, image/jpeg"
                                 onchange="displaySelectedPhoto('update_photo','image')"
                                 style="width: 0; height: 0; overflow: hidden"
                             />
-
                             <img
                                 src="{{ asset('images/default.png') }}"
                                 alt=""

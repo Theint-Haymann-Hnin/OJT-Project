@@ -1,39 +1,75 @@
-<?php 
+<?php
+
 namespace App\Service\User;
+
 use App\Dao\User\UserDao;
 use App\Contract\Service\User\UserServiceInterface;
+
 class userService implements UserServiceInterface
-    {
+{
+    /**$userDao*/
     private $userDao;
-    public function __construct (UserDao $user_dao)
+    /**
+     * construct
+     * @param PostDao UserDao $user_dao
+     */
+    public function __construct(UserDao $user_dao)
     {
         $this->userDao = $user_dao;
-    } 
-    public function index(){
+    }
+    /**
+     * Display user list
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
         return $this->userDao->index();
-    } 
+    }
+    /**
+     * store collect data
+     * @param $data
+     */
     public function storeCollectData($data)
     {
         $this->userDao->storeCollectData($data);
     }
+    /**
+     * Find Use By id
+     * @param $id
+     * @return User $users
+     */
     public function findUserById($id)
-    {      
-        return $users= $this->userDao ->findUserById($id);
+    {
+        return $users = $this->userDao->findUserById($id);
     }
+    /**
+     * updateUser
+     * @param $user_data_to_update, $id
+     * @return User $user
+     */
+    public function  updateUser($user_data_to_update, $id)
+    {
+        $this->userDao->updateUser($user_data_to_update, $id);
+    }
+    /**
+     * delete user
+     * @param $id 
+     * @return User $user
+     */
 
     public function delete($id)
     {
         $this->userDao->delete($id);
     }
-    public function  updateUser($user_data_to_update, $id)
+    /**
+     * searchuser by name , email , created from and created to
+     * @param $name, $email,$start_date , $end_date
+     * @return User $user
+     */
+
+    public function search($name, $email, $start_date, $end_date)
     {
-        $this->userDao->updateUser($user_data_to_update, $id);
+        return  $this->userDao->search($name, $email, $start_date, $end_date);
     }
-    public function search($name, $email,$start_date , $end_date)
-    {   
-        return  $this->userDao->search($name, $email,$start_date , $end_date);
-       
-    }
-    
-    
-} 
+}

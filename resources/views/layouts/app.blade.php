@@ -6,7 +6,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-        <title>{{ config("app.name", "SCM Bulletin Board") }}</title>
+        <title>SCM Bulletin Board</title>
         <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
@@ -93,13 +93,7 @@
                                 >
                             </li>
                             @endif @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a
-                                    class="nav-link"
-                                    href="{{ route('register') }}"
-                                    >{{ __("Register") }}</a
-                                >
-                            </li>
+
                             @endif @else
                             <li class="nav-item dropdown">
                                 <a
@@ -174,7 +168,6 @@
                 var fileSelected =
                     document.getElementById(selectedfile_id).files;
                 var image_ui = document.getElementById(img_id);
-                //alert()
                 if (fileSelected.length > 0) {
                     var fileToLoad = fileSelected[0];
                     if (fileToLoad.type.match("image.*")) {

@@ -57,11 +57,9 @@
             </form>
         </div>
         <div class="col-md-2">
-            <a href="{{ url('/users/create') }}"
-                ><button type="button" class="btn btn-info btn-lg btn-block">
-                    <i class="fas fa-user-plus"></i> Add
-                </button></a
-            >
+            <a href="{{ url('/users/create') }}" class="btn btn-info btn-lg btn-block"
+                > <i class="fas fa-user-plus"></i> Add
+            </a>
         </div>
     </div>
     <div class="row mt-5">
@@ -84,7 +82,6 @@
                     @foreach($users as $user)
                     <tr>
                         <td>
-                            
                             <a
                                 class="ttl"
                                 data-toggle="modal"
@@ -103,21 +100,15 @@
                         <td>{{$user->phone}}</td>
                         <td>{{$user->dob}}</td>
                         <td>{{$user->address}}</td>
-                        <td>{{$user->created_at}}</td>
-                        <td>{{$user->updated_at}}</td>
+                        <td>{{date('d-m-Y', strtotime($user->created_at))}}</td>
+                        <td>{{date('d-m-Y', strtotime($user->updated_at))}}</td>
                         <td>
                             <form
                                 action="{{url('users/'.$user->id)}}"
                                 method="post"
                             >
                                 @csrf @method('delete')
-                                <a href="{{url('users/'.$user->id.'/edit')}}">
-                                    <button
-                                        type="button"
-                                        class="btn btn-success mr-1 mb-2"
-                                    >
-                                        <i class="fa fa-edit"></i> Edit
-                                    </button>
+                                <a href="{{url('users/'.$user->id.'/edit')}}" type="button"  class="btn btn-success mr-1 mb-2"><i class="fa fa-edit"></i> Edit
                                 </a>
                                 <button
                                     type="submit"
@@ -159,7 +150,8 @@
                         <div class="modal-body">
                             <div class="card">
                                 <div class="card-header">
-                                    <img src="" alt="" class="user_profile">
+                                    <img src="" alt="" class="user_profile" style="width:100px; height:100px;">
+                                  
                                     <a
                                         href="{{url('users/'.$user->id.'/edit')}}"
                                     >
@@ -200,7 +192,6 @@
 @endsection
 @section('javascript')
     <script>
-       
        function userDetail(id){
            var user_id = id;
        
