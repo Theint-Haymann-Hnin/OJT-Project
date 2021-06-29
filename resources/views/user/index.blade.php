@@ -152,8 +152,7 @@
                                 <div class="card-header">
                                     <img src="" alt="" class="user_profile" style="width:100px; height:100px;">
                                   
-                                    <a
-                                        href="{{url('users/'.$user->id.'/edit')}}"
+                                    <a href="" class="user-id"
                                     >
                                         <button
                                             class="edit-btn btn btn-dark
@@ -212,8 +211,11 @@
            
             $('#displayArea').append("<tr><th>Name</th><td>" + user_name + "</td></tr><tr><th>Email</th><td>"+user_email+"</td></tr><tr><th>Type</th><td>"+type+"</td></tr><tr><th>Phone</th><td>"+user_phone+"</td></tr>"+"</td></tr><tr><th>Date of Birth</th><td>"+user_dob+"</td></tr><tr><th>Address</th><td>"+user_address+"</td></tr>");
             var source = "{!! asset('storage/profile-images/" +user_profile+ " ') !!}";
+            var href = "{!! url('users/"+user_id +"/edit') !!}";
 
-            $('.user_profile').attr('src', source); 
+            $('.user_profile').attr('src', source);
+            $('.user-id').attr('href', href);
+           
         });
 
         }

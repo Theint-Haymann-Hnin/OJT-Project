@@ -77,7 +77,7 @@
                             >
                         </div>
                         <button class="btn btn-success mr-3">Confirm</button>
-                        <button class="btn btn-outline-success">Cancel</button>
+                       <a href="{{ url()->previous() }}" class="btn btn-outline-success">Cancel</a>
                     </form>
                 </div>
             </div>

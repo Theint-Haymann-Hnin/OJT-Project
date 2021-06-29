@@ -8,15 +8,17 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('change.password') }}">
                         @csrf
-                         @foreach ($errors->all() as $error)
-                            <p class="text-danger">{{ $error }}</p>
-                         @endforeach 
-  
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">Current Password</label>
   
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="current_password" autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('current_password') is-invalid @enderror" name="current_password" autocomplete="current-password">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-6">
+                                <div class="text-danger">{{$errors->first('current_password')}}</div>
                             </div>
                         </div>
   
@@ -24,7 +26,13 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">New Password</label>
   
                             <div class="col-md-6">
-                                <input id="new_password" type="password" class="form-control" name="new_password" autocomplete="current-password">
+                                <input id="new_password" type="password" class="form-control @error('new_password') is-invalid @enderror" name="new_password" autocomplete="current-password">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-6">
+                                <div class="text-danger">{{$errors->first('new_password')}}</div>
                             </div>
                         </div>
   
@@ -32,7 +40,13 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">New Confirm Password</label>
     
                             <div class="col-md-6">
-                                <input id="new_confirm_password" type="password" class="form-control" name="new_confirm_password" autocomplete="current-password" >
+                                <input id="new_confirm_password" type="password" class="form-control @error('ew_confirm_password') is-invalid @enderror" name="new_confirm_password" autocomplete="current-password" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-6">
+                                <div class="text-danger">{{$errors->first('new_confirm_password')}}</div>
                             </div>
                         </div>
    

@@ -7,7 +7,6 @@
                     <h1 class="update-user-confirm">
                         Update User Confirm Screen
                     </h1>
-                    <div class="update-user-confirm-photo">: Profile photo</div>
                     <img
                     src="{{asset('storage/profile-images/'.request()->session()->get('user')['profile'])}}"
                     alt="profile-img"
@@ -64,8 +63,13 @@
                         </div>
                         <div class="form-group">
                             <label for="type">Type</label>
-                            <label> :  </label>
-                            <select
+                            <label> : @if(request()->session()->get('user')['type'] == 0)
+                                Admin
+                                @else 
+                                User
+                                 @endif
+                                 </label>
+                            <input
                                 class="
                                     form-control
                                     @error('type')
@@ -75,12 +79,7 @@
                                 style="display: none"
                                 id="type"
                                 name="type"
-                                required
-                            >
-                                <option>Select Type</option>
-                                <option value="0">Admin</option>
-                                <option value="1">User</option>
-                            </select>
+                                value="{{request()->session()->get('user')['type']}}">
                             @error('type')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -170,9 +169,9 @@
                         <button type="submit" class="btn btn-primary mr-3">
                             Update
                         </button>
-                        <button type="reset" class="btn btn-outline-success">
+                        <a  href="{{ url()->previous()}}" class="btn btn-outline-success">
                             Cancel
-                        </button>
+                        </a>
                     </form>
                 </div>
             </div>

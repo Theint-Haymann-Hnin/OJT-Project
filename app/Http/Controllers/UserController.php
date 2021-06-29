@@ -44,9 +44,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request )
     {
-        $data = $this->validateUser();
+        $data = $this->validateUser('required',null);
         $image = $request->profile;
         $imageName = uniqid() . '_' . $image->getClientOriginalName();
         $image->storeAs('public/profile-images', $imageName);
@@ -96,9 +96,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
         $user = User::find($id);
-        $user_update_data = $this->validateUpdateUser();
+        $user_update_data = $this->validateUser('nullable', $id);
         $user_update_data['id'] = $id;
         if ($request->profile) {
             $old_image = $user->profile;
@@ -119,7 +119,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function updateCollectDataForm()
-    {
+    {   
         return view('user.update-user-confirm');
     }
     /**
@@ -131,7 +131,7 @@ class UserController extends Controller
      */
     public function  updateUser(Request $request, $id)
     {
-
+        
         $this->userService->updateUser($request->all(), $id);
         return redirect('/users')->with('successAlert', 'You have successfully updated');
     }
@@ -170,28 +170,20 @@ class UserController extends Controller
 
         return view('user.index', compact('users'));
     }
-    private function validateUser()
+    private function validateUser($rule , $id)
     {
         return request()->validate([
             'name' => 'required',
-            'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|unique:users|email',
-            'password' => 'required',
-            'type'=>'required',
+            'email' => 'required|regex:/(.+)@(.+)\.(.+)/i|unique:users,email,'.$id,
+            'password' => $rule.'|min:8|regex:/^(?:(?=.*\d)(?=.*[A-Z]).*)$/',
+            'password_confirmation' => $rule.'|same:password',
+            'type' => 'required',
             'phone' => 'nullable',
             'address' => 'nullable',
             'dob' => 'nullable',
-            'profile' => 'required',
+            'profile' => $rule,
         ]);
     }
-    private function validateUpdateUser()
-    {
-        return request()->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-            'dob' => 'required',
-            'profile' => 'nullable',
-        ]);
-    }
+    
+    
 }

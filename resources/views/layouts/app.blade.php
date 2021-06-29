@@ -3,9 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-
         <title>SCM Bulletin Board</title>
         <link
             rel="stylesheet"
@@ -13,19 +11,12 @@
             integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
             crossorigin="anonymous"
         />
-
-        <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-        <!-- <script src="{{ asset('js/preview-image.js') }}"></script> -->
-
-        <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
         <link
             href="https://fonts.googleapis.com/css?family=Nunito"
             rel="stylesheet"
         />
-
-        <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
         <link
@@ -47,7 +38,6 @@
             >
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <!-- {{ config('app.name', 'SCM Bulletin Board') }} -->
                         <h1 class="bulletin-board-ttl">SCM Bulletin Board</h1>
                     </a>
                     <button
@@ -66,7 +56,6 @@
                         class="collapse navbar-collapse"
                         id="navbarSupportedContent"
                     >
-                        <!-- Left Side Of Navbar -->
                         @if(Auth::check())
                         <ul class="navbar-nav mr-auto">
                             <li><a href="{{ asset('/users') }}">Users</a></li>
@@ -81,9 +70,8 @@
                             <li><a href="{{ asset('/posts') }}">Posts</a></li>
                         </ul>
                         @endif
-                        <!-- Right Side Of Navbar -->
+
                         <ul class="navbar-nav ml-auto">
-                            <!-- Authentication Links -->
                             @guest @if (Route::has('login'))
                             <li class="nav-item">
                                 <a
@@ -92,9 +80,7 @@
                                     >{{ __("Login") }}</a
                                 >
                             </li>
-                            @endif @if (Route::has('register'))
-
-                            @endif @else
+                            @endif @if (Route::has('register')) @endif @else
                             <li class="nav-item dropdown">
                                 <a
                                     id="navbarDropdown"
@@ -113,10 +99,10 @@
                                     aria-labelledby="navbarDropdown"
                                 >
                                     <a
-                                    class="dropdown-item"
-                                    href="{{url('/change-password')}}"
+                                        class="dropdown-item"
+                                        href="{{ url('/change-password') }}"
                                     >
-                                    {{ __("Change password") }}
+                                        {{ __("Change password") }}
                                     </a>
                                     <a
                                         class="dropdown-item"

@@ -39,7 +39,7 @@
                                 >Email address</label>
                             <input
                                 type="email"
-                                required
+                                
                                 name="email"
                                 class="
                                     form-control
@@ -61,53 +61,52 @@
                             <label for="password">Password</label>
                             <input
                                 type="password"
-                                required
                                 name="password"
-                                class="form-control"
-                                id="password"
+                                class="form-control @error('password') is-invalid @enderror"
                                 placeholder="Password"
                                 value="{{
                                 isset( request()->session()->get('user')['password']) ? request()->session()->get('user')['password'] : ''
                              }}"
                             />
                         </div>
-                        @error('password')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                            <div class="text-danger">{{$errors->first('password')}}</div>
+                       
                         <div class="form-group">
                             <label for="pasword">Confirm Password</label>
                             <input
                                 type="password"
-                                required
                                 name="password_confirmation"
-                                class="form-control"
-                                id="pasword"
+                                class="
+                                    form-control
+                                    @error('password_confirmation')
+                                    is-invalid
+                                    @enderror
+                                "
                                 placeholder="Password"
                                 value="{{
                                 isset( request()->session()->get('user')['password_confirmation']) ?  request()->session()->get('user')['password_confirmation'] : ''
                              }}"
                             />
                         </div>
+                        <div class="text-danger">{{$errors->first('password_confirmation')}}</div>
                         <div class="form-group">
                             <label for="type">Type</label>
                             <select
                                 class="
                                     form-control
-                                    @error('actress')
+                                    @error('type')
                                     is-invalid
                                     @enderror
                                 "
-                                id="type"
                                 name="type"
                                 value="{{
-                                    isset( request()->session()->get('user')['type']) ?  request()->session()->get('user')['type'] : '0'
-                                 }}"
-                            >
+                                    isset( request()->session()->get('user')['type']) ?  request()->session()->get('user')['type'] : '1'
+                                 }}">
                                 <option value="0">Admin</option>
                                 <option value="1">User</option>
                             </select>
                             @error('type')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
@@ -127,7 +126,6 @@
                             <label for="dob">Date Of Birth</label>
                             <input
                                 type="date"
-                                required
                                 class="
                                     form-control
                                     @error('dob')
@@ -177,7 +175,11 @@
                                 id="update_photo"
                                 accept="image/png, image/jpg, image/jpeg"
                                 onchange="displaySelectedPhoto('update_photo','image')"
-                                style="width: 0; height: 0; overflow: hidden"
+                                style="width: 0; height: 0; overflow: hidden"  class="
+                                @error('profile')
+                                is-invalid
+                                @enderror
+                            "
                             />
                             <img
                                 src="{{ asset('images/default.png') }}"

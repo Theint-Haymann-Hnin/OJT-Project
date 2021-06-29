@@ -13,14 +13,13 @@
                         enctype="multipart/form-data"
                     >
                         @csrf @method('put') 
-                        {{$user->profile}}
                       
                         @if($user->profile)
                                     <img src="{{asset('storage/profile-images/'.$user->profile)}}"  alt="{{$user->profile}}" style="width: 100px; height:100px">
                                     @else    
                                     <img src="{{ asset('images/default.png') }}" alt="" style="width: 100px; height:100px">  
                                 @endif 
-                        <div class="form-group">
+                        <div class="form-group mt-2">
                             <label for="name">Name</label>
                             <input
                                 type="text"
@@ -68,11 +67,18 @@
                                 class="form-control"
                                 id="type"
                                 name="type"
-                                required
                             >
                                 <option>Select Type</option>
-                                <option value="0">Admin</option>
-                                <option value="1">User</option>
+                                <option value="0"
+                                @if($user->type == 0 )
+                                selected
+                                @endif
+                                >Admin</option>
+                                <option value="1"
+                                @if($user->type == 1 )
+                                selected
+                                @endif
+                                >User</option>
                             </select>
                         </div>
                         <div class="form-group">

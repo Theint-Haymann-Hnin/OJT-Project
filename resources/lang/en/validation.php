@@ -161,6 +161,43 @@ return [
         ],
     ],
 
+    'custom' => [
+        'name' => [
+            'required' => 'Name is required'
+        ],
+        'type' => [
+            'required' => 'Type is required'
+        ],
+        'profile' => [
+            'required' => 'Profile is required'
+        ],
+        'email' => [
+            'unique' => 'User with email already exists'
+        ],
+        'password' => [
+            'required' => 'Password is required',
+            'min' => 'Password must be more than 8 characters long',
+            'regex' => 'Password must contain at least one upper case and one numeric'
+        ],
+        'password_confirmation' => [
+            'required' => 'Password is required',
+            'same' => 'Password and confirm password must be same'
+        ],
+        'current_password' => [
+            'required' => 'Password is required',
+        ],
+        'new_password' => [
+            'required' => 'Password is required',
+            'min' => 'Password must be more than 8 characters long',
+            'regex' => 'Password must contain at least one upper case and one numeric'
+        ],
+        'new_confirm_password' => [
+            'required' => 'Password is required',
+            'same' => 'new Password and new confirm password must be same'
+        ],
+        
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -171,7 +208,7 @@ return [
     | of "email". This simply helps us make our message more expressive.
     |
     */
-    'attributes' => ['title','description','import_file'],
+    'attributes' => ['title','description','import_file','name','type','profile','password','type'],
 
 
 ];
