@@ -1,17 +1,15 @@
 @extends('layouts.app') @section('content')
 <div class="container">
     <div class="row mt-5">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-md-12">
+            <div class="card text-dark">
                 <div class="card-header">
                     <h1 class="title">Create Post Confirmation</h1>
                 </div>
                 <div class="card-body">
                     <form
                         action="{{ url('/posts/store/collectdata') }}"
-                        method="post"
-                    >
+                        method="post">
                         {{ csrf_field() }}
                         <div class="form-group input-group">
                             <label for="title" class="col-sm-2"
@@ -28,8 +26,7 @@
                                     form-control
                                     @error('title')
                                     is-invalid
-                                    @enderror
-                                "
+                                    @enderror"
                                 placeholder="Enter your title"
                                 name="title"
                                 id="title"
@@ -55,8 +52,7 @@
                                     form-control
                                     @error('description')
                                     is-invalid
-                                    @enderror
-                                "
+                                    @enderror"
                                 style="display: none"
                                 placeholder="Enter Description"
                             >

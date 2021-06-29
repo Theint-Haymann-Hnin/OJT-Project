@@ -88,9 +88,12 @@
                         </div>
                         <div class="form-group">
                             <label for="type" class="col-sm-2">Type</label>
-                            <label for="type" class="col-sm-8">:
-                                {{request()->session()->get('user')['type']}}
-                            </label>
+                            <label class="col-sm-8">:@if(request()->session()->get('user')['type'] == 0)
+                                Admin
+                                @else 
+                                User
+                                 @endif
+                                 </label>
                             <input type="text"
                                 class="
                                     form-control
@@ -100,12 +103,10 @@
                                 "
                                 name="type"  value="{{request()->session()->get('user')['type']}}" style="display:none;"
                             >
-                           
                             @error('type')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
                         <div class="form-group input-group">
                             <label for="phone" class="col-sm-2">Phone</label>
                             <label class="col-sm-8"

@@ -58,8 +58,7 @@
         </div>
     </div>
     <div class="row mt-5">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <table class="table table-bordered table-hover">
                 <thead>
                     <th>Post Title</th>
@@ -67,7 +66,7 @@
                     <th>Posted User</th>
                     <th>Posted Date</th>
                      @if(Auth::check())
-                    <th></th>
+                    <th>Action</th>
                     @endif
                 </thead>
                 <tbody>
@@ -86,7 +85,6 @@
                         <td>{{$post->description}}</td>
                         <td>{{$post->user->name}}</td>
                         <td>{{date('d-m-Y', strtotime($post->created_at))}}</td>
-                        
                          @if(Auth::check())
                         <td>
                             <form
@@ -94,8 +92,7 @@
                                 method="post"
                             >
                                 @csrf @method('delete')
-                                <a href="{{url('posts/'.$post->id.'/edit')}}" class="btn btn-success">
-                                   
+                                <a href="{{url('posts/'.$post->id.'/edit')}}" class="btn btn-success mr-2">
                                         <i class="fa fa-edit"></i> Edit
                                     </button>
                                 </a>
@@ -116,7 +113,6 @@
             <div class="pagination">
                 {{ $posts->links() }}
             </div>
-           <!-- Modal -->
            <div
            class="modal fade"
            id="exampleModalCenter"
@@ -167,16 +163,13 @@
            </div>
        </div>
         </div>
-        <div class="col-md-1"></div>
     </div>
 </div>
 @endsection
 @section('javascript')
     <script>
-       
        function postDetail(id){
            var post_id = id;
-       
         $.get("api/post/"+post_id, function( response ) {
             var post_title = response.title;
             var post_description = response.description;
@@ -185,11 +178,9 @@
             var post_created_user_id = response.created_user_id;
             var post_updated_at = response.updated_at;
             var post_updated_user_id = response.updated_user_id;
-           
             $('#displayArea').append("<tr><th>Title</th><td>" + post_title + "</td></tr><tr><th>Description</th><td>"+post_description+"</td></tr><tr><th>Status</th><td>"+post_status+"</td></tr><tr><th>Created at</th><td>"+post_created_at+"</td></tr><tr><th>Created User</th><td>"+ post_created_user_id+"</td></tr><tr><th>Updated at</th><td>"+post_updated_at+"</td></tr><tr><th>Updated User</th><td>"+post_updated_user_id+"</td></tr>");
         });
         }
-
         $('#exampleModalCenter').on('hidden.bs.modal', function () {
             window.location.reload(true)
         })

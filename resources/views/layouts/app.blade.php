@@ -34,7 +34,7 @@
     <body>
         <div id="app">
             <nav
-                class="navbar navbar-expand-md navbar-light bg-white shadow-sm"
+                class="navbar navbar-expand-md navbar-light bg-info shadow-sm"
             >
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
@@ -54,12 +54,13 @@
 
                     <div
                         class="collapse navbar-collapse"
-                        id="navbarSupportedContent"
-                    >
+                        id="navbarSupportedContent">
                         @if(Auth::check())
                         <ul class="navbar-nav mr-auto">
-                            <li><a href="{{ asset('/users') }}">Users</a></li>
-                            <li class="ml-3 mr-3">
+                        @if(Auth::user()->type == 0)
+                         <li><a href="{{ asset('/users') }}">Users</a></li>
+                        @endif
+                        <li class="ml-3 mr-3">
                                 <a
                                     href="{{
                                         asset('/userprofile/')
@@ -95,11 +96,11 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div
-                                    class="dropdown-menu dropdown-menu-right"
+                                    class="bg-info dropdown-menu dropdown-menu-right"
                                     aria-labelledby="navbarDropdown"
                                 >
                                     <a
-                                        class="dropdown-item"
+                                        class="dropdown-item "
                                         href="{{ url('/change-password') }}"
                                     >
                                         {{ __("Change password") }}

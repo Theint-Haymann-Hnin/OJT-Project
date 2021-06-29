@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row mt-4">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card text-dark">
                 <div class="card-header">
                     <h1 class="update-user-confirm">
                         Update User Confirm Screen

@@ -41,7 +41,6 @@
                             <th>Address</th>
                             <td>{{$user->address}}</td>
                         </tr>
-                      
                     </table>
                 </div>
             </div>

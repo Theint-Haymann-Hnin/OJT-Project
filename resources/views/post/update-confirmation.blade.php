@@ -1,9 +1,8 @@
 @extends('layouts.app') @section('content')
 <div class="container">
     <div class="row mt-5">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-md-12">
+            <div class="card text-dark">
                 <div class="card-header">
                     <h1 class="title">Update Post Confirmation</h1>
                 </div>

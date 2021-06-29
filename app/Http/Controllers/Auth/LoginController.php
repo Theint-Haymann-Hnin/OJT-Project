@@ -30,11 +30,6 @@ class LoginController extends Controller
    
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
-            // if (auth()->user()->type == 0) {
-            //     return redirect('/posts');
-            // }else{
-            //     return redirect('/users');
-            // }
             if(auth()->check()){
                 return redirect('posts');
             } 

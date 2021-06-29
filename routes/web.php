@@ -18,7 +18,7 @@ use App\Http\Controllers\ChangePasswordController;
 
 
 Route::get('/', [PostController::class, 'index']);
-Route::resource('/posts','App\Http\Controllers\PostController')->middleware('isadmin');
+Route::resource('/posts','App\Http\Controllers\PostController');
 Route::get('posts/create/collectdataform', [PostController::class, 'collectDataForm']);
 Route::post('posts/store/collectdata', [PostController::class, 'storeCollectData']);
 Route::get('posts/update/updatecollectdataform', [PostController::class, 'updateCollectDataForm']);
@@ -30,7 +30,7 @@ Route::post('importExcel', [PostController::class, 'importExcel'])->name('import
 Route::get('/upload', [PostController::class, 'upload']);
 
 
-Route::resource('/users','App\Http\Controllers\UserController');
+Route::resource('/users','App\Http\Controllers\UserController')->middleware('isadmin', ['except' => array('users.update')]);
 Route::get('users/create/collectdataform', [UserController::class, 'collectDataForm']);
 Route::post('users/store/collectdata', [UserController::class, 'storeCollectData']);
 Route::get('/createuserconfirm', [UserController::class, 'createUserConfirmation']);
