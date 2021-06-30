@@ -178,7 +178,12 @@
             var post_created_user_id = response.created_user_id;
             var post_updated_at = response.updated_at;
             var post_updated_user_id = response.updated_user_id;
-            $('#displayArea').append("<tr><th>Title</th><td>" + post_title + "</td></tr><tr><th>Description</th><td>"+post_description+"</td></tr><tr><th>Status</th><td>"+post_status+"</td></tr><tr><th>Created at</th><td>"+post_created_at+"</td></tr><tr><th>Created User</th><td>"+ post_created_user_id+"</td></tr><tr><th>Updated at</th><td>"+post_updated_at+"</td></tr><tr><th>Updated User</th><td>"+post_updated_user_id+"</td></tr>");
+             if(post_status == 0){
+                var status = 'Inactive';
+            }else{
+                var status='Active';
+            }
+            $('#displayArea').append("<tr><th>Title</th><td>" + post_title + "</td></tr><tr><th>Description</th><td>"+post_description+"</td></tr><tr><th>Status</th><td>"+status+"</td></tr><tr><th>Created at</th><td>"+post_created_at+"</td></tr><tr><th>Created User</th><td>"+ post_created_user_id+"</td></tr><tr><th>Updated at</th><td>"+post_updated_at+"</td></tr><tr><th>Updated User</th><td>"+post_updated_user_id+"</td></tr>");
         });
         }
         $('#exampleModalCenter').on('hidden.bs.modal', function () {
