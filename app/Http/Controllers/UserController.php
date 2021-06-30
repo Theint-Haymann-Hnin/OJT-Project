@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Contract\Service\User\UserServiceInterface;
 use File;
 
+
 class UserController extends Controller
 {
     /** $userService*/
@@ -79,7 +80,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function storeCollectData(Request $request)
-    {
+    {   
+        
         $this->userService->storeCollectData($request->all());
         return redirect('/users')->with('successAlert', 'You have successfully created');
     }

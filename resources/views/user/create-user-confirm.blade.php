@@ -83,7 +83,7 @@
                                 class="form-control"
                                 id="pasword"
                                 placeholder="Password"
-                                value=" {{ request()->session()->get('user')['password'] }}" style="display:none;"
+                                value="{{ request()->session()->get('user')['password'] }}" style="display:none;" 
                             />
                         </div>
                         <div class="form-group">

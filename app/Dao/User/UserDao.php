@@ -5,6 +5,7 @@ namespace App\Dao\User;
 use App\Models\User;
 use App\Contract\Dao\User\UserDaoInterface;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class UserDao implements UserDaoInterface
 {

@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'SCMAdmin',
             'email' => 'scmadmin@gmail.com',
             'password' => Hash::make('12345678SCM'),
-            'type' => '0',
+            'type' => 0,
             'phone' => '09798059425',
             'address' => 'Yangon',
             'dob' => '1995-06-16',
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             'name' => 'User1',
             'email' => 'user1@gmail.com',
             'password' => Hash::make('12345678USER1'),
-            'type' => '1',
+            'type' => 1,
             'phone' => '09977826355',
             'address' => 'Yangon',
             'dob' => '1997-12-21',
@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
             'name' => 'User2',
             'email' => 'user2@gmail.com',
             'password' => Hash::make('12345678USER2'),
-            'type' => '1',
+            'type' => 1,
             'phone' => '09876354212',
             'address' => 'Yangon',
             'dob' => '1985-06-20',
@@ -52,12 +52,13 @@ class UserSeeder extends Seeder
             'name' => 'User3',
             'email' => 'user3@gmail.com',
             'password' => Hash::make('12345678USER3'),
-            'type' => '1',
+            'type' => 1,
             'phone' => '09874038212',
             'address' => 'Yangon',
             'dob' => '1996-07-28',
             'created_at'=>'2021-06-16 04:27:49',
             'updated_at' => '2021-06-16 04:27:49'
         ]);
+        
     }
 }
