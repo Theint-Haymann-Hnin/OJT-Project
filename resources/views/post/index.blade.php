@@ -92,7 +92,7 @@
                                 method="post"
                             >
                                 @csrf @method('delete')
-                                <a href="{{url('posts/'.$post->id.'/edit')}}" class="btn btn-success mr-2">
+                                <a href="{{url('posts/'.$post->id.'/edit')}}" class="btn btn-success mb-2">
                                         <i class="fa fa-edit"></i> Edit
                                     </button>
                                 </a>

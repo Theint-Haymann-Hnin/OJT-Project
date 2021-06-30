@@ -10,15 +10,13 @@ use App\Imports\TransactionsImport;
 
 class PostController extends Controller
 {
-    /** $postService*/
-    private $postService;
+    /** $postService*/  
+      private $postService;
 
     /**
      * construct
      * @param PostServiceInterface $post_service_interface
-     */
-
-    public function __construct(PostServiceInterface $post_service_interface)
+     */    public function __construct(PostServiceInterface $post_service_interface)
     {
         $this->postService = $post_service_interface;
     }
@@ -27,9 +25,7 @@ class PostController extends Controller
      * Display post list
      *
      * @return \Illuminate\Http\Response
-     */
-
-    public function index()
+     */    public function index()
     {
         $posts = $this->postService->index();
         return view('post.index', compact('posts'));
@@ -39,9 +35,7 @@ class PostController extends Controller
      * Show the post create form
      *
      * @return \Illuminate\Http\Response
-     */
-
-    public function create()
+     */    public function create()
     {
         return view('post.create');
     }
@@ -52,7 +46,6 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
     public function store(Request $request)
     {
         $data = $this->validatePost(null);
@@ -65,7 +58,6 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function collectDataForm(Request $request)
     {
 
@@ -78,7 +70,6 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
     public function storeCollectData(Request $request)
     {
 
@@ -92,7 +83,6 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function edit($id)
     {
         $post = $this->postService->findPostById($id);
@@ -107,7 +97,6 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function update(Request $request, $id)
     {
         $post_update_data = $this->validatePost($id);
@@ -121,7 +110,6 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function updateCollectDataForm()
     {
         return view('post.update-confirmation');
@@ -134,7 +122,6 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function  updatePost(Request $request, $id)
     {
         $post_update_data = $this->validatePost($id);
@@ -148,7 +135,6 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function destroy($id)
     {
         $this->postService->delete($id);
@@ -159,7 +145,6 @@ class PostController extends Controller
      * Show the upload post blade
      *
      */
-
     public function upload()
     {
         return view('post.upload-post');
@@ -171,7 +156,6 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return $posts
      */
-
     public function search(Request $request)
     {
         $searchData = $request->search_data;
@@ -179,6 +163,10 @@ class PostController extends Controller
         return view('post.index', compact('posts'));
     }
 
+    /**
+     * @param $id
+     * 
+     */
     public function validatePost($id)
     {
         return request()->validate([
@@ -191,7 +179,6 @@ class PostController extends Controller
     /**
      * @return \Illuminate\Support\Collection
      */
-
     public function exportExcel($type)
     {
         return \Excel::download(new TransactionsExport, 'posts.' . $type);
@@ -200,7 +187,6 @@ class PostController extends Controller
     /**
      * @return \Illuminate\Support\Collection
      */
-
     public function importExportView()
     {
         return view('post.upload-post');
@@ -209,7 +195,6 @@ class PostController extends Controller
     /**
      * @return \Illuminate\Support\Collection
      */
-
     public function importExcel(Request $request)
     {
         $this->validate($request, [

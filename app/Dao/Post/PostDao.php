@@ -12,7 +12,6 @@ class PostDao implements PostDaoInterface
    * get Post LIst
    * @return PostList
    */
-
   public function index()
   {
     if (auth()->check() && auth()->user()->type == 0) {
@@ -29,7 +28,6 @@ class PostDao implements PostDaoInterface
    * store collect data
    * @param $data
    */
-
   public function storeCollectData($data)
   {
     $data['created_user_id'] = auth()->user()->id;
@@ -42,7 +40,6 @@ class PostDao implements PostDaoInterface
    * @param $id
    * @return Post $post
    */
-
   public function findPostById($id)
   {
     return $post = Post::find($id);
@@ -53,7 +50,6 @@ class PostDao implements PostDaoInterface
    * @param $id ,$post_data_to_update
    * @return Post $post
    */
-
   public function updatePost($post_data_to_update, $id)
   {
     if (isset($post_data_to_update['status'])) {
@@ -70,7 +66,6 @@ class PostDao implements PostDaoInterface
    * @param $id 
    * @return Post $post
    */
-
   public function delete($id)
   {
     Post::find($id)->delete();
@@ -81,7 +76,6 @@ class PostDao implements PostDaoInterface
    * @param $searchData
    * @return Post $post
    */
-
   public function search($searchData)
   {
     $posts = Post::where('title', 'like', "%" . $searchData . "%")->orWhere('description', 'like', "%" . $searchData . "%")->orWhereHas('user', function ($user) use ($searchData) {

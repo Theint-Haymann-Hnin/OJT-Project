@@ -16,10 +16,10 @@ class UserController extends Controller
      * construct
      * @param UserServiceInterface $user_service_interface
      */
-
     public function __construct(UserServiceInterface $user_service_interface)
     {
-        
+       
+        $this->middleware('isadmin')->only('index');
         $this->userService = $user_service_interface;
     }
 
@@ -28,7 +28,6 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
         $users = $this->userService->index();
@@ -40,7 +39,6 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function create()
     {
         return view('user.create');
@@ -52,7 +50,6 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
     public function store(Request $request)
     {
         $data = $this->validateUser('required', null);
@@ -69,7 +66,6 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function collectDataForm(Request $request)
     {
 
@@ -82,7 +78,6 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
     public function storeCollectData(Request $request)
     {
         $this->userService->storeCollectData($request->all());
@@ -95,7 +90,6 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function edit($id)
     {
         $user = $this->userService->findUserById($id);
@@ -110,7 +104,6 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function update(Request $request, $id)
     {
         $user = User::find($id);
@@ -135,7 +128,6 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function updateCollectDataForm()
     {
         return view('user.update-user-confirm');
@@ -148,7 +140,6 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function  updateUser(Request $request, $id)
     {
 
@@ -162,7 +153,6 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function destroy($id)
     {
         $this->userService->delete($id);
@@ -175,7 +165,6 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function userProfile($id)
     {
         $user = User::find($id);
@@ -188,7 +177,6 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return $posts
      */
-
     public function search(Request $request)
     {
         $users = $this->userService->search($request->name, $request->email, $request->start_date, $request->end_date);
@@ -196,6 +184,11 @@ class UserController extends Controller
         return view('user.index', compact('users'));
     }
 
+    /**
+     * @param $rule
+     * @param $id
+     * 
+     */
     private function validateUser($rule, $id)
     {
         return request()->validate([
@@ -209,5 +202,6 @@ class UserController extends Controller
             'dob' => 'nullable',
             'profile' => $rule,
         ]);
+       
     }
 }

@@ -30,7 +30,7 @@ Route::post('importExcel', [PostController::class, 'importExcel'])->name('import
 Route::get('/upload', [PostController::class, 'upload']);
 
 
-Route::resource('/users','App\Http\Controllers\UserController')->middleware('isadmin', ['except' => array('users.update')]);
+Route::resource('/users','App\Http\Controllers\UserController');
 Route::get('users/create/collectdataform', [UserController::class, 'collectDataForm']);
 Route::post('users/store/collectdata', [UserController::class, 'storeCollectData']);
 Route::get('/createuserconfirm', [UserController::class, 'createUserConfirmation']);

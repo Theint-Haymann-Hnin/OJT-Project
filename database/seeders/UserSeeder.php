@@ -16,9 +16,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'TheintHaymannHnin',
-            'email' => 'scm.theinthaymannhnin@gmail.com',
-            'password' => Hash::make('12345678'),
+            'name' => 'SCMAdmin',
+            'email' => 'scmadmin@gmail.com',
+            'password' => Hash::make('12345678SCM'),
             'type' => '0',
             'phone' => '09798059425',
             'address' => 'Yangon',
@@ -27,9 +27,9 @@ class UserSeeder extends Seeder
             'updated_at' => '2021-06-16 04:27:49'
         ]);
         DB::table('users')->insert([
-            'name' => 'Lily',
-            'email' => 'lily@gmail.com',
-            'password' => Hash::make('12345678'),
+            'name' => 'User1',
+            'email' => 'user1@gmail.com',
+            'password' => Hash::make('12345678USER1'),
             'type' => '1',
             'phone' => '09977826355',
             'address' => 'Yangon',
@@ -38,9 +38,9 @@ class UserSeeder extends Seeder
             'updated_at' => '2021-06-16 04:27:49'
         ]);
         DB::table('users')->insert([
-            'name' => 'Alison',
-            'email' => 'alison@gmail.com',
-            'password' => Hash::make('12345678'),
+            'name' => 'User2',
+            'email' => 'user2@gmail.com',
+            'password' => Hash::make('12345678USER2'),
             'type' => '1',
             'phone' => '09876354212',
             'address' => 'Yangon',
@@ -49,9 +49,9 @@ class UserSeeder extends Seeder
             'updated_at' => '2021-06-16 04:27:49'
         ]);
         DB::table('users')->insert([
-            'name' => 'Kitty',
-            'email' => 'kitty@gmail.com',
-            'password' => Hash::make('12345678'),
+            'name' => 'User3',
+            'email' => 'user3@gmail.com',
+            'password' => Hash::make('12345678USER3'),
             'type' => '1',
             'phone' => '09874038212',
             'address' => 'Yangon',
