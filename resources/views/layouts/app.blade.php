@@ -12,6 +12,7 @@
             crossorigin="anonymous"
         />
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
         <link
             href="https://fonts.googleapis.com/css?family=Nunito"

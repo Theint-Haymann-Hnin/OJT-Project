@@ -26,7 +26,7 @@
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
-                style="width: 400px"
+                style="width: 400px" 
             />
             <button
                 class="btn btn-outline-success my-2 my-sm-0"
@@ -175,15 +175,21 @@
             var post_title = response.title;
             var post_description = response.description;
             var post_status = response.status;
-            var post_created_at = response.created_at;
+            var post_created_at =  moment(response.post_created_at).format('DD-MM-YYYY');
             var post_created_user_id = response.created_user_id;
-            var post_updated_at = response.updated_at;
+            var post_updated_at = moment(response.post_updated_at).format('DD-MM-YYYY');
              if(post_status == 0){
                 var status = 'Inactive';
             }else{
                 var status='Active';
             }
-            $('#displayArea').append("<tr><th>Title</th><td>" + post_title + "</td></tr><tr><th>Description</th><td>"+post_description+"</td></tr><tr><th>Status</th><td>"+status+"</td></tr><tr><th>Created at</th><td>"+post_created_at+"</td></tr><tr><th>Created User</th><td>"+ post_created_user_id+"</td></tr><tr><th>Updated at</th><td>"+post_updated_at+"</td></tr>");
+            $.get("api/user/"+post_created_user_id, function(data) {
+                var user_name = data.name;
+
+                $('#displayArea').append("<tr><th>Title</th><td>" + post_title + "</td></tr><tr><th>Description</th><td>"+post_description+"</td></tr><tr><th>Status</th><td>"+status+"</td></tr><tr><th>Created at</th><td>"+ post_created_at+"</td></tr><tr><th>Created User</th><td>"+ user_name+"</td></tr><tr><th>Updated at</th><td>"+post_updated_at+"</td></tr>");
+            });
+
+           
         });
         }
         $('#exampleModalCenter').on('hidden.bs.modal', function () {
