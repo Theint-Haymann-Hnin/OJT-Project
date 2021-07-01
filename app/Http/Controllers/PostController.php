@@ -9,8 +9,9 @@ use App\Exports\TransactionsExport;
 use App\Imports\TransactionsImport;
 
 
+
 class PostController extends Controller
-{
+{        
     /** $postService*/  
       private $postService;
 
@@ -18,7 +19,9 @@ class PostController extends Controller
      * construct
      * @param PostServiceInterface $post_service_interface
      */    public function __construct(PostServiceInterface $post_service_interface)
-    {
+    {   
+        // $this->middleware(['isadmin','revalidate']);
+        $this->middleware(['isadmin','revalidate'])->except('guestPostIndex');
         $this->postService = $post_service_interface;
     }
 
@@ -29,6 +32,16 @@ class PostController extends Controller
      */    public function index()
     {
         $posts = $this->postService->index();
+        return view('post.index', compact('posts'));
+    }
+
+    /**
+    * get Post LIst for guest
+   
+     * @return \Illuminate\Http\Response
+     */    public function guestPostIndex()
+     {
+        $posts = $this->postService->guestPostIndex();
         return view('post.index', compact('posts'));
     }
 

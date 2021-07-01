@@ -12,15 +12,35 @@ class PostDao implements PostDaoInterface
    * get Post LIst
    * @return PostList
    */
+  // public function index()
+  // {
+  //   if (auth()->check() && auth()->user()->type == 0) {
+  //     $posts = Post::orderBy('id', 'desc')->paginate(5);
+  //   } elseif (auth()->check() && auth()->user()->type == 1) {
+  //     $posts = Post::where('created_user_id', auth()->user()->id)->paginate(5);
+  //   } else {
+  //     $posts = Post::where('status', '=', 1)->paginate(5);
+  //   }
+  //   return $posts;
+  // }
   public function index()
   {
     if (auth()->check() && auth()->user()->type == 0) {
       $posts = Post::orderBy('id', 'desc')->paginate(5);
-    } elseif (auth()->check() && auth()->user()->type == 1) {
-      $posts = Post::where('created_user_id', auth()->user()->id)->paginate(5);
     } else {
-      $posts = Post::where('status', '=', 1)->paginate(5);
+      $posts = Post::where('created_user_id', auth()->user()->id)->paginate(5);
     }
+    return $posts;
+  }
+  /**
+   * get Post LIst for guest
+   * @return PostList
+   */
+  public function guestPostIndex()
+  {
+    
+      $posts = Post::where('status', '=', 1)->paginate(5);
+    
     return $posts;
   }
 

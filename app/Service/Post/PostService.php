@@ -30,6 +30,17 @@ class postService implements PostServiceInterface
     {
         return $this->postDao->index();
     }
+    
+    /**
+     * Display post list for guest
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function guestPostIndex()
+    {
+        return $this->postDao->guestPostIndex();
+    }
 
     /**
      * store collect data

@@ -18,6 +18,7 @@ use App\Http\Controllers\ChangePasswordController;
 
 
 Route::get('/', [PostController::class, 'index']);
+Route::get('/', [PostController::class, 'guestPostIndex']);
 Route::resource('/posts','App\Http\Controllers\PostController');
 Route::get('posts/create/collectdataform', [PostController::class, 'collectDataForm']);
 Route::post('posts/store/collectdata', [PostController::class, 'storeCollectData']);
