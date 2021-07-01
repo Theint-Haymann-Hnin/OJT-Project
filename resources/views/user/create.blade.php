@@ -27,7 +27,7 @@
                                 name="name"
                                 id="name"
                                 value="{{  
-                                isset( request()->session()->get('user')['name']) ?  request()->session()->get('user')['name'] : ''
+                                isset( request()->session()->get('user')['name']) ?  request()->session()->get('user')['name'] : old('name')
                              }}"
                             />
                             @error('name')
@@ -50,7 +50,7 @@
                                 id="exampleFormControlInput1"
                                 placeholder="Enter your email address"
                                 value="{{
-                                isset( request()->session()->get('user')['email']) ?  request()->session()->get('user')['email'] : ''
+                                isset( request()->session()->get('user')['email']) ?  request()->session()->get('user')['email'] : old('email')
                              }}"
                             />
                             @error('email')
@@ -65,7 +65,7 @@
                                 class="form-control @error('password') is-invalid @enderror"
                                 placeholder="Password"
                                 value="{{
-                                isset( request()->session()->get('user')['password']) ? request()->session()->get('user')['password'] : ''
+                                isset( request()->session()->get('user')['password']) ? request()->session()->get('user')['password'] : old('password')
                              }}"
                             />
                         </div>
@@ -84,7 +84,7 @@
                                 "
                                 placeholder="Password"
                                 value="{{
-                                isset( request()->session()->get('user')['password_confirmation']) ?  request()->session()->get('user')['password_confirmation'] : ''
+                                isset( request()->session()->get('user')['password_confirmation']) ?  request()->session()->get('user')['password_confirmation'] : old('password_confirmation')
                              }}"
                             />
                         </div>
@@ -118,7 +118,7 @@
                                 name="phone"
                                 id="phone"
                                 value="{{
-                                isset( request()->session()->get('user')['phone']) ?  request()->session()->get('user')['phone'] : ''
+                                isset( request()->session()->get('user')['phone']) ?  request()->session()->get('user')['phone'] : old('phone')
                              }}"
                             />
                         </div>
@@ -136,7 +136,7 @@
                                 name="dob"
                                 id="dob"
                                 value="{{
-                                isset( request()->session()->get('user')['dob']) ?  request()->session()->get('user')['dob'] : ''
+                                isset( request()->session()->get('user')['dob']) ?  request()->session()->get('user')['dob'] : old('dob')
                              }}"
                             />
                             @error('dob')
@@ -156,7 +156,7 @@
                                 name="address"
                                 id="address"
                                 value="{{
-                                isset( request()->session()->get('user')['address']) ?  request()->session()->get('user')['address'] : ''
+                                isset( request()->session()->get('user')['address']) ?  request()->session()->get('user')['address'] : old('address')
                              }}"
                             />
                             @error('address')

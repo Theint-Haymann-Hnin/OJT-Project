@@ -14,26 +14,27 @@
     <div class="row">
         <div class="col-md-6">
             <form
-                action="{{ url('/search_posts') }}"
-                class="form-inline my-2 my-lg-0"
-                method="GET"
+            action="{{ url('/search_posts') }}"
+            class="form-inline my-2 my-lg-0"
+            method="GET"
+        >
+            @csrf
+            
+            <input
+                class="form-control mr-sm-2"
+                name="search_data"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                style="width: 400px"
+            />
+            <button
+                class="btn btn-outline-success my-2 my-sm-0"
+                type="submit"
             >
-                @csrf
-                <input
-                    class="form-control mr-sm-2"
-                    name="search_data"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                    style="width: 400px"
-                />
-                <button
-                    class="btn btn-outline-success my-2 my-sm-0"
-                    type="submit"
-                >
-                    <i class="fas fa-search mr-2"></i>Search
-                </button>
-            </form>
+                <i class="fas fa-search mr-2"></i>Search
+            </button>
+        </form>
         </div>
         @if(Auth::check())
         <div class="col-md-2">
@@ -52,7 +53,7 @@
         </div>
         @endif
         <div class="col-md-2">
-            <a href="{{ route('exportExcel', 'csv') }}" class="btn btn-info btn-lg btn-block">
+            <a href="{{ route('exportExcel', 'xlsx') }}" class="btn btn-info btn-lg btn-block">
                 <i class="fas fa-download"></i> Download
             </a>
         </div>
@@ -61,10 +62,10 @@
         <div class="col-md-12">
             <table class="table table-bordered table-hover">
                 <thead>
-                    <th>Post Title</th>
-                    <th>Post Description</th>
-                    <th>Posted User</th>
-                    <th>Posted Date</th>
+                    <th class="text-center">Post Title</th>
+                    <th class="text-center">Post Description</th>
+                    <th class="text-center">Posted User</th>
+                    <th class="text-center">Posted Date</th>
                      @if(Auth::check())
                     <th>Action</th>
                     @endif
@@ -177,13 +178,12 @@
             var post_created_at = response.created_at;
             var post_created_user_id = response.created_user_id;
             var post_updated_at = response.updated_at;
-            var post_updated_user_id = response.updated_user_id;
              if(post_status == 0){
                 var status = 'Inactive';
             }else{
                 var status='Active';
             }
-            $('#displayArea').append("<tr><th>Title</th><td>" + post_title + "</td></tr><tr><th>Description</th><td>"+post_description+"</td></tr><tr><th>Status</th><td>"+status+"</td></tr><tr><th>Created at</th><td>"+post_created_at+"</td></tr><tr><th>Created User</th><td>"+ post_created_user_id+"</td></tr><tr><th>Updated at</th><td>"+post_updated_at+"</td></tr><tr><th>Updated User</th><td>"+post_updated_user_id+"</td></tr>");
+            $('#displayArea').append("<tr><th>Title</th><td>" + post_title + "</td></tr><tr><th>Description</th><td>"+post_description+"</td></tr><tr><th>Status</th><td>"+status+"</td></tr><tr><th>Created at</th><td>"+post_created_at+"</td></tr><tr><th>Created User</th><td>"+ post_created_user_id+"</td></tr><tr><th>Updated at</th><td>"+post_updated_at+"</td></tr>");
         });
         }
         $('#exampleModalCenter').on('hidden.bs.modal', function () {

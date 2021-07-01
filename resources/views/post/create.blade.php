@@ -22,7 +22,7 @@
                                 placeholder="Enter your title"
                                 name="title"
                                 id="title"
-                                value="{{isset( request()->session()->get('post')['title']) ?  request()->session()->get('post')['title'] : ''
+                                value="{{isset( request()->session()->get('post')['title']) ?  request()->session()->get('post')['title'] : old('title')
                             }}"
                             />
                             @error('title')
@@ -42,7 +42,7 @@
                                     @enderror
                                 "
                                 placeholder="Enter Description"
-                                >{{isset( request()->session()->get('post')['description']) ?  request()->session()->get('post')['description'] : ''
+                                >{{isset( request()->session()->get('post')['description']) ?  request()->session()->get('post')['description'] : old('description')
                                 }}</textarea
                             >
                             @error('description')

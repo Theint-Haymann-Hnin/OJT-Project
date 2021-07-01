@@ -46,7 +46,8 @@ class UserDao implements UserDaoInterface
      * @return User $user
      */
     public function updateUser($user_data_to_update, $id)
-    {
+    {   
+        $user_data_to_update['updated_user_id'] = auth()->user()->id;
         User::find($id)->update($user_data_to_update);
     }
 

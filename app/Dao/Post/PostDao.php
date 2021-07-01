@@ -57,6 +57,7 @@ class PostDao implements PostDaoInterface
     } else {
       $post_data_to_update['status'] = 0;
     }
+    $post_data_to_update['updated_user_id'] = auth()->user()->id;
     Post::find($id)->update($post_data_to_update);
     request()->session()->forget('post');
   }
@@ -77,7 +78,8 @@ class PostDao implements PostDaoInterface
    * @return Post $post
    */
   public function search($searchData)
-  {
+  {  
+    
     $posts = Post::where('title', 'like', "%" . $searchData . "%")->orWhere('description', 'like', "%" . $searchData . "%")->orWhereHas('user', function ($user) use ($searchData) {
       $user->where('name', 'like', "%" . $searchData . "%");
     })->paginate(5);

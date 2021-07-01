@@ -27,8 +27,6 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        // return \App\Models\User::where('email',$input['email'])
-        // ->where('password',$input[])->get();
        
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {

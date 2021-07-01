@@ -8,6 +8,7 @@ use App\Contract\Service\Post\PostServiceInterface;
 use App\Exports\TransactionsExport;
 use App\Imports\TransactionsImport;
 
+
 class PostController extends Controller
 {
     /** $postService*/  
@@ -171,7 +172,7 @@ class PostController extends Controller
     {
         return request()->validate([
             'title' => "required|min:3|max:255|unique:posts,title," . $id,
-            'description' => 'required| min:5',
+            'description' => 'required| min:5|max:255',
             'status' => 'nullable'
         ]);
     }
@@ -180,8 +181,8 @@ class PostController extends Controller
      * @return \Illuminate\Support\Collection
      */
     public function exportExcel($type)
-    {
-        return \Excel::download(new TransactionsExport, 'posts.' . $type);
+    {   
+        return \Excel::download(new TransactionsExport, 'posts.xlsx');
     }
 
     /**
