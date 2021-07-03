@@ -26,9 +26,9 @@ class userService implements UserServiceInterface
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function getUserList()
     {
-        return $this->userDao->index();
+        return $this->userDao->getUserList();
     }
 
     /**
@@ -83,5 +83,16 @@ class userService implements UserServiceInterface
     public function search($name, $email, $start_date, $end_date)
     {
         return  $this->userDao->search($name, $email, $start_date, $end_date);
+    }
+
+    /**
+     * show user detail 
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function userProfile($id)
+    {   
+        return $users = $this->userDao->userProfile($id);;
     }
 }

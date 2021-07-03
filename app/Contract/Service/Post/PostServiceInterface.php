@@ -1,10 +1,17 @@
-<?php 
+<?php
+
 namespace App\Contract\Service\Post;
 
-interface PostServiceInterface 
+interface PostServiceInterface
 {
-    public function index();
+    // get post list
+    public function  getPostList();
+    //post list for guest
+    public function guestPost();
+    //store post
     public function storeCollectData($data);
-    public function  updatePost($post_data_to_update, $id);
+    //update post
+    public function updatePost($post_data_to_update, $id);
+    //delete post
     public function delete($id);
 }

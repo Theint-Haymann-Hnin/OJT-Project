@@ -7,7 +7,10 @@ use App\Models\User;
 use App\Contract\Service\User\UserServiceInterface;
 use File;
 
-
+/**
+ * User Controler , CRUD for Users
+ * @author Theint Haymann Hnin
+ */
 class UserController extends Controller
 {
     /** $userService*/
@@ -19,8 +22,7 @@ class UserController extends Controller
      */
     public function __construct(UserServiceInterface $user_service_interface)
     {
-       
-        $this->middleware('isadmin')->only('index');
+        $this->middleware(['isadmin','revalidate'])->only('index');
         $this->userService = $user_service_interface;
     }
 
@@ -31,8 +33,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->userService->index();
-        return view('user.index', compact('users'));
+        $users = $this->userService->getUserList();
+        $name = "";
+        $email = "";
+        $start_date = "";
+        $end_date ="";
+        return view('user.index', compact('users','name','email','start_date','end_date'));
     }
 
     /**
@@ -67,9 +73,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function collectDataForm(Request $request)
+    public function collectDataForm()
     {
-
         return view('user.create-user-confirm');
     }
 
@@ -80,8 +85,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function storeCollectData(Request $request)
-    {   
-        
+    {
+
         $this->userService->storeCollectData($request->all());
         return redirect('/users')->with('successAlert', 'You have successfully created');
     }
@@ -144,7 +149,6 @@ class UserController extends Controller
      */
     public function  updateUser(Request $request, $id)
     {
-
         $this->userService->updateUser($request->all(), $id);
         return redirect('/users')->with('successAlert', 'You have successfully updated');
     }
@@ -168,8 +172,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function userProfile($id)
-    {
-        $user = User::find($id);
+    {   
+        $user = $this->userService->userProfile($id);
         return view('user.userprofile', compact('user'));
     }
 
@@ -177,13 +181,16 @@ class UserController extends Controller
      * searching user
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return $posts
+     * @return \Illuminate\Http\Response
      */
     public function search(Request $request)
-    {
-        $users = $this->userService->search($request->name, $request->email, $request->start_date, $request->end_date);
-
-        return view('user.index', compact('users'));
+    {   
+        $name = $request->name;
+        $email = $request->email;
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $users = $this->userService->search($name, $email, $start_date, $end_date);
+        return view('user.index', compact('users','name','email','start_date','end_date'));
     }
 
     /**
@@ -204,6 +211,6 @@ class UserController extends Controller
             'dob' => 'nullable',
             'profile' => $rule,
         ]);
-       
     }
 }
+

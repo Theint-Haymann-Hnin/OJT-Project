@@ -26,9 +26,9 @@ class postService implements PostServiceInterface
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function  getPostList()
     {
-        return $this->postDao->index();
+        return $this->postDao-> getPostList();
     }
     
     /**
@@ -37,9 +37,9 @@ class postService implements PostServiceInterface
      * @return \Illuminate\Http\Response
      */
 
-    public function guestPostIndex()
+    public function guestPost()
     {
-        return $this->postDao->guestPostIndex();
+        return $this->postDao->guestPost();
     }
 
     /**

@@ -7,136 +7,84 @@
                     <h1 class="title">Update User Screen</h1>
                 </div>
                 <div class="card-body">
-                 <form
-                        action="{{ route('users.update', [$user->id]) }}"
-                        method="post"
-                        enctype="multipart/form-data"
-                    >
-                        @csrf @method('put') 
-                      
+                    <form action="{{ route('users.update', [$user->id]) }}" method="post" enctype="multipart/form-data">
+                        @csrf @method('put')
+
                         @if($user->profile)
-                                    <img src="{{asset('storage/profile-images/'.$user->profile)}}"  alt="{{$user->profile}}" style="width: 100px; height:100px">
-                                    @else    
-                                    <img src="{{ asset('images/default.png') }}" alt="" style="width: 100px; height:100px">  
-                                @endif 
+                        <img src="{{asset('storage/profile-images/'.$user->profile)}}" alt="{{$user->profile}}" style="width: 100px; height:100px">
+                        @else
+                        <img src="{{ asset('images/default.png') }}" alt="" style="width: 100px; height:100px">
+                        @endif
                         <div class="form-group mt-2">
                             <label for="name">Name</label>
-                            <input
-                                type="text"
-                                required
-                                class="
+                            <input type="text" required class="
                                     form-control
                                     @error('name')
                                     is-invalid
                                     @enderror
-                                "
-                                placeholder="Enter your name"
-                                name="name"
-                                id="name"
-                                value="{{ old('name') ?? $user->name}}"
-                            />
+                                " placeholder="Enter your name" name="name" id="name" value="{{ old('name') ?? $user->name}}" />
                             @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1"
-                                >Email address</label
-                            >
-                            <input
-                                type="email"
-                                required
-                                name="email"
-                                class="
+                            <label for="exampleFormControlInput1">Email address</label>
+                            <input type="email" required name="email" class="
                                     form-control
                                     @error('email')
                                     is-invalid
                                     @enderror
-                                "
-                                id="exampleFormControlInput1"
-                                placeholder="name@example.com"
-                                value="{{ old('email') ?? $user->email }}"
-                            />
+                                " id="exampleFormControlInput1" placeholder="name@example.com" value="{{ old('email') ?? $user->email }}" />
                             @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="type">Type</label>
-                            <select
-                                class="form-control"
-                                id="type"
-                                name="type"
-                            >
+                            <select class="form-control" id="type" name="type">
                                 <option>Select Type</option>
-                                <option value="0"
-                                @if($user->type == 0 )
-                                selected
-                                @endif
-                                >Admin</option>
-                                <option value="1"
-                                @if($user->type == 1 )
-                                selected
-                                @endif
-                                >User</option>
+                                <option value="0" @if($user->type == 0 )
+                                    selected
+                                    @endif
+                                    >Admin</option>
+                                <option value="1" @if($user->type == 1 )
+                                    selected
+                                    @endif
+                                    >User</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input
-                                type="text"
-                                required
-                                class="
+                            <input type="text" required class="
                                     form-control
                                     @error('phone')
                                     is-invalid
                                     @enderror
-                                "
-                                placeholder="Enter your phone number"
-                                name="phone"
-                                id="phone"
-                                value="{{ old('phone') ?? $user->phone}}"
-                            />
+                                " placeholder="Enter your phone number" name="phone" id="phone" value="{{ old('phone') ?? $user->phone}}" />
                             @error('phone')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="dob">Date Of Birth</label>
-                            <input
-                                type="date"
-                                required
-                                class="
+                            <input type="date" required class="
                                     form-control
                                     @error('dob')
                                     is-invalid
                                     @enderror
-                                "
-                                placeholder="Enter date of birth"
-                                name="dob"
-                                id="dob"
-                                value="{{ old('dob') ?? $user->dob }}"
-                            />
+                                " placeholder="Enter date of birth" name="dob" id="dob" value="{{ old('dob') ?? $user->dob }}" />
                             @error('dob')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <input
-                                type="text"
-                                required
-                                class="
+                            <input type="text" required class="
                                     form-control
                                     @error('address')
                                     is-invalid
                                     @enderror
-                                "
-                                placeholder="Enter your address"
-                                name="address"
-                                id="address"
-                                value="{{ old('address') ?? $user->address}}"
-                            />
+                                " placeholder="Enter your address" name="address" id="address" value="{{ old('address') ?? $user->address}}" />
                             @error('address')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -144,20 +92,18 @@
                         <div class="form-group">
                             <label for="update_photo" class="btn btn-outline-dark update_photo">Profile</label>
                             <input type="file" name="profile" id="update_photo" class="" accept="image/png, image/jpg, image/jpeg" onchange="displaySelectedPhoto('update_photo','image')" style="width:0; height:0; overflow:hidden">
-                                @if($user->profile)
-                                    <img src="{{asset('storage/profile-images/'.$user->profile)}}" id="image" alt="{{$user->profile}}" class="imagePreview img-thumbnail" style="width: 100px; height:100px">
-                                    @else    
-                                    <img src="{{ asset('images/default.png') }}" alt="" id="image" class="imagePreview img-thumbnail" style="width: 100px; height:100px">  
-                                @endif
+                            @if($user->profile)
+                            <img src="{{asset('storage/profile-images/'.$user->profile)}}" id="image" alt="{{$user->profile}}" class="imagePreview img-thumbnail" style="width: 100px; height:100px">
+                            @else
+                            <img src="{{ asset('images/default.png') }}" alt="" id="image" class="imagePreview img-thumbnail" style="width: 100px; height:100px">
+                            @endif
                             @error('profile')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                       <div class="mt-2 mb-2"><a href="{{url('/change-password')}}" class="changepwd"
-                        >Change Password</a
-                    ></div>
+                        <div class="mt-2 mb-2"><a href="{{url('/change-password')}}" class="changepwd">Change Password</a></div>
                         <button class="btn btn-primary mr-3">Confirm</button>
-                        <button type="reset" class="btn btn-outline-success">
+                        <button type="button" class="btn btn-outline-success" onclick="clearInputs()">
                             Clear
                         </button>
                     </form>
@@ -167,5 +113,3 @@
     </div>
 </div>
 @endsection
-
-

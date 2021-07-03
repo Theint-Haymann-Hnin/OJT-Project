@@ -4,7 +4,6 @@ namespace App\Dao\Post;
 
 use App\Models\Post;
 use App\Contract\Dao\Post\PostDaoInterface;
-use Auth;
 
 class PostDao implements PostDaoInterface
 {
@@ -12,18 +11,7 @@ class PostDao implements PostDaoInterface
    * get Post LIst
    * @return PostList
    */
-  // public function index()
-  // {
-  //   if (auth()->check() && auth()->user()->type == 0) {
-  //     $posts = Post::orderBy('id', 'desc')->paginate(5);
-  //   } elseif (auth()->check() && auth()->user()->type == 1) {
-  //     $posts = Post::where('created_user_id', auth()->user()->id)->paginate(5);
-  //   } else {
-  //     $posts = Post::where('status', '=', 1)->paginate(5);
-  //   }
-  //   return $posts;
-  // }
-  public function index()
+  public function  getPostList()
   {
     if (auth()->check() && auth()->user()->type == 0) {
       $posts = Post::orderBy('id', 'desc')->paginate(5);
@@ -32,15 +20,14 @@ class PostDao implements PostDaoInterface
     }
     return $posts;
   }
+
   /**
    * get Post LIst for guest
    * @return PostList
    */
-  public function guestPostIndex()
+  public function guestPost()
   {
-    
-      $posts = Post::where('status', '=', 1)->paginate(5);
-    
+    $posts = Post::where('status', '=', 1)->paginate(5);
     return $posts;
   }
 
@@ -62,12 +49,12 @@ class PostDao implements PostDaoInterface
    */
   public function findPostById($id)
   {
-    return $post = Post::find($id);
+    return Post::find($id);
   }
 
   /**
    * updatePost
-   * @param $id ,$post_data_to_update
+   * @param $post_data_to_update, $id
    * @return Post $post
    */
   public function updatePost($post_data_to_update, $id)
@@ -98,8 +85,8 @@ class PostDao implements PostDaoInterface
    * @return Post $post
    */
   public function search($searchData)
-  {  
-    
+  {
+
     $posts = Post::where('title', 'like', "%" . $searchData . "%")->orWhere('description', 'like', "%" . $searchData . "%")->orWhereHas('user', function ($user) use ($searchData) {
       $user->where('name', 'like', "%" . $searchData . "%");
     })->paginate(5);

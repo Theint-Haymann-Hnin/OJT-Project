@@ -5,9 +5,9 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{url('users/'.$user->id.'/edit')}}"><button class="btn btn-dark profile-edit-btn float-right mt-3">
-                        <i class="fa fa-edit"></i> Edit
-                    </button></a>
-                    <img src="{{asset('storage/profile-images/'.$user->profile)}}" alt="profile-img" style = "width: 100px; height:100px;">
+                            <i class="fa fa-edit"></i> Edit
+                        </button></a>
+                    <img src="{{asset('storage/profile-images/'.$user->profile)}}" alt="profile-img" style="width: 100px; height:100px;">
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-hover">
@@ -23,11 +23,12 @@
                         </tr>
                         <tr>
                             <th>Type</th>
-                            <td>@if($user->type == 0)         
-                                Admin        
-                           @else
-                                User    
-                           @endif</td>
+                            <td>@if($user->type == 0)
+                                Admin
+                                @else
+                                User
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <th>Phone</th>

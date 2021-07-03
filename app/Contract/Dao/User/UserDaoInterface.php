@@ -1,12 +1,18 @@
-<?php 
+<?php
+
 namespace App\Contract\Dao\User;
 
-interface UserDaoInterface 
+interface UserDaoInterface
 {
-    public function index();
+    // get user list
+    public function getUserList();
+    //store user
     public function storeCollectData($data);
-    public function delete($id);
+    //update user
     public function updateUser($user_data_to_update, $id);
-    public function search($name, $email,$start_date , $end_date);
-   
+    //delete post
+    public function delete($id);
+    //search user
+    public function search($name, $email, $start_date, $end_date);
 }
+

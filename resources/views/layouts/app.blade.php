@@ -12,6 +12,7 @@
             crossorigin="anonymous"
         />
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <!-- <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
         <link
@@ -151,23 +152,25 @@
             integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
             crossorigin="anonymous"
         ></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
+
         <script>
-            function displaySelectedPhoto(selectedfile_id, img_id) {
-                var fileSelected =
-                    document.getElementById(selectedfile_id).files;
-                var image_ui = document.getElementById(img_id);
-                if (fileSelected.length > 0) {
-                    var fileToLoad = fileSelected[0];
-                    if (fileToLoad.type.match("image.*")) {
-                        var fileReader = new FileReader();
-                        fileReader.onload = function (fileLoadedEvent) {
-                            image_ui.src = fileLoadedEvent.target.result;
-                        };
-                        fileReader.readAsDataURL(fileToLoad);
-                    }
-                }
-            }
+            // function displaySelectedPhoto(selectedfile_id, img_id) {
+            //     var fileSelected =
+            //         document.getElementById(selectedfile_id).files;
+            //     var image_ui = document.getElementById(img_id);
+            //     if (fileSelected.length > 0) {
+            //         var fileToLoad = fileSelected[0];
+            //         if (fileToLoad.type.match("image.*")) {
+            //             var fileReader = new FileReader();
+            //             fileReader.onload = function (fileLoadedEvent) {
+            //                 image_ui.src = fileLoadedEvent.target.result;
+            //             };
+            //             fileReader.readAsDataURL(fileToLoad);
+            //         }
+            //     }
+            // }
         </script>
-        @yield('javascript')
+         @yield('javascript')
     </body>
 </html>

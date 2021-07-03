@@ -19,14 +19,13 @@
             method="GET"
         >
             @csrf
-            
             <input
                 class="form-control mr-sm-2"
                 name="search_data"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
-                style="width: 400px" 
+                style="width: 400px" value="{{$searchData}}"
             />
             <button
                 class="btn btn-outline-success my-2 my-sm-0"
@@ -77,13 +76,13 @@
                             <a
                                 class="ttl"
                                 data-toggle="modal"
-                                data-target="#exampleModalCenter"
+                                data-target="#mymodal"
                                 onclick="postDetail({{$post->id}})"
                             >
                                 {{$post->title}}
                             </a>
                         </td>
-                        <td>{{$post->description}}</td>
+                        <td>{{$post->description}}</td>  
                         <td>{{$post->user->name}}</td>
                         <td>{{date('d-m-Y', strtotime($post->created_at))}}</td>
                          @if(Auth::check())
@@ -93,7 +92,7 @@
                                 method="post"
                             >
                                 @csrf @method('delete')
-                                <a href="{{url('posts/'.$post->id.'/edit')}}" class="btn btn-success mb-2">
+                                <a href="{{url('posts/'.$post->id.'/edit')}}" class="btn btn-success">
                                         <i class="fa fa-edit"></i> Edit
                                     </button>
                                 </a>
@@ -116,10 +115,10 @@
             </div>
            <div
            class="modal fade"
-           id="exampleModalCenter"
+           id="mymodal"
            tabindex="-1"
            role="dialog"
-           aria-labelledby="exampleModalCenterTitle"
+           aria-labelledby="myModalTitle"
            aria-hidden="true"
        >
            <div class="modal-dialog modal-dialog-centered" role="document">
@@ -167,34 +166,6 @@
     </div>
 </div>
 @endsection
-@section('javascript')
-    <script>
-       function postDetail(id){
-           var post_id = id;
-        $.get("api/post/"+post_id, function( response ) {
-            var post_title = response.title;
-            var post_description = response.description;
-            var post_status = response.status;
-            var post_created_at =  moment(response.post_created_at).format('DD-MM-YYYY');
-            var post_created_user_id = response.created_user_id;
-            var post_updated_at = moment(response.post_updated_at).format('DD-MM-YYYY');
-             if(post_status == 0){
-                var status = 'Inactive';
-            }else{
-                var status='Active';
-            }
-            $.get("api/user/"+post_created_user_id, function(data) {
-                var user_name = data.name;
-
-                $('#displayArea').append("<tr><th>Title</th><td>" + post_title + "</td></tr><tr><th>Description</th><td>"+post_description+"</td></tr><tr><th>Status</th><td>"+status+"</td></tr><tr><th>Created at</th><td>"+ post_created_at+"</td></tr><tr><th>Created User</th><td>"+ user_name+"</td></tr><tr><th>Updated at</th><td>"+post_updated_at+"</td></tr>");
-            });
-
-           
-        });
-        }
-        $('#exampleModalCenter').on('hidden.bs.modal', function () {
-            window.location.reload(true)
-        })
-    </script>
-@endsection
+ 
+   
 

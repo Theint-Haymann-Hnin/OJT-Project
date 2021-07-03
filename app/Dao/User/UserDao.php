@@ -5,7 +5,6 @@ namespace App\Dao\User;
 use App\Models\User;
 use App\Contract\Dao\User\UserDaoInterface;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
 
 class UserDao implements UserDaoInterface
 {
@@ -13,7 +12,7 @@ class UserDao implements UserDaoInterface
      * get User List
      * @return UserList
      */
-    public function index()
+    public function getUserList()
     {
         return User::orderBy('id', 'desc')->paginate(10);
     }
@@ -25,7 +24,7 @@ class UserDao implements UserDaoInterface
      */
     public function findUserById($id)
     {
-        return $user = User::find($id);
+        return User::find($id);
     }
 
     /**
@@ -33,7 +32,7 @@ class UserDao implements UserDaoInterface
      * @param $data
      */
     public function storeCollectData($data)
-    {   
+    {
         $data['created_user_id'] = auth()->user()->id;
         $data['password'] = Hash::make($data['password']);
         User::create($data);
@@ -46,7 +45,7 @@ class UserDao implements UserDaoInterface
      * @return User $user
      */
     public function updateUser($user_data_to_update, $id)
-    {   
+    {
         $user_data_to_update['updated_user_id'] = auth()->user()->id;
         User::find($id)->update($user_data_to_update);
     }
@@ -67,20 +66,28 @@ class UserDao implements UserDaoInterface
      * @return User $user
      */
     public function search($name, $email, $start_date, $end_date)
+    {   
+        if($name == null && $email == null && $start_date == null && $end_date == null) {
+            return $this->getUserList();
+        }
+       if (isset($name) && !empty($name)) {
+            $users = User::where('name', 'like', '%' . $name . '%')->paginate(5)->withQueryString();
+        } elseif (isset($email) && !empty($email)) {
+            $users = User::where('email', 'like', '%' . $email . '%')->paginate(5)->withQueryString();
+        } elseif ($start_date && $end_date) {
+            $users = User::whereDate('created_at', '>=', $start_date)->whereDate('created_at', '<=', $end_date)->paginate(5)->withQueryString();
+        }
+        return $users;
+    }
+
+    /**
+     * show user detail 
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function userProfile($id)
     {
-        $user = User::leftJoin('users as u', 'u.id', '=', 'users.created_user_id');
-        if (isset($name) && !empty($name)) {
-            $user = $user->where('users.name', 'like', '%' . $name . '%');
-        }
-        if (isset($email) && !empty($email)) {
-            $user = $user->where('users.email', 'like', '%' . $email . '%');
-        }
-        if (isset($start_date) && !empty($start_date)) {
-            $user = $user->where('users.created_at', '>=', $start_date);
-        }
-        if (isset($end_date) && !empty($end_date)) {
-            $user = $user->where('users.created_at', '<=', $end_date);
-        }
-        return $user->paginate(10, array('users.*', 'u.name as c_name'));
+        return  User::find($id);
     }
 }

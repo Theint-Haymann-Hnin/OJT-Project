@@ -8,11 +8,11 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class TransactionsExport implements FromCollection, ShouldAutoSize , WithHeadings, WithMapping
+class TransactionsExport implements FromCollection, ShouldAutoSize, WithHeadings, WithMapping
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return Post::all();
@@ -28,13 +28,11 @@ class TransactionsExport implements FromCollection, ShouldAutoSize , WithHeading
     }
 
     public function map($post): array
-    {   
+    {
         return [
             $post->title,
             $post->description,
-            $post->user->name ,
+            $post->user->name,
         ];
     }
-    
 }
-

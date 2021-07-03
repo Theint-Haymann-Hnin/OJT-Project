@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    
+
     use AuthenticatesUsers;
 
-    
+
     protected $redirectTo = '/posts';
 
     public function __construct()
@@ -20,32 +20,21 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
     public function login(Request $request)
-    {   
+    {
         $input = $request->all();
-   
+
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
         ]);
-       
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
-            if(auth()->check()){
+
+        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
+            if (auth()->check()) {
                 return redirect('posts');
-            } 
-           
+            }
         } else {
             return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
-}
+                ->with('error', 'Email-Address And Password Are Wrong.');
+        }
     }
-
-//     public function logout(Request $request)
-//    {
-//     $this->guard()->logout();
-
-//     $request->session()->invalidate();
-
-//     return $this->loggedOut($request) ?: redirect('/');
-//    }
 }
