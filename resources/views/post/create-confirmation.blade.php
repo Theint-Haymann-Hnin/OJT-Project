@@ -7,57 +7,32 @@
                     <h1 class="title">Create Post Confirmation</h1>
                 </div>
                 <div class="card-body">
-                    <form
-                        action="{{ url('/posts/store/collectdata') }}"
-                        method="post">
+                    <form action="{{ url('/posts/store/collectdata') }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group input-group">
-                            <label for="title" class="col-sm-2"
-                                >Title</label
-                            >
-                            <label for="title" class="col-sm-8"
-                                >:
-                                {{ request()->session()->get('post')['title'] }}</label
-                            >
-                            <input
-                                type="hidden"
-                                required
-                                class="
+                            <label for="title" class="col-sm-2">Title</label>
+                            <label for="title" class="col-sm-8">:
+                                {{ request()->session()->get('post')['title'] }}</label>
+                            <input type="hidden" required class="
                                     form-control
                                     @error('title')
                                     is-invalid
-                                    @enderror"
-                                placeholder="Enter your title"
-                                name="title"
-                                id="title"
-                                value="{{ request()->session()->get('post')['title'] }}"
-                            />
+                                    @enderror" placeholder="Enter your title" name="title" id="title" value="{{ request()->session()->get('post')['title'] }}" />
                             @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group input-group">
-                            <label for="description" class="col-sm-2"
-                                >Description</label
-                            >
-                            <label for="description" class="col-sm-8"
-                                >:
+                            <label for="description" class="col-sm-2">Description</label>
+                            <label for="description" class="col-sm-8">:
                                 {{ request()->session()->get('post')['description'] }}
                             </label>
-                            <textarea
-                                name="description"
-                                id="description"
-                                rows="5"
-                                class="
+                            <textarea name="description" id="description" rows="5" class="
                                     form-control
                                     @error('description')
                                     is-invalid
-                                    @enderror"
-                                style="display: none"
-                                placeholder="Enter Description"
-                            >
-                             {{ request()->session()->get('post')['description'] }}</textarea
-                            >
+                                    @enderror" style="display: none" placeholder="Enter Description">
+                            {{ request()->session()->get('post')['description'] }}</textarea>
                             @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

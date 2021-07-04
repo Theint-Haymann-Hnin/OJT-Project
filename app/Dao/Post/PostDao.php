@@ -8,10 +8,10 @@ use App\Contract\Dao\Post\PostDaoInterface;
 class PostDao implements PostDaoInterface
 {
   /**
-   * get Post LIst
+   * get Post List
    * @return PostList
    */
-  public function  getPostList()
+  public function getPostList()
   {
     if (auth()->check() && auth()->user()->type == 0) {
       $posts = Post::orderBy('id', 'desc')->paginate(5);
@@ -22,13 +22,12 @@ class PostDao implements PostDaoInterface
   }
 
   /**
-   * get Post LIst for guest
+   * get Post List for guest
    * @return PostList
    */
   public function guestPost()
   {
-    $posts = Post::where('status', '=', 1)->paginate(5);
-    return $posts;
+    return Post::where('status', '=', 1)->paginate(5);
   }
 
   /**
@@ -72,7 +71,6 @@ class PostDao implements PostDaoInterface
   /**
    * delete post
    * @param $id 
-   * @return Post $post
    */
   public function delete($id)
   {
@@ -82,14 +80,12 @@ class PostDao implements PostDaoInterface
   /**
    * search post by title and description
    * @param $searchData
-   * @return Post $post
+   * @return Post $posts
    */
   public function search($searchData)
   {
-
-    $posts = Post::where('title', 'like', "%" . $searchData . "%")->orWhere('description', 'like', "%" . $searchData . "%")->orWhereHas('user', function ($user) use ($searchData) {
+    return Post::where('title', 'like', "%" . $searchData . "%")->orWhere('description', 'like', "%" . $searchData . "%")->orWhereHas('user', function ($user) use ($searchData) {
       $user->where('name', 'like', "%" . $searchData . "%");
     })->paginate(5);
-    return $posts;
   }
 }

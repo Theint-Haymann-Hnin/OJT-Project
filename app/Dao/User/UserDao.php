@@ -61,16 +61,16 @@ class UserDao implements UserDaoInterface
     }
 
     /**
-     * search user by name , email, created from and created to
+     * search user by name, email, created from and created to
      * @param $name, $email, $start_date, $end_date
      * @return User $user
      */
     public function search($name, $email, $start_date, $end_date)
     {   
-        if($name == null && $email == null && $start_date == null && $end_date == null) {
+        if ($name == null && $email == null && $start_date == null && $end_date == null) {
             return $this->getUserList();
         }
-       if (isset($name) && !empty($name)) {
+        if (isset($name) && !empty($name)) {
             $users = User::where('name', 'like', '%' . $name . '%')->paginate(5)->withQueryString();
         } elseif (isset($email) && !empty($email)) {
             $users = User::where('email', 'like', '%' . $email . '%')->paginate(5)->withQueryString();
@@ -83,11 +83,11 @@ class UserDao implements UserDaoInterface
     /**
      * show user detail 
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function userProfile($id)
     {
-        return  User::find($id);
+        return User::find($id);
     }
 }

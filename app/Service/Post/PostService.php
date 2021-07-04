@@ -7,14 +7,13 @@ use App\Contract\Service\Post\PostServiceInterface;
 
 class postService implements PostServiceInterface
 {
-    /** $postDao*/
+    /** $postDao */
     private $postDao;
 
     /**
      * construct
      * @param PostDao $post_dao
      */
-
     public function __construct(PostDao $post_dao)
     {
         $this->postDao = $post_dao;
@@ -25,7 +24,6 @@ class postService implements PostServiceInterface
      *
      * @return \Illuminate\Http\Response
      */
-
     public function  getPostList()
     {
         return $this->postDao-> getPostList();
@@ -36,7 +34,6 @@ class postService implements PostServiceInterface
      *
      * @return \Illuminate\Http\Response
      */
-
     public function guestPost()
     {
         return $this->postDao->guestPost();
@@ -46,7 +43,6 @@ class postService implements PostServiceInterface
      * store collect data
      * @param $data
      */
-
     public function storeCollectData($data)
     {
         $this->postDao->storeCollectData($data);
@@ -57,10 +53,9 @@ class postService implements PostServiceInterface
      * @param $id
      * @return Post $post
      */
-
     public function findPostById($id)
     {
-        return $posts = $this->postDao->findPostById($id);
+        return $this->postDao->findPostById($id);
     }
 
     /**
@@ -68,7 +63,6 @@ class postService implements PostServiceInterface
      * @param $id ,$post_data_to_update
      * @return Post $post
      */
-
     public function  updatePost($post_data_to_update, $id)
     {
         $this->postDao->updatePost($post_data_to_update, $id);
@@ -79,7 +73,6 @@ class postService implements PostServiceInterface
      * @param $id 
      * @return Post $post
      */
-
     public function delete($id)
     {
         $this->postDao->delete($id);
@@ -90,10 +83,8 @@ class postService implements PostServiceInterface
      * @param $searchData
      * @return Post $post
      */
-
     public function search($searchData)
     {
-        $posts = $this->postDao->search($searchData);
-        return $posts;
+        return $this->postDao->search($searchData);
     }
 }

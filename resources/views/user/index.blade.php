@@ -19,9 +19,9 @@
         <div class="col-md-10">
             <form action="{{ url('/search_users') }}" class="form-inline my-2 my-lg-0" method="GET">
                 @csrf
-                <input class="form-control mr-sm-1" type="search" placeholder="Name" aria-label="Search" name="name" value="{{$name}}"/>
-                <input class="form-control mr-sm-1" type="search" placeholder="Email" aria-label="Search" name="email" value="{{$email}}"/>
-                <input class="form-control mr-sm-1" type="date" placeholder="Created From" aria-label="Search" name="start_date" value="{{$start_date}}"/>
+                <input class="form-control mr-sm-1" type="search" placeholder="Name" aria-label="Search" name="name" value="{{$name}}" />
+                <input class="form-control mr-sm-1" type="search" placeholder="Email" aria-label="Search" name="email" value="{{$email}}" />
+                <input class="form-control mr-sm-1" type="date" placeholder="Created From" aria-label="Search" name="start_date" value="{{$start_date}}" />
                 <input class="form-control mr-sm-1" type="date" placeholder="Created to" aria-label="Search" name="end_date" value="{{$end_date}}" />
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
                     <i class="fas fa-search mr-2"></i>Search

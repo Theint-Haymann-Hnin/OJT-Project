@@ -75,9 +75,6 @@ function userDetail(id) {
         $('#user_profile_id').attr('href', href);
     });
 }
-$('#mymodal').on('hidden.bs.modal', function () {
-    window.location.reload(true)
-})
 
 function clearInputs() {
     var myinputs = document.getElementsByClassName('form-control');

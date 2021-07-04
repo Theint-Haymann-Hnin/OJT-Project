@@ -11,40 +11,26 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input
-                                type="text"
-                                class="
+                            <input type="text" class="
                                     form-control
                                     @error('title')
                                     is-invalid
                                     @enderror
-                                "
-                                placeholder="Enter your title"
-                                name="title"
-                                id="title"
-                                value="{{isset( request()->session()->get('post')['title']) ?  request()->session()->get('post')['title'] : old('title')
-                            }}"
-                            />
+                                " placeholder="Enter your title" name="title" id="title" value="{{isset( request()->session()->get('post')['title']) ?  request()->session()->get('post')['title'] : old('title')
+                            }}" />
                             @error('title')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea
-                                name="description"
-                                id="description"
-                                rows="5"
-                                class="
+                            <textarea name="description" id="description" rows="5" class="
                                     form-control
                                     @error('description')
                                     is-invalid
                                     @enderror
-                                "
-                                placeholder="Enter Description"
-                                >{{isset( request()->session()->get('post')['description']) ?  request()->session()->get('post')['description'] : old('description')
-                                }}</textarea
-                            >
+                                " placeholder="Enter Description">{{isset( request()->session()->get('post')['description']) ?  request()->session()->get('post')['description'] : old('description')
+                                }}</textarea>
                             @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

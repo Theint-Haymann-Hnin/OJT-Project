@@ -6,13 +6,12 @@ interface UserDaoInterface
 {
     // get user list
     public function getUserList();
-    //store user
+    // store user
     public function storeCollectData($data);
-    //update user
+    // update user
     public function updateUser($user_data_to_update, $id);
-    //delete post
+    // delete post
     public function delete($id);
-    //search user
+    // search user
     public function search($name, $email, $start_date, $end_date);
 }
-

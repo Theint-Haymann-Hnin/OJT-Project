@@ -9,7 +9,7 @@ use App\Imports\TransactionsImport;
 
 class PostController extends Controller
 {
-    /** $postService*/
+    /** $postService */
     private $postService;
 
     /**
@@ -18,7 +18,6 @@ class PostController extends Controller
      */
     public function __construct(PostServiceInterface $post_service_interface)
     {
-        // $this->middleware(['isadmin', 'revalidate'])->except('guestPost');
         $this->middleware(['auth', 'revalidate'])->except('guestPost');
         $this->postService = $post_service_interface;
     }
@@ -28,23 +27,22 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function  index()
+    public function index()
     {
         $posts = $this->postService->getPostList();
-        $searchData ="";
-        return view('post.index', compact('posts','searchData'));
+        $searchData = "";
+        return view('post.index', compact('posts', 'searchData'));
     }
 
     /**
      * get Post LIst for guest
-   
      * @return \Illuminate\Http\Response
      */
     public function guestPost()
     {
         $posts = $this->postService->guestPost();
-        $searchData ="";
-        return view('post.index', compact('posts','searchData'));
+        $searchData = "";
+        return view('post.index', compact('posts', 'searchData'));
     }
 
     /**
@@ -83,7 +81,7 @@ class PostController extends Controller
     /**
      * Store a newly created post in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function storeCollectData(Request $request)
@@ -95,7 +93,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the post.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -107,8 +105,8 @@ class PostController extends Controller
     /**
      * Show the post update form
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -133,11 +131,11 @@ class PostController extends Controller
     /**
      * Update the post 
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function  updatePost($id)
+    public function updatePost($id)
     {
         $post_update_data = $this->validatePost($id);
         $this->postService->updatePost($post_update_data, $id);
@@ -147,7 +145,7 @@ class PostController extends Controller
     /**
      * Remove the specified post from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Resp္onse
      */
     public function destroy($id)
@@ -168,14 +166,14 @@ class PostController extends Controller
     /**
      * searching post 
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return $posts
      */
     public function search(Request $request)
     {
         $searchData = $request->search_data;
         $posts = $this->postService->search($searchData);
-        return view('post.index', compact('posts','searchData'));
+        return view('post.index', compact('posts', 'searchData'));
     }
 
     /**
@@ -185,7 +183,7 @@ class PostController extends Controller
     public function validatePost($id)
     {
         return request()->validate([
-            'title' => "required|min:3|max:255|unique:posts,title," . $id,
+            'title' => 'required|min:3|max:255|unique:posts,title,' . $id,
             'description' => 'required| min:5|max:255',
             'status' => 'nullable'
         ]);

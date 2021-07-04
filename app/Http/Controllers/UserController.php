@@ -13,7 +13,7 @@ use File;
  */
 class UserController extends Controller
 {
-    /** $userService*/
+    /** $userService */
     private $userService;
 
     /**
@@ -37,8 +37,8 @@ class UserController extends Controller
         $name = "";
         $email = "";
         $start_date = "";
-        $end_date ="";
-        return view('user.index', compact('users','name','email','start_date','end_date'));
+        $end_date = "";
+        return view('user.index', compact('users', 'name', 'email', 'start_date', 'end_date'));
     }
 
     /**
@@ -54,7 +54,7 @@ class UserController extends Controller
     /**
      * Show the user create confirm form
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -81,12 +81,11 @@ class UserController extends Controller
     /**
      * Store a newly created user in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function storeCollectData(Request $request)
     {
-
         $this->userService->storeCollectData($request->all());
         return redirect('/users')->with('successAlert', 'You have successfully created');
     }
@@ -94,7 +93,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the user.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -104,7 +103,7 @@ class UserController extends Controller
     }
 
     /**
-     * Show the user update  form
+     * Show the user update form
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -143,11 +142,11 @@ class UserController extends Controller
     /**
      * Update the user
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function  updateUser(Request $request, $id)
+    public function updateUser(Request $request, $id)
     {
         $this->userService->updateUser($request->all(), $id);
         return redirect('/users')->with('successAlert', 'You have successfully updated');
@@ -156,7 +155,7 @@ class UserController extends Controller
     /**
      * Remove the specified post from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -168,7 +167,7 @@ class UserController extends Controller
     /**
      * show user detail 
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function userProfile($id)
@@ -180,7 +179,7 @@ class UserController extends Controller
     /**
      * searching user
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function search(Request $request)
@@ -190,13 +189,12 @@ class UserController extends Controller
         $start_date = $request->start_date;
         $end_date = $request->end_date;
         $users = $this->userService->search($name, $email, $start_date, $end_date);
-        return view('user.index', compact('users','name','email','start_date','end_date'));
+        return view('user.index', compact('users', 'name', 'email', 'start_date', 'end_date'));
     }
 
     /**
      * @param $rule
      * @param $id
-     * 
      */
     private function validateUser($rule, $id)
     {
@@ -213,4 +211,3 @@ class UserController extends Controller
         ]);
     }
 }
-
