@@ -184,6 +184,7 @@ class UserController extends Controller
      */
     public function search(Request $request)
     {   
+
         $name = $request->name;
         $email = $request->email;
         $start_date = $request->start_date;

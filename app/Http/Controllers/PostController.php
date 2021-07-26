@@ -18,6 +18,7 @@ class PostController extends Controller
      */
     public function __construct(PostServiceInterface $post_service_interface)
     {
+        // $this->middleware('cors');
         $this->middleware(['auth', 'revalidate'])->except('guestPost');
         $this->postService = $post_service_interface;
     }

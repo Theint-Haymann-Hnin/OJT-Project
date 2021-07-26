@@ -7,24 +7,14 @@ use Illuminate\Http\Request;
 
 class IsAdmin
 {
-   
+
     public function handle(Request $request, Closure $next)
-    {    
-        
-        if(auth()->check() && auth()->user()->type == 0 ){
+    {
+
+        if (auth()->check() && auth()->user()->type == 0) {
             return $next($request);
-        } else{
+        } else {
             return redirect('/');
         }
     }
-    
-    // public function handle(Request $request, Closure $next)
-    // {
-    //     if( auth()->user() != ""){
-    //         return $next($request);
-    //     }else{
-    //        return redirect('login');
-    //     } 
-    // }
 }
-

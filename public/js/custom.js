@@ -29,7 +29,7 @@ String.prototype.escape = function () {
 
 function postDetail(id) {
     var post_id = id;
-    $.get("api/post/" + post_id, function (response) {
+    $.get("api/posts/" + post_id, function (response) {
         var post_title = response.title.escape();
         var post_description = response.description.escape();
         var post_status = response.status;
@@ -41,7 +41,7 @@ function postDetail(id) {
         } else {
             var status = 'Active';
         }
-        $.get("api/user/" + post_created_user_id, function (data) {
+        $.get("api/users/" + post_created_user_id, function (data) {
             var user_name = data.name;
 
             $('#displayArea').append("<tr><th>Title</th><td>" + post_title + "</td></tr><tr><th>Description</th><td>" + post_description + "</td></tr><tr><th>Status</th><td>" + status + "</td></tr><tr><th>Created at</th><td>" + post_created_at + "</td></tr><tr><th>Created User</th><td>" + user_name + "</td></tr><tr><th>Updated at</th><td>" + post_updated_at + "</td></tr>");
@@ -55,7 +55,7 @@ $('#mymodal').on('hidden.bs.modal', function () {
 // For user modal box
 function userDetail(id) {
     var user_id = id;
-    $.get("api/user/" + user_id, function (response) {
+    $.get("api/users/" + user_id, function (response) {
         var user_name = response.name;
         var user_email = response.email;
         var user_type = response.type;

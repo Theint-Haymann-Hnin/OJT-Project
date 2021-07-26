@@ -27,7 +27,7 @@ class PostDao implements PostDaoInterface
    */
   public function guestPost()
   {
-    return Post::where('status', '=', 1)->paginate(5);
+    return Post::where('status', '=', 1)->paginate(20);
   }
 
   /**
@@ -36,9 +36,13 @@ class PostDao implements PostDaoInterface
    */
   public function storeCollectData($data)
   {
-    $data['created_user_id'] = auth()->user()->id;
-    Post::create($data);
-    request()->session()->forget('post');
+    if (!isset($data['created_user_id'])) {
+      $data['created_user_id'] = auth()->user()->id;
+      Post::create($data);
+      request()->session()->forget('post');
+    } else {
+      Post::create($data);
+    }
   }
 
   /**
@@ -58,14 +62,18 @@ class PostDao implements PostDaoInterface
    */
   public function updatePost($post_data_to_update, $id)
   {
-    if (isset($post_data_to_update['status'])) {
-      $post_data_to_update['status'] = 1;
+    if (!isset($post_data_to_update['updated_user_id'])) {
+      if (isset($post_data_to_update['status'])) {
+        $post_data_to_update['status'] = 1;
+      } else {
+        $post_data_to_update['status'] = 0;
+      }
+      $post_data_to_update['updated_user_id'] = auth()->user()->id;
+      Post::find($id)->update($post_data_to_update);
+      request()->session()->forget('post');
     } else {
-      $post_data_to_update['status'] = 0;
+      Post::find($id)->update($post_data_to_update);
     }
-    $post_data_to_update['updated_user_id'] = auth()->user()->id;
-    Post::find($id)->update($post_data_to_update);
-    request()->session()->forget('post');
   }
 
   /**
@@ -86,6 +94,6 @@ class PostDao implements PostDaoInterface
   {
     return Post::where('title', 'like', "%" . $searchData . "%")->orWhere('description', 'like', "%" . $searchData . "%")->orWhereHas('user', function ($user) use ($searchData) {
       $user->where('name', 'like', "%" . $searchData . "%");
-    })->paginate(5);
+    })->paginate(5)->withQueryString();
   }
 }

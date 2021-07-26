@@ -58,11 +58,7 @@
                             </a>
                         </td>
                         <td>{{$user->email}}</td>
-                        <td>@if($user->type == 0)
-                            Admin
-                            @else
-                            User
-                            @endif</td>
+                        <td> {{$user->createdUser->name}}</td>
                         <td>{{$user->phone}}</td>
                         <td>{{$user->dob}}</td>
                         <td>{{$user->address}}</td>

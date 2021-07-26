@@ -32,7 +32,7 @@
         </div>
         @endif
         <div class="col-md-2">
-            <a href="{{ route('exportExcel', 'xlsx') }}" class="btn btn-info btn-lg btn-block">
+            <a href="{{ route('exportExcel') }}" class="btn btn-info btn-lg btn-block">
                 <i class="fas fa-download"></i> Download
             </a>
         </div>
@@ -79,7 +79,7 @@
                 </tbody>
             </table>
             <div class="pagination">
-                {{ $posts->links() }}
+            {{ $posts->links() }}
             </div>
             <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="myModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">

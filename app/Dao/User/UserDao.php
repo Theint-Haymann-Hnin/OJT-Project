@@ -14,7 +14,7 @@ class UserDao implements UserDaoInterface
      */
     public function getUserList()
     {
-        return User::orderBy('id', 'desc')->paginate(10);
+        return User::with('createdUser')->latest()->paginate(10);
     }
 
     /**
@@ -33,10 +33,14 @@ class UserDao implements UserDaoInterface
      */
     public function storeCollectData($data)
     {
-        $data['created_user_id'] = auth()->user()->id;
-        $data['password'] = Hash::make($data['password']);
-        User::create($data);
-        request()->session()->forget('user');
+        if (!isset($data['created_user_id'])) {
+            $data['created_user_id'] = auth()->user()->id;
+            $data['password'] = Hash::make($data['password']);
+            User::create($data);
+            request()->session()->forget('user');
+        } else {
+            User::create($data);
+        }
     }
 
     /**
@@ -46,7 +50,9 @@ class UserDao implements UserDaoInterface
      */
     public function updateUser($user_data_to_update, $id)
     {
-        $user_data_to_update['updated_user_id'] = auth()->user()->id;
+        if (!isset($user_data_to_update['updated_user_id'])) {
+            $user_data_to_update['updated_user_id'] = auth()->user()->id;
+        }
         User::find($id)->update($user_data_to_update);
     }
 
@@ -66,7 +72,7 @@ class UserDao implements UserDaoInterface
      * @return User $user
      */
     public function search($name, $email, $start_date, $end_date)
-    {   
+    {
         if ($name == null && $email == null && $start_date == null && $end_date == null) {
             return $this->getUserList();
         }

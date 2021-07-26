@@ -26,7 +26,7 @@ Route::get('posts/update/updatecollectdataform', [PostController::class, 'update
 Route::put('posts/update/updateconfirm/{id}', [PostController::class, 'updatePost']);
 Route::get('/search_posts', [PostController::class, 'search']);
 Route::get('importExportView', [PostController::class, 'importExportView'])->name('importExportView');
-Route::get('exportExcel/{type}', [PostController::class, 'exportExcel'])->name('exportExcel');
+Route::get('exportExcel', [PostController::class, 'exportExcel'])->name('exportExcel');
 Route::post('importExcel', [PostController::class, 'importExcel'])->name('importExcel');
 Route::get('/upload', [PostController::class, 'upload']);
 
